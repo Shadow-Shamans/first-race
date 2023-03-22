@@ -12,4 +12,9 @@ export default defineConfig({
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
   plugins: [react()],
+  css: {
+    modules: {
+      generateScopedName: `[name]_[local]_[hash:base64:5]`,
+    },
+  },
 })
