@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import './App.css'
+import 'antd/dist/reset.css'
+import styles from './App.module.css'
 
 export function App() {
   useEffect(() => {
@@ -13,7 +14,7 @@ export function App() {
     fetchServerData()
   }, [])
   return (
-    <div className="App">
+    <div className={styles.container}>
       <h1>First Race</h1>
     </div>
   )
