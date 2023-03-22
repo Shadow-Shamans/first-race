@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 
-function App() {
+export function App() {
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`
@@ -12,7 +12,9 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+  return (
+    <div className="App">
+      <h1>First Race</h1>
+    </div>
+  )
 }
-
-export default App
