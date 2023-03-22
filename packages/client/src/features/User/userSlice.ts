@@ -27,6 +27,6 @@ export const userSlice = createSlice({
 
 export const { setTheme } = userSlice.actions
 
-export const isDarkMode = ({ user }: RootState) => user.theme === 'dark'
+export const checkIsDarkMode = ({ user }: RootState) => user.theme === 'dark'
 export const selectUserName = ({ user }: RootState) => user.name
 export const selectUserId = ({ user }: RootState) => user.id

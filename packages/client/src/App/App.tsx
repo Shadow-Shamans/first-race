@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import {
   ConfigProvider,
   theme,
@@ -10,12 +10,18 @@ import {
 } from 'antd'
 import 'antd/dist/reset.css'
 import styles from './App.module.css'
+import { useAppDispatch, useAppSelector } from './hooks'
+import { checkIsDarkMode, setTheme } from '../features/User'
+import { ThemeNames } from './types'
 
 export function App() {
   const { defaultAlgorithm, darkAlgorithm } = theme
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const appDispatch = useAppDispatch()
+  const isDarkMode = useAppSelector(checkIsDarkMode)
+  const themeName: ThemeNames = isDarkMode ? 'light' : 'dark'
+
   const handleClick = () => {
-    setIsDarkMode(previousValue => !previousValue)
+    appDispatch(setTheme(themeName))
   }
 
   useEffect(() => {
@@ -42,9 +48,7 @@ export function App() {
             <Button type="primary">Primary Button</Button>
           </Space>
 
-          <Button onClick={handleClick}>
-            Change Theme to {isDarkMode ? 'Light' : 'Dark'}
-          </Button>
+          <Button onClick={handleClick}>Change Theme to {themeName}</Button>
         </div>
       </Card>
     </ConfigProvider>
