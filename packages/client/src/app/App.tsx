@@ -11,24 +11,16 @@ import {
 } from 'antd'
 
 import store, { persistor } from '../store'
-import { useAppDispatch, useAppSelector } from './hooks'
-import { selectIsDarkMode, setTheme } from '../features/User'
-import type { ThemeNames } from './types'
 import { useGetTestDataQuery } from './api'
+import { useTheme } from './hooks'
 
 import styles from './App.module.css'
 import './index.css'
 
 function AppInner() {
   const { defaultAlgorithm, darkAlgorithm } = theme
-  const appDispatch = useAppDispatch()
-  const isDarkMode = useAppSelector(selectIsDarkMode)
-  const themeName: ThemeNames = isDarkMode ? 'light' : 'dark'
+  const { handleChangeTheme, themeName, isDarkMode } = useTheme()
   const { data, isLoading, error } = useGetTestDataQuery('')
-
-  const handleClick = () => {
-    appDispatch(setTheme(themeName))
-  }
 
   if (isLoading) {
     return <h1>Loading test data using RTKQuery</h1>
@@ -53,7 +45,9 @@ function AppInner() {
 
           {data && <h2>loaded data: {data}</h2>}
 
-          <Button onClick={handleClick}>Change Theme to {themeName}</Button>
+          <Button onClick={handleChangeTheme}>
+            Change Theme to {themeName}
+          </Button>
         </div>
       </Card>
     </ConfigProvider>
