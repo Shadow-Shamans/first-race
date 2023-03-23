@@ -1,3 +1,5 @@
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import {
   ConfigProvider,
   theme,
@@ -7,6 +9,8 @@ import {
   DatePicker,
   version,
 } from 'antd'
+
+import store, { persistor } from '../store'
 import { useAppDispatch, useAppSelector } from './hooks'
 import { selectIsDarkMode, setTheme } from '../features/User'
 import type { ThemeNames } from './types'
@@ -15,7 +19,7 @@ import { useGetTestDataQuery } from './api'
 import styles from './App.module.css'
 import './index.css'
 
-export function App() {
+function AppInner() {
   const { defaultAlgorithm, darkAlgorithm } = theme
   const appDispatch = useAppDispatch()
   const isDarkMode = useAppSelector(selectIsDarkMode)
@@ -55,3 +59,11 @@ export function App() {
     </ConfigProvider>
   )
 }
+
+export const App = () => (
+  <Provider store={store}>
+    <PersistGate loading={'Loading...'} persistor={persistor}>
+      <AppInner />
+    </PersistGate>
+  </Provider>
+)
