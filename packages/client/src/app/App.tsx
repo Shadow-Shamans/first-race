@@ -7,12 +7,13 @@ import {
   DatePicker,
   version,
 } from 'antd'
-import 'antd/dist/reset.css'
-import styles from './App.module.css'
 import { useAppDispatch, useAppSelector } from './hooks'
 import { checkIsDarkMode, setTheme } from '../features/User'
 import type { ThemeNames } from './types'
 import { useGetTestDataQuery } from './api'
+
+import styles from './App.module.css'
+import './index.css'
 
 export function App() {
   const { defaultAlgorithm, darkAlgorithm } = theme

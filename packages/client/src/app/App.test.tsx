@@ -1,7 +1,10 @@
 import { App } from './App'
+import { Provider } from 'react-redux'
 import { render, screen } from '@testing-library/react'
 
-const appContent = 'Вот тут будет жить ваше приложение :)'
+import store from '../store'
+
+const appContent = 'Loading test data using RTKQuery'
 
 // @ts-ignore
 global.fetch = jest.fn(() =>
@@ -9,6 +12,10 @@ global.fetch = jest.fn(() =>
 )
 
 test('Example test', async () => {
-  render(<App />)
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
   expect(screen.getByText(appContent)).toBeDefined()
 })
