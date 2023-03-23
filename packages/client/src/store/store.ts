@@ -9,6 +9,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
+import { testDataApi } from '../App/api'
 
 export const store = configureStore({
   reducer,
@@ -20,7 +21,7 @@ export const store = configureStore({
         // https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(testDataApi.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

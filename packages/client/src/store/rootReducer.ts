@@ -2,6 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 import { userSlice } from '../features/User'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { testDataApi } from '../App/api'
 // learn: example how to configure session storage persist
 // import sessionStorage from 'redux-persist/lib/storage/session'
 
@@ -21,6 +22,7 @@ const rootPersistConfig = {
 
 const rootReducer = combineReducers({
   [userSlice.name]: userSlice.reducer,
+  [testDataApi.reducerPath]: testDataApi.reducer,
   // learn: example how to configure session storage persist
   // [authSlice.name]: persistReducer(
   //   sessionStoragePersistConfig,

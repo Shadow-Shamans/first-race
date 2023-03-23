@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import {
   ConfigProvider,
   theme,
@@ -12,28 +11,27 @@ import 'antd/dist/reset.css'
 import styles from './App.module.css'
 import { useAppDispatch, useAppSelector } from './hooks'
 import { checkIsDarkMode, setTheme } from '../features/User'
-import { ThemeNames } from './types'
+import type { ThemeNames } from './types'
+import { useGetTestDataQuery } from './api'
 
 export function App() {
   const { defaultAlgorithm, darkAlgorithm } = theme
   const appDispatch = useAppDispatch()
   const isDarkMode = useAppSelector(checkIsDarkMode)
   const themeName: ThemeNames = isDarkMode ? 'light' : 'dark'
+  const { data, isLoading, error } = useGetTestDataQuery('')
 
   const handleClick = () => {
     appDispatch(setTheme(themeName))
   }
 
-  useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
-    }
+  if (isLoading) {
+    return <h1>Loading test data using RTKQuery</h1>
+  }
 
-    fetchServerData()
-  }, [])
+  if (error) {
+    return <h1>Error</h1>
+  }
 
   return (
     <ConfigProvider
@@ -47,6 +45,8 @@ export function App() {
             <DatePicker />
             <Button type="primary">Primary Button</Button>
           </Space>
+
+          {data && <h2>loaded data: {data}</h2>}
 
           <Button onClick={handleClick}>Change Theme to {themeName}</Button>
         </div>
