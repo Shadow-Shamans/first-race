@@ -10,10 +10,10 @@ import {
   version,
 } from 'antd'
 
-import store, { persistor } from '../store'
+import store, { persistor } from '@/store'
+
 import { useGetTestDataQuery } from './api'
 import { useTheme } from './hooks'
-
 import styles from './App.module.css'
 import './index.css'
 

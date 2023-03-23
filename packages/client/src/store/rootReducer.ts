@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import { userSlice } from '../features/User'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { testDataApi } from '../app/api'
-// learn: example how to configure session storage persist
-// import sessionStorage from 'redux-persist/lib/storage/session'
+import { userSlice } from '@/features/User'
+import { testDataApi } from '@/app/api'
+// todo: learn: example how to configure session storage persist
+// todo: import sessionStorage from 'redux-persist/lib/storage/session'
 
 const storageKey = 'first_rase_game'
 
@@ -14,7 +14,7 @@ const rootPersistConfig = {
   whitelist: [userSlice.name],
 }
 
-// learn: example how to configure session storage persist
+// todo: learn: example how to configure session storage persist
 // const sessionStoragePersistConfig = {
 //   key: storageKey,
 //   storage: sessionStorage,
@@ -23,7 +23,7 @@ const rootPersistConfig = {
 const rootReducer = combineReducers({
   [userSlice.name]: userSlice.reducer,
   [testDataApi.reducerPath]: testDataApi.reducer,
-  // learn: example how to configure session storage persist
+  // todo: learn: example how to configure session storage persist
   // [authSlice.name]: persistReducer(
   //   sessionStoragePersistConfig,
   //   authSlice.reducer

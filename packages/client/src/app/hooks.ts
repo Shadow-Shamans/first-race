@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
-import type { RootState, AppDispatch } from '../store'
-import { selectIsDarkMode, setTheme } from '../features/User'
+
+import { selectIsDarkMode, setTheme } from '@/features/User'
+import type { RootState, AppDispatch } from '@/store'
+
 import type { ThemeNames } from './types'
 
 // todo: Use throughout your app instead of plain `useDispatch` and `useSelector`

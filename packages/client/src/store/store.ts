@@ -1,4 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
+
+import { testDataApi } from '@/app/api'
 import { reducer } from './rootReducer'
 import {
   persistStore,
@@ -9,7 +11,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
-import { testDataApi } from '../app/api'
 
 export const store = configureStore({
   reducer,

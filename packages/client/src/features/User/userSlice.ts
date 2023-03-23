@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ThemeNames } from '../../app'
+import { ThemeNames } from '@/app'
 
 interface User {
   id: string | null
