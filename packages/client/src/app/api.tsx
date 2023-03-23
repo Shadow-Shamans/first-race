@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { TestData } from './types'
+import type { TTestData } from './types'
 
 export const testDataApi = createApi({
   reducerPath: 'testDataApi',
   baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:${__SERVER_PORT__}` }),
   endpoints: builder => ({
-    getTestData: builder.query<TestData, string>({
+    getTestData: builder.query<TTestData, string>({
       query: () => `/`,
     }),
   }),
