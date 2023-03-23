@@ -9,11 +9,11 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
-import { testDataApi } from '../App/api'
+import { testDataApi } from '../app/api'
 
 export const store = configureStore({
   reducer,
-  devTools: import.meta.env.MODE !== 'producton',
+  devTools: process.env.NODE_ENV !== 'producton',
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
