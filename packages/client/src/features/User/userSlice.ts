@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ThemeNames } from '../../app'
 
-import { RootState } from '../../store'
-
 interface User {
   id: string | null
   name: string
@@ -26,7 +24,3 @@ export const userSlice = createSlice({
 })
 
 export const { setTheme } = userSlice.actions
-
-export const checkIsDarkMode = ({ user }: RootState) => user.theme === 'dark'
-export const selectUserName = ({ user }: RootState) => user.name
-export const selectUserId = ({ user }: RootState) => user.id

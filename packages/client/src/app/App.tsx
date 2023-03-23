@@ -8,7 +8,7 @@ import {
   version,
 } from 'antd'
 import { useAppDispatch, useAppSelector } from './hooks'
-import { checkIsDarkMode, setTheme } from '../features/User'
+import { selectIsDarkMode, setTheme } from '../features/User'
 import type { ThemeNames } from './types'
 import { useGetTestDataQuery } from './api'
 
@@ -18,7 +18,7 @@ import './index.css'
 export function App() {
   const { defaultAlgorithm, darkAlgorithm } = theme
   const appDispatch = useAppDispatch()
-  const isDarkMode = useAppSelector(checkIsDarkMode)
+  const isDarkMode = useAppSelector(selectIsDarkMode)
   const themeName: ThemeNames = isDarkMode ? 'light' : 'dark'
   const { data, isLoading, error } = useGetTestDataQuery('')
 
