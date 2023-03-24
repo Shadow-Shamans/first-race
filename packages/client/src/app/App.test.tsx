@@ -1,7 +1,8 @@
-import App from './App'
 import { render, screen } from '@testing-library/react'
 
-const appContent = 'Вот тут будет жить ваше приложение :)'
+import { App } from './App'
+
+const appContent = 'Loading test data using RTKQuery'
 
 // @ts-ignore
 global.fetch = jest.fn(() =>
