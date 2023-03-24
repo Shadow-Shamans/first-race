@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ThemeNames } from '@/app'
 
-interface User {
+interface IUser {
   id: string | null
   name: string
   theme: ThemeNames
 }
 
-const initialState: User = {
+const initialState: IUser = {
   id: null,
   name: 'no name',
   theme: 'light',
