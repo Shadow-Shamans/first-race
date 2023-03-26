@@ -15,6 +15,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@/shared': path.resolve(__dirname, './src/shared'),
+      '@/router': path.resolve(__dirname, './src/router'),
+      '@/pages': path.resolve(__dirname, './src/pages/'),
     },
   },
   plugins: [react()],

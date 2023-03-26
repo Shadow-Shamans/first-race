@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 
 import { App } from './App'
 
-const appContent = 'Loading test data using RTKQuery'
+const appContent = 'Главная'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({ json: () => Promise.resolve('hey') })
