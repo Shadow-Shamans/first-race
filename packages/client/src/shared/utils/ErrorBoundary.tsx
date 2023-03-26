@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Component } from 'react';
 import { Alert } from 'antd';
 
 type ErrorBoundaryState = {
@@ -9,7 +9,7 @@ type ErrorBoundaryProps = {
   children: ReactNode;
 };
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
