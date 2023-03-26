@@ -1,16 +1,16 @@
 import React, { ReactNode, Component } from 'react';
 import { Alert } from 'antd';
 
-type TErrorBoundaryState = {
+interface IErrorBoundaryState {
   hasError: boolean;
 };
 
-type TErrorBoundaryProps = {
+interface IErrorBoundaryProps {
   children: ReactNode;
 };
 
-export class ErrorBoundary extends Component<TErrorBoundaryProps, TErrorBoundaryState> {
-  constructor(props: TErrorBoundaryProps) {
+export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
+  constructor(props: IErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
