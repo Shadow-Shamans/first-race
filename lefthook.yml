@@ -4,3 +4,10 @@ pre-commit:
     lint:
       glob: '*.{ts,tsx}'
       run: yarn eslint {staged_files}
+
+pre-push:
+  parallel: true
+  commands:
+    test:
+      glob: '*.test.tsx'
+      run: yarn run test
