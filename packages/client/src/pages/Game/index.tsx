@@ -1,9 +1,6 @@
-import { FC } from 'react'
 
-const Game: FC = () => {
-  return (
-    <div>Game page</div>
-  )
-}
+import { Game } from './Game'
 
-export default Game;
+export { Game }
+
+export default Game

@@ -1,12 +1,12 @@
 import { FC, ReactElement } from 'react'
 import { Navigate } from 'react-router-dom'
 
-type PrivateRouteProps = {
+type TProps = {
   isLoggedin: boolean;
   children: ReactElement;
 }
 
-const PrivateRoute: FC<PrivateRouteProps> = ({ isLoggedin, children }) => {
+const PrivateRoute: FC<TProps> = ({ isLoggedin, children }) => {
   if (!isLoggedin) {
     return <Navigate to="/login" />
   }

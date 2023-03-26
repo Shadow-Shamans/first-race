@@ -1,3 +1,7 @@
 .container {
   border: 1px solid var(--red-600);
 }
+
+.wrapper {
+  width: max-content;
+}

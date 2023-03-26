@@ -2,12 +2,12 @@ import { useTheme } from '@/app'
 import { ConfigProvider, theme } from 'antd'
 import { FC, ReactElement } from 'react'
 
-export type Props = {
+export type TProps = {
   children: ReactElement
 }
 
 
-const ThemeProvider: FC<Props> = ({ children }) => {
+const ThemeProvider: FC<TProps> = ({ children }) => {
   const { defaultAlgorithm, darkAlgorithm } = theme
   const { isDarkMode } = useTheme()
 
