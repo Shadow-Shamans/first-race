@@ -6,11 +6,9 @@ type TProps = {
   children: ReactElement;
 }
 
-const PrivateRoute: FC<TProps> = ({ isLoggedin, children }) => {
+export const PrivateRoute: FC<TProps> = ({ isLoggedin, children }) => {
   if (!isLoggedin) {
     return <Navigate to="/login" />
   }
   return children
 };
-
-export default PrivateRoute

@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/app';
 import { Suspense, lazy } from 'react';
 import { selectIsLoggedIn } from '@/features/Auth';
-import PrivateRoute from '@/shared/hocs/PrivateRoute';
+import PrivateRoute from '@/shared/hocs/PrivateRouter';
 import { Route, Routes } from 'react-router-dom';
 import { Spin } from 'antd';
 
@@ -13,7 +13,7 @@ const Profile = lazy(() => import('../pages/Profile'))
 const Game = lazy(() => import('../pages/Game'))
 const NotFound = lazy(() => import('../pages/NotFound'))
 
-const AppRoutes = () => {
+export const AppRoutes = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
   return (
     <Suspense fallback={<Spin tip="Loading" size="large" />}>
@@ -44,5 +44,3 @@ const AppRoutes = () => {
     </Suspense>
   )
 }
-
-export default AppRoutes
