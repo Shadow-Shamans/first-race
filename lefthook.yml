@@ -1,6 +1,15 @@
 pre-commit:
-  parallel: true
   commands:
     lint:
       glob: '*.{ts,tsx}'
       run: yarn eslint {staged_files}
+
+pre-push:
+  parallel: true
+  commands:
+    test:
+      glob: '*.test.tsx'
+      run: yarn run test
+    prettier:
+      glob: '*.{ts,tsx}'
+      run: yarn prettier --write {staged_files} && git add {staged_files}
