@@ -1,5 +1,5 @@
-import React, { ReactNode, Component } from 'react';
-import { Alert } from 'antd';
+import React, { ReactNode, Component } from 'react'
+import { Alert } from 'antd'
 
 interface IErrorBoundaryState {
   hasError: boolean;
@@ -11,23 +11,23 @@ interface IErrorBoundaryProps {
 
 export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
   constructor(props: IErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false };
+    super(props)
+    this.state = { hasError: false }
   }
 
   static getDerivedStateFromError() {
-    return { hasError: true };
+    return { hasError: true }
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error(`error ${error}`);
-    console.error(`errorInfo: ${JSON.stringify(errorInfo)}`);
-    console.error(`componentStack: ${errorInfo.componentStack}`);
+    console.error(`error ${error}`)
+    console.error(`errorInfo: ${JSON.stringify(errorInfo)}`)
+    console.error(`componentStack: ${errorInfo.componentStack}`)
   }
 
   render() {
-    const { hasError } = this.state;
-    const { children } = this.props;
+    const { hasError } = this.state
+    const { children } = this.props
     if (hasError) {
       return (
         <Alert
@@ -37,8 +37,8 @@ export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundary
           showIcon
           closable
       />
-      );
+      )
     }
-    return children;
+    return children
   }
 }

@@ -5,8 +5,8 @@ import {
   PlaySquareOutlined,
   ProfileOutlined,
   UsergroupDeleteOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+} from '@ant-design/icons'
+import type { MenuProps } from 'antd'
 
 export const menuLinks: MenuProps['items'] = [
   {
@@ -47,4 +47,4 @@ export const menuLinks: MenuProps['items'] = [
     ),
     key: 'ant',
   },
-];
+]

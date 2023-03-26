@@ -5,3 +5,4 @@ export const NotFound: FC = () => {
     <div>NotFound page</div>
   )
 }
+

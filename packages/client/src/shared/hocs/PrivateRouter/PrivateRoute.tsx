@@ -11,4 +11,4 @@ export const PrivateRoute: FC<IProps> = ({ isLoggedin, children }) => {
     return <Navigate to="/login" />
   }
   return children
-};
+}

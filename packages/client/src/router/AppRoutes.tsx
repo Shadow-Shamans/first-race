@@ -1,9 +1,9 @@
-import { useAppSelector } from '@/app';
-import { Suspense, lazy } from 'react';
-import { selectIsLoggedIn } from '@/features/Auth';
-import PrivateRoute from '@/shared/hocs/PrivateRouter';
-import { Route, Routes } from 'react-router-dom';
-import { Spin } from 'antd';
+import { useAppSelector } from '@/app'
+import { Suspense, lazy } from 'react'
+import { selectIsLoggedIn } from '@/features/Auth'
+import PrivateRoute from '@/shared/hocs/PrivateRouter'
+import { Route, Routes } from 'react-router-dom'
+import { Spin } from 'antd'
 
 const Login = lazy(() => import('../pages/Login'))
 const Registration = lazy(() => import('../pages/Registration'))
