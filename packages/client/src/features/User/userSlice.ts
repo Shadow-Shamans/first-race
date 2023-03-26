@@ -17,8 +17,8 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setTheme: (state, action:            PayloadAction<ThemeNames>) => {
-      state.theme =            action.payload
+    setTheme: (state, action: PayloadAction<ThemeNames>) => {
+      state.theme = action.payload
     },
   },
 })
