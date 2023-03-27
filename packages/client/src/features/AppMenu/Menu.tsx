@@ -9,8 +9,9 @@ export const Menu: FC = () => {
   const navigate = useNavigate()
 
   const handleClick: MenuProps['onClick'] = (e) => {
-    setCurrent(e.key)
-    navigate(`/${e.key}`)
+    const { key } = e
+    setCurrent(key)
+    navigate(`/${key}`)
   }
 
   return (
