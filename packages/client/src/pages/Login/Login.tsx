@@ -4,14 +4,15 @@ import { LayoutFullPage } from '@/components/LayoutFullPage'
 import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
 import { generateId } from '@/shared/utils/generateId'
+import styled from './Login.module.css'
 
 const LoginInputs = [
   {
-    label: 'Логин',
+    placeholder: 'Логин',
     name: 'login',
   },
   {
-    label: 'Пароль',
+    placeholder: 'Пароль',
     name: 'password',
   },
 ]
@@ -19,7 +20,7 @@ const LoginInputs = [
 export const Login: FC = () => {
   const [form] = Form.useForm()
 
-  const onCheck = async () => {
+  const handleCheck = async () => {
     try {
       const values = await form.validateFields()
 
@@ -33,33 +34,31 @@ export const Login: FC = () => {
 
   return (
     <LayoutFullPage>
-      <div>
-        <Form
-          form={form}
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ width: 420 }}
-          initialValues={{ remember: true }}
-          autoComplete="off"
-          size="large">
-          {LoginInputs.map(({ label, name }) => {
-            return (
-              <FormInput
-                label={label}
-                name={name}
-                key={generateId()}></FormInput>
-            )
-          })}
-
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" onClick={onCheck}>
-              Войти
-            </Button>
-          </Form.Item>
-        </Form>
-        <LinkToPage text="Нет аккаунта?" to="/registration" />
-      </div>
+      <Form
+        form={form}
+        name="basic"
+        initialValues={{ remember: true }}
+        autoComplete="off"
+        size="large"
+        className={styled.form}>
+        {LoginInputs.map(({ placeholder, name }) => {
+          return (
+            <FormInput
+              placeholder={placeholder}
+              name={name}
+              key={generateId()}></FormInput>
+          )
+        })}
+        <Form.Item>
+          <Button
+            type="primary"
+            onClick={handleCheck}
+            className={styled.button}>
+            Войти
+          </Button>
+          <LinkToPage text="Нет аккаунта?" to="/registration" />
+        </Form.Item>
+      </Form>
     </LayoutFullPage>
   )
 }

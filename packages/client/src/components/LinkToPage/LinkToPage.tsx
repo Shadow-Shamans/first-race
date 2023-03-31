@@ -1,13 +1,12 @@
-import React from 'react'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './LinkToPage.module.css'
 
-interface ILinkToPageProps {
+interface IProps {
   text: string
   to: string
 }
-
-export function LinkToPage({ text, to }: ILinkToPageProps) {
+export const LinkToPage: FC<IProps> = ({ text, to }) => {
   return (
     <Link to={to} relative="path" className={styles.link}>
       <p className={styles.text}>{text}</p>

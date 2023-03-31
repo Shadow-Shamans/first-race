@@ -1,15 +1,15 @@
 import { Form, Input } from 'antd'
 import validateForms from '@/shared/utils/validateForms'
+import { FC } from 'react'
 
-interface IFormInputProps {
-  label: string
+interface IProps {
+  placeholder: string
   name: string
 }
 
-export function FormInput({ label, name }: IFormInputProps) {
+export const FormInput: FC<IProps> = ({ placeholder, name }) => {
   return (
     <Form.Item
-      label={label}
       name={name}
       rules={[
         {
@@ -22,7 +22,11 @@ export function FormInput({ label, name }: IFormInputProps) {
           },
         }),
       ]}>
-      {name === 'password' ? <Input.Password /> : <Input />}
+      {name === 'password' ? (
+        <Input.Password placeholder={placeholder} />
+      ) : (
+        <Input placeholder={placeholder} />
+      )}
     </Form.Item>
   )
 }

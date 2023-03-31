@@ -4,30 +4,31 @@ import { LayoutFullPage } from '@/components/LayoutFullPage'
 import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
 import { generateId } from '@/shared/utils/generateId'
+import styled from './Registration.module.css'
 
 const RegistrationInputs = [
   {
-    label: 'Имя',
+    placeholder: 'Имя',
     name: 'name',
   },
   {
-    label: 'Фамилия',
+    placeholder: 'Фамилия',
     name: 'last_name',
   },
   {
-    label: 'Email',
+    placeholder: 'Email',
     name: 'email',
   },
   {
-    label: 'Телефон',
+    placeholder: 'Телефон',
     name: 'phone',
   },
   {
-    label: 'Логин',
+    placeholder: 'Логин',
     name: 'login',
   },
   {
-    label: 'Пароль',
+    placeholder: 'Пароль',
     name: 'password',
   },
 ]
@@ -35,7 +36,7 @@ const RegistrationInputs = [
 export const Registration: FC = () => {
   const [form] = Form.useForm()
 
-  const onCheck = async () => {
+  const handleCheck = async () => {
     try {
       const values = await form.validateFields()
 
@@ -49,33 +50,32 @@ export const Registration: FC = () => {
 
   return (
     <LayoutFullPage>
-      <div>
-        <Form
-          form={form}
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ width: 420 }}
-          initialValues={{ remember: true }}
-          autoComplete="off"
-          size="large">
-          {RegistrationInputs.map(({ label, name }) => {
-            return (
-              <FormInput
-                label={label}
-                name={name}
-                key={generateId()}></FormInput>
-            )
-          })}
+      <Form
+        form={form}
+        name="basic"
+        initialValues={{ remember: true }}
+        autoComplete="off"
+        size="large"
+        className={styled.form}>
+        {RegistrationInputs.map(({ placeholder, name }) => {
+          return (
+            <FormInput
+              placeholder={placeholder}
+              name={name}
+              key={generateId()}></FormInput>
+          )
+        })}
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" onClick={onCheck}>
-              Регистрация
-            </Button>
-          </Form.Item>
-        </Form>
-        <LinkToPage text="Нет аккаунта?" to="/registration" />
-      </div>
+        <Form.Item>
+          <Button
+            type="primary"
+            onClick={handleCheck}
+            className={styled.button}>
+            Регистрация
+          </Button>
+          <LinkToPage text="Уже зарегистрированы?" to="/login" />
+        </Form.Item>
+      </Form>
     </LayoutFullPage>
   )
 }
