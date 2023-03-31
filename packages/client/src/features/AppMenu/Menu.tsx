@@ -8,7 +8,7 @@ export const Menu: FC = () => {
   const [current, setCurrent] = useState('mail')
   const navigate = useNavigate()
 
-  const handleClick: MenuProps['onClick'] = (e) => {
+  const handleClick: MenuProps['onClick'] = e => {
     const { key } = e
     setCurrent(key)
     navigate(`/${key}`)
