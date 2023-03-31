@@ -49,6 +49,74 @@ export const Registration: FC = () => {
           </Form.Item>
 
           <Form.Item
+            name="last_name"
+            label="Фамилия"
+            rules={[
+              {
+                required: true,
+                message: 'Поле фамилии не может быть пустым!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  return validateForms(getFieldValue, 'last_name', value)
+                },
+              }),
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="email"
+            label="Email"
+            rules={[
+              {
+                required: true,
+                message: 'Поле email не может быть пустым!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  return validateForms(getFieldValue, 'email', value)
+                },
+              }),
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="phone"
+            label="Телефон"
+            rules={[
+              {
+                required: true,
+                message: 'Поле телефона не может быть пустым!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  return validateForms(getFieldValue, 'phone', value)
+                },
+              }),
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="login"
+            label="Логин"
+            rules={[
+              {
+                required: true,
+                message: 'Поле логина не может быть пустым!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  return validateForms(getFieldValue, 'login', value)
+                },
+              }),
+            ]}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
             name="password"
             label="Пароль"
             rules={[
@@ -62,7 +130,7 @@ export const Registration: FC = () => {
                 },
               }),
             ]}>
-            <Input />
+            <Input.Password />
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
