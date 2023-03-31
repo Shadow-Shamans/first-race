@@ -1,55 +1,59 @@
 import { FC } from 'react'
-import { Button, Form, Input } from 'antd'
+import { Button, Form } from 'antd'
 import { LayoutFullPage } from '@/components/LayoutFullPage'
 import { LinkToPage } from '@/components/LinkToPage'
+import { FormInput } from '@/components/FormInput'
+import { generateId } from '@/shared/utils/generateId'
+
+const LoginInputs = [
+  {
+    label: 'Логин',
+    name: 'login',
+  },
+  {
+    label: 'Пароль',
+    name: 'password',
+  },
+]
 
 export const Login: FC = () => {
-  const onSuccessSubmit = (values: any) => {
-    // Вызвать кастомный хук для отправки данных post на создание пользователя и получения токена
-    // {
-    //   login: String,
-    //   password: String,
-    // }
-    console.log('Data:', values)
-  }
+  const [form] = Form.useForm()
 
-  const onErrorSubmit = (errorInfo: any) => {
-    console.error('Failed:', errorInfo)
+  const onCheck = async () => {
+    try {
+      const values = await form.validateFields()
+
+      if (!values.errorFields) {
+        console.log(values)
+      }
+    } catch (errorInfo) {
+      console.log(errorInfo)
+    }
   }
 
   return (
     <LayoutFullPage>
       <div>
         <Form
+          form={form}
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           style={{ width: 420 }}
           initialValues={{ remember: true }}
-          onFinish={onSuccessSubmit}
-          onFinishFailed={onErrorSubmit}
           autoComplete="off"
           size="large">
-          <Form.Item
-            label="Логин"
-            name="login"
-            rules={[
-              { required: true, message: 'Поле логина не может быть пустым!' },
-            ]}>
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Пароль"
-            name="password"
-            rules={[
-              { required: true, message: 'Поле пароля не может быть пустым!' },
-            ]}>
-            <Input.Password />
-          </Form.Item>
+          {LoginInputs.map(({ label, name }) => {
+            return (
+              <FormInput
+                label={label}
+                name={name}
+                key={generateId()}></FormInput>
+            )
+          })}
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" onClick={onCheck}>
               Войти
             </Button>
           </Form.Item>
