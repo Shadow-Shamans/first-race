@@ -24,19 +24,19 @@ export const AppRoutes = () => {
         <Route path="/registration" element={<Registration />} />
         <Route
           path="/forum"
-          element={(
+          element={
             <PrivateRoute isLoggedin={isLoggedIn}>
               <Forum />
             </PrivateRoute>
-          )}
+          }
         />
         <Route
           path="/profile"
-          element={(
+          element={
             <PrivateRoute isLoggedin={isLoggedIn}>
               <Profile />
             </PrivateRoute>
-          )}
+          }
         />
         <Route path="/game" element={<Game />} />
         <Route path="*" element={<NotFound />} />

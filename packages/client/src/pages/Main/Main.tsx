@@ -1,11 +1,5 @@
 import { FC } from 'react'
-import {
-  Button,
-  Card,
-  Space,
-  DatePicker,
-  version,
-} from 'antd'
+import { Button, Card, Space, DatePicker, version } from 'antd'
 import styles from './main.module.css'
 import { useTheme } from '@/app/hooks'
 
@@ -19,9 +13,7 @@ export const Main: FC = () => {
           <DatePicker />
           <Button type="primary">Primary Button</Button>
         </Space>
-        <Button onClick={handleChangeTheme}>
-          Change Theme to {themeName}
-        </Button>
+        <Button onClick={handleChangeTheme}>Change Theme to {themeName}</Button>
       </div>
     </Card>
   )
