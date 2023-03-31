@@ -32,8 +32,8 @@ const REG: IREG = {
   },
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export default function validateForms(
+  // eslint-disable-next-line @typescript-eslint/ban-types
   getFieldValue: Function,
   name: string,
   value: string
