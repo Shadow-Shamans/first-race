@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { Button, Form } from 'antd'
-import { LayoutFullPage } from '@/components/LayoutFullPage'
 import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
 import { generateId } from '@/shared/utils/generateId'
@@ -49,7 +48,7 @@ export const Registration: FC = () => {
   }
 
   return (
-    <LayoutFullPage>
+    <div className={styled.inner}>
       <Form
         form={form}
         name="basic"
@@ -76,6 +75,6 @@ export const Registration: FC = () => {
           <LinkToPage text="Уже зарегистрированы?" to="/login" />
         </Form.Item>
       </Form>
-    </LayoutFullPage>
+    </div>
   )
 }
