@@ -7,6 +7,10 @@ import AppRoutes from '@/router'
 import ThemeProvider from '@/shared/providers/ThemeProvider'
 import AppMenu from '@/features/AppMenu'
 import './index.css'
+import { Layout } from 'antd'
+import styled from './App.module.css'
+
+const { Header, Content } = Layout
 
 export const App = () => (
   <ErrorBoundary>
@@ -14,8 +18,14 @@ export const App = () => (
       <PersistGate loading={'Loading...'} persistor={persistor}>
         <ThemeProvider>
           <Router>
-            <AppMenu />
-            <AppRoutes />
+            <Layout>
+              <Header>
+                <AppMenu />
+              </Header>
+              <Content className={styled.content}>
+                <AppRoutes />
+              </Content>
+            </Layout>
           </Router>
         </ThemeProvider>
       </PersistGate>

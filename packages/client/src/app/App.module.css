@@ -1,3 +1,4 @@
-.container {
-  border: 1px solid var(--red-600);
+.content {
+  min-height: calc(100vh - 64px);
+  position: relative;
 }
