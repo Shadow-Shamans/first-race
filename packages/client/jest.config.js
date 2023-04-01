@@ -9,7 +9,7 @@ export default {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
-    '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
+    '.+\\.(css|styl|less|sass|scss|svg)$': 'jest-css-modules-transform',
   },
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT,
