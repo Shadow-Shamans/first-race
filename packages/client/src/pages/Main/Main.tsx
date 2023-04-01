@@ -24,7 +24,7 @@ export const Main: FC = () => {
       </Text>
 
       <div className={styles.picturesWrapper}>
-        <div className={styles.rectanglesWrapper}>
+        <div>
           <img
             className={classNames(styles.rectangle, styles.bottomRectangle)}
             src={grayRectangle}

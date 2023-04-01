@@ -69,12 +69,6 @@
   border-radius: 10px;
 }
 
-.rectanglesWrapper {
-  /*position: absolute;*/
-  /*top: -200px;*/
-  /*right: 0;*/
-}
-
 .rectangle {
   position: absolute;
 }

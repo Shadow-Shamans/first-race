@@ -2,9 +2,9 @@ import { useState, FC } from 'react'
 import { Typography } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { menuItems, TPath } from './constants'
+import { Button } from '@/components/Button'
 
 import styles from './menu.module.css'
-import { Button } from '../Button/Button'
 
 const { Text } = Typography
 
