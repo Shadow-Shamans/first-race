@@ -6,17 +6,20 @@ interface IProps {
   children: ReactElement
 }
 
-
 export const ThemeProvider: FC<IProps> = ({ children }) => {
   const { defaultAlgorithm, darkAlgorithm } = theme
+
   const { isDarkMode } = useTheme()
 
   return (
     <ConfigProvider
       theme={{
         algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
+        token: {
+          colorBgLayout: isDarkMode ? '#000000' : '#FFFFFF',
+        },
       }}>
-        {children}
+      {children}
     </ConfigProvider>
   )
 }
