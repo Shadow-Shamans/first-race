@@ -18,3 +18,9 @@
 .text {
   font-size: 20px;
 }
+
+@media (max-width: 613px) {
+  .inner {
+    padding: 0 20px;
+  }
+}

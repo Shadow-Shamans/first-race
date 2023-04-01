@@ -1,5 +1,6 @@
 .form {
-  width: 420px;
+  max-width: 420px;
+  width: 100%;
 }
 
 .button {
@@ -16,4 +17,10 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+@media (max-width: 613px) {
+  .inner {
+    padding: 0 20px;
+  }
 }
