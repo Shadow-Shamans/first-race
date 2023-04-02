@@ -4,32 +4,21 @@ import storage from 'redux-persist/lib/storage'
 import { userSlice } from '@/features/User'
 import { testDataApi } from '@/app/api'
 import { authSlice } from '@/features/Auth/authSlice'
-// todo: learn: example how to configure session storage persist
-// todo: import sessionStorage from 'redux-persist/lib/storage/session'
+import { gameSlice } from '@/features/Game'
 
 const storageKey = 'first_rase_game'
 
 const rootPersistConfig = {
   key: storageKey,
   storage,
-  whitelist: [userSlice.name, authSlice.name],
+  whitelist: [userSlice.name, authSlice.name, gameSlice.name],
 }
-
-// todo: learn: example how to configure session storage persist
-// const sessionStoragePersistConfig = {
-//   key: storageKey,
-//   storage: sessionStorage,
-// }
 
 const rootReducer = combineReducers({
   [userSlice.name]: userSlice.reducer,
   [authSlice.name]: authSlice.reducer,
   [testDataApi.reducerPath]: testDataApi.reducer,
-  // todo: learn: example how to configure session storage persist
-  // [authSlice.name]: persistReducer(
-  //   sessionStoragePersistConfig,
-  //   authSlice.reducer
-  // ),
+  [gameSlice.name]: gameSlice.reducer,
 })
 
 export const reducer = persistReducer(rootPersistConfig, rootReducer)
