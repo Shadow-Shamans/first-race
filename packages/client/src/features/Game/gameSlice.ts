@@ -21,6 +21,9 @@ export const gameSlice = createSlice({
     setRunning: (state, action: PayloadAction<boolean>) => {
       state.isRunning = action.payload
     },
+    setTime: (state, action: PayloadAction<number>) => {
+      state.time = action.payload
+    },
     decrementTime: state => {
       const { time } = state
 
@@ -33,4 +36,4 @@ export const gameSlice = createSlice({
   },
 })
 
-export const { decrementTime, setRunning } = gameSlice.actions
+export const { decrementTime, setRunning, setTime } = gameSlice.actions
