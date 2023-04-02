@@ -33,8 +33,8 @@ export class GameElement extends HTMLElement {
     this._root = this.shadowRoot as ShadowRoot
     this._root.innerHTML = style
     this._canvas = document.createElement('canvas')
-    this._CANVAS_WIDTH = this._canvas.width = CANVAS_WIDTH
-    this._CANVAS_HEIGHT = this._canvas.height = CANVAS_HEIGHT
+    this._CANVAS_WIDTH = this._canvas.width = window.innerWidth
+    this._CANVAS_HEIGHT = this._canvas.height = window.innerHeight
     this._root.appendChild(this._canvas)
     this._ctx = this._canvas.getContext('2d') as CanvasRenderingContext2D
     this._bg = new Image()

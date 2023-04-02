@@ -1,11 +1,10 @@
 .container {
   position: relative;
-  height: calc(100vh - 46px);
+  height: calc(100vh - var(--height-top-nav));
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid blue;
 }
 
 .controls {
