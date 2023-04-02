@@ -71,7 +71,7 @@ export const Main: FC = () => {
         <Text className={styles.title}>Попади в топ!</Text>
 
         <Card className={styles.card}>
-          <Rating list={leaderBoardMock} />
+          <Rating currentUserId={1} list={leaderBoardMock} />
         </Card>
       </div>
     </section>
