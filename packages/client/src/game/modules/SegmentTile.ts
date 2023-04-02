@@ -6,17 +6,24 @@ export class SegmentTile {
   tileSize: number
   color: string
   occupied: boolean
+  _ctx: CanvasRenderingContext2D
 
-  constructor({ position = { x: 0, y: 0 } }) {
+  constructor({ position = { x: 0, y: 0 } }, ctx: CanvasRenderingContext2D) {
     this.position = position
     this.tileSize = TILE_SIZE
     this.color = 'rgba(255, 255, 255, 0.15)'
     this.occupied = false
+    this._ctx = ctx
   }
 
   draw() {
-    c.fillStyle = this.color
-    c.fillRect(this.position.x, this.position.y, this.size, this.size)
+    this._ctx.fillStyle = this.color
+    this._ctx.fillRect(
+      this.position.x,
+      this.position.y,
+      this.tileSize,
+      this.tileSize
+    )
   }
 
   update(mouse: Position) {
@@ -24,9 +31,9 @@ export class SegmentTile {
 
     if (
       mouse.x > this.position.x &&
-      mouse.x < this.position.x + this.size &&
+      mouse.x < this.position.x + this.tileSize &&
       mouse.y > this.position.y &&
-      mouse.y < this.position.y + this.size
+      mouse.y < this.position.y + this.tileSize
     ) {
       this.color = 'white'
     } else this.color = 'rgba(255, 255, 255, 0.15)'
