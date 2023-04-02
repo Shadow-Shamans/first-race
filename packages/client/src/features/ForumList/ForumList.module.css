@@ -1,0 +1,12 @@
+.loadmoreList {
+  min-height: 350px;
+  margin: 100px auto;
+  width: 980px;
+}
+
+.loadMoreBtn {
+  text-align: center;
+  margin-top: 10px;
+  height: 32px;
+  line-height: 32px;
+}

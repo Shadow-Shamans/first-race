@@ -1,0 +1,30 @@
+.listItem {
+  border-bottom: 1px solid #E6E6E6;
+  padding-bottom: 15px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.lastMessage {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.badge {
+  margin-right: 43px;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.badgeText {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.totalMessages {
+  font-weight: 700;
+  font-size: 16px;
+}

@@ -6,12 +6,5 @@ export interface IForumItem {
   totalMessages: number
   userAvatar: string
   badgeColor: string
-}
-
-export interface IForumState {
-  data: IForumItem[]
-  isLoading: boolean
-  isError: boolean
-  currentPage: number
-  totalElement: number
+  isLoading?: boolean
 }

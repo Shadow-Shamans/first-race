@@ -1,15 +1,10 @@
 import { List, Skeleton, Avatar, Badge } from 'antd'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Forum.module.css'
-import { IForumItem } from './types'
+import { IProps } from './types'
+import styles from './ForumTopicItem.module.css'
 
-interface IProps {
-  item: IForumItem
-  isLoading: boolean
-}
-
-const TopicItem: FC<IProps> = ({ item, isLoading }) => (
+export const ForumTopicItem: FC<IProps> = ({ item, isLoading }) => (
   <List.Item className={styles.listItem}>
     <Skeleton avatar title={false} loading={isLoading} active>
       <List.Item.Meta
@@ -34,5 +29,3 @@ const TopicItem: FC<IProps> = ({ item, isLoading }) => (
     </Skeleton>
   </List.Item>
 )
-
-export default TopicItem

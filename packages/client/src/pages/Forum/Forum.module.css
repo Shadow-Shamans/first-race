@@ -1,43 +1,4 @@
-.loadmoreList {
-  min-height: 350px;
-  margin: 100px auto;
-  width: 980px;
-}
-
-.listItem {
-  border-bottom: 1px solid #E6E6E6;
-  padding-bottom: 15px;
-}
-
-.badge {
-  margin-right: 43px;
-  padding: 6px;
-  border-radius: 4px;
-}
-
-.badgeText {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.totalMessages {
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.title {
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.lastMessage {
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.loadMoreBtn {
-  text-align: center;
-  margin-top: 10px;
-  height: 32px;
-  line-height: 32px;
+.layout {
+  background-color: #FFF;
+  padding-bottom: 10px;
 }

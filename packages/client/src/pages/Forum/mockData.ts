@@ -100,4 +100,94 @@ export const forumTempData = [
     badgeColor: 'green',
     id: generateId(),
   },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 23,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 24,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 25,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 26,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 27,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 28,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 29,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 30,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 31,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
+  {
+    title: 'Зависает на первом уровне',
+    lastMessage: 'Скинь кэш браузера',
+    topic: 'баги', // просто строка ? зависит от кол-ва хэшей
+    totalMessages: 32,
+    userAvatar: './path/to/avatar/file.png',
+    badgeColor: 'green',
+    id: generateId(),
+  },
 ]
