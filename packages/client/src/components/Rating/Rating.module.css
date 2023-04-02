@@ -1,0 +1,29 @@
+.item {
+  display: grid;
+  grid-template-columns: 20px 35px auto 100px;
+  align-items: center;
+  justify-items: start;
+  gap: 16px;
+  padding: 12px 0;
+  position: relative;
+}
+
+.item[data-is-current-user=true]:before {
+  content: '';
+  position: absolute;
+  background-color: var(--badge);
+  width: 9px;
+  height: 9px;
+  border-radius: 100%;
+  top: 50%;
+  margin-top: -4px;
+  left: -30px;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid var(--secondary);
+}
+
+.score {
+  justify-self: flex-end;
+}
