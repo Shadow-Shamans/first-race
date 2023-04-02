@@ -10,7 +10,7 @@ export const ForumTopicItem: FC<IProps> = ({ item, isLoading }) => (
       <List.Item.Meta
         avatar={<Avatar shape="circle" size="default" src={item.userAvatar} />}
         title={
-          <Link to={`forum/topic${item.id}`} className={styles.title}>
+          <Link to={`/forum/topic/${item.id}`} className={styles.title}>
             {item.title}
           </Link>
         }
