@@ -12,4 +12,6 @@ export interface IForumState {
   data: IForumItem[]
   isLoading: boolean
   isError: boolean
+  currentPage: number
+  totalElement: number
 }

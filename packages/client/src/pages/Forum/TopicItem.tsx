@@ -24,9 +24,11 @@ const TopicItem: FC<IProps> = ({ item, isLoading }) => (
         }
       />
       <Badge
-        style={{ backgroundColor: 'red' }}
-        className={styles.bagde}
-        text={item.topic}
+        className={styles.badge}
+        text={<span className={styles.badgeText}>{item.topic}</span>}
+        color={item.badgeColor}
+        size="small"
+        dot={false}
       />
       <div className={styles.totalMessages}>{item.totalMessages}</div>
     </Skeleton>

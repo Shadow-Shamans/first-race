@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react'
 import { IForumState } from './types'
 import { Layout, List, Button } from 'antd'
 import { forumTempData } from './mockData'
-import { initialForumState } from './constants'
+import { initialForumState, loadMoreBtnSx } from './constants'
 import styles from './Forum.module.css'
 import TopicItem from './TopicItem'
 
@@ -28,17 +28,21 @@ export const Forum: FC = () => {
       ...prev,
       isLoading: true,
     }))
+    setTimeout(() => {
+      setForumState(prev => ({
+        ...prev,
+        isLoading: false,
+        data: forumTempData,
+        currentPage: prev.currentPage + 5,
+      }))
+    }, 2000)
   }
 
   const loadMore = !forumState.isLoading ? (
-    <div
-      style={{
-        textAlign: 'center',
-        marginTop: 12,
-        height: 32,
-        lineHeight: '32px',
-      }}>
-      <Button onClick={onLoadMore}>Загрузить еще 5 тем</Button>
+    <div className={styles.loadMoreBtn}>
+      <Button style={loadMoreBtnSx} onClick={onLoadMore}>
+        Загрузить еще 5 тем
+      </Button>
     </div>
   ) : null
 
@@ -51,7 +55,10 @@ export const Forum: FC = () => {
           itemLayout="horizontal"
           size="small"
           loadMore={loadMore}
-          dataSource={forumState.data}
+          dataSource={forumState.data.slice(
+            forumState.currentPage,
+            forumState.currentPage + 5
+          )}
           renderItem={item => (
             <TopicItem item={item} isLoading={forumState.isLoading} />
           )}

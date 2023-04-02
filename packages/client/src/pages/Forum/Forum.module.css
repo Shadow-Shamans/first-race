@@ -9,18 +9,23 @@
   padding-bottom: 15px;
 }
 
-.bagde {
+.badge {
   margin-right: 43px;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.badgeText {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .totalMessages {
-  color: #000000;
   font-weight: 700;
   font-size: 16px;
 }
 
 .title {
-  color: #000000;
   font-weight: 700;
   font-size: 20px;
 }
@@ -28,5 +33,11 @@
 .lastMessage {
   font-weight: 700;
   font-size: 14px;
-  color: #545454;
+}
+
+.loadMoreBtn {
+  text-align: center;
+  margin-top: 10px;
+  height: 32px;
+  line-height: 32px;
 }
