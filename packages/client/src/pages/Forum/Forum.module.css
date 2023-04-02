@@ -1,0 +1,32 @@
+.loadmoreList {
+  min-height: 350px;
+  margin: 100px auto;
+  width: 980px;
+}
+
+.listItem {
+  border-bottom: 1px solid #E6E6E6;
+  padding-bottom: 15px;
+}
+
+.bagde {
+  margin-right: 43px;
+}
+
+.totalMessages {
+  color: #000000;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.title {
+  color: #000000;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.lastMessage {
+  font-weight: 700;
+  font-size: 14px;
+  color: #545454;
+}
