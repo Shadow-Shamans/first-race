@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { Layout, theme } from 'antd'
+import { Layout } from 'antd'
 import store, { persistor } from '@/store'
 import ErrorBoundary from '@/shared/ErrorBoundary'
 import { AppRoutes } from '@/router'
@@ -11,7 +11,7 @@ import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 
 import './index.css'
 
-const { Header: AntHeader, Content } = Layout
+const { Content } = Layout
 
 export const App = () => (
   <ErrorBoundary>
@@ -20,10 +20,9 @@ export const App = () => (
         <ThemeProvider>
           <Router>
             <Layout>
-              <AntHeader>
-                <ThemeSwitcher />
-                <Header />
-              </AntHeader>
+              <ThemeSwitcher />
+              <Header />
+
               <Content>
                 <AppRoutes />
               </Content>
