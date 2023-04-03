@@ -2,14 +2,17 @@ import React, { ReactNode, Component } from 'react'
 import { Alert } from 'antd'
 
 interface IErrorBoundaryState {
-  hasError: boolean;
-};
+  hasError: boolean
+}
 
 interface IErrorBoundaryProps {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
-export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
+export class ErrorBoundary extends Component<
+  IErrorBoundaryProps,
+  IErrorBoundaryState
+> {
   constructor(props: IErrorBoundaryProps) {
     super(props)
     this.state = { hasError: false }
@@ -36,7 +39,7 @@ export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundary
           type="error"
           showIcon
           closable
-      />
+        />
       )
     }
     return children

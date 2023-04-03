@@ -11,18 +11,24 @@ import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 
 import './index.css'
 
+const { Header: AntHeader, Content } = Layout
+
 export const App = () => (
   <ErrorBoundary>
     <Provider store={store}>
       <PersistGate loading={'Loading...'} persistor={persistor}>
         <ThemeProvider>
-          <Layout>
-            <Router>
-              <ThemeSwitcher />
-              <Header />
-              <AppRoutes />
-            </Router>
-          </Layout>
+          <Router>
+            <Layout>
+              <AntHeader>
+                <ThemeSwitcher />
+                <Header />
+              </AntHeader>
+              <Content>
+                <AppRoutes />
+              </Content>
+            </Layout>
+          </Router>
         </ThemeProvider>
       </PersistGate>
     </Provider>

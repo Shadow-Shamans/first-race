@@ -1,0 +1,26 @@
+.form {
+  max-width: 420px;
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+}
+
+.inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (max-width: 613px) {
+  .inner {
+    padding: 0 20px;
+  }
+}
