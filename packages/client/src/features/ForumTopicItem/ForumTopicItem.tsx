@@ -1,4 +1,4 @@
-import { List, Skeleton, Avatar, Badge } from 'antd'
+import { List, Skeleton, Avatar, Badge, Typography } from 'antd'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { IProps } from './types'
@@ -15,7 +15,9 @@ export const ForumTopicItem: FC<IProps> = ({ item, isLoading }) => (
           </Link>
         }
         description={
-          <div className={styles.lastMessage}>{item.lastMessage}</div>
+          <Typography className={styles.lastMessage}>
+            {item.lastMessage}
+          </Typography>
         }
       />
       <Badge
@@ -25,7 +27,9 @@ export const ForumTopicItem: FC<IProps> = ({ item, isLoading }) => (
         size="small"
         dot={false}
       />
-      <div className={styles.totalMessages}>{item.totalMessages}</div>
+      <Typography className={styles.totalMessages}>
+        {item.totalMessages}
+      </Typography>
     </Skeleton>
   </List.Item>
 )

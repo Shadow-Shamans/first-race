@@ -1,0 +1,30 @@
+.layout {
+  padding-bottom: 10px;
+  width: 980px;
+  margin: 50px auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 27px;
+  border-bottom: 1px solid #E6E6E6;
+  align-items: center;
+  padding-top: 20px;
+  background: none;
+  padding: 0;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.badgeText {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.badge {
+  border-radius: 4px;
+}
