@@ -1,0 +1,16 @@
+.item {
+  display: grid;
+  grid-template-columns: 20px 35px auto 100px;
+  align-items: center;
+  justify-items: start;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid var(--secondary);
+}
+
+.score {
+  justify-self: flex-end;
+}
