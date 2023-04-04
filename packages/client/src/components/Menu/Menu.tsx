@@ -1,6 +1,7 @@
 import { useState, FC } from 'react'
 import { Typography } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
+import classNames from 'classnames'
 import { menuItems, TPath } from './types'
 import { Button } from '@/components/Button'
 
@@ -24,12 +25,11 @@ export const Menu: FC = () => {
     <ul className={styles.list}>
       {menuItems.map(({ label, path }) => {
         const isActive = current === path
-        const classNames = `${styles.item} ${isActive ? styles.active : ''}`
 
         return (
           <li
             key={path}
-            className={classNames}
+            className={classNames(styles.item, { [styles.active]: isActive })}
             onClick={() => handleClick(path)}>
             <Text strong>{label}</Text>
           </li>
@@ -37,7 +37,7 @@ export const Menu: FC = () => {
       })}
 
       <li>
-        <Button type={'primary'} onClick={() => handleClick('/game')}>
+        <Button type="primary" onClick={() => handleClick('/game')}>
           Играть
         </Button>
       </li>

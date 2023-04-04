@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Card, Typography } from 'antd'
-import { classNames } from '@/shared/utils/classNames'
+import classNames from 'classnames'
 import { Rating } from '@/components/Rating'
 
 import coins from '@/assets/images/coins.png'
