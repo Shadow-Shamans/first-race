@@ -11,6 +11,7 @@ const Main = lazy(() => import('@/pages/Main'))
 const Forum = lazy(() => import('@/pages/Forum'))
 const Profile = lazy(() => import('@/pages/Profile'))
 const Game = lazy(() => import('@/pages/Game'))
+const Rating = lazy(() => import('@/pages/Rating'))
 const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 
 export const AppRoutes = () => {
@@ -22,6 +23,7 @@ export const AppRoutes = () => {
         <Route path="/main" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/rating" element={<Rating />} />
         <Route
           path="/forum"
           element={
