@@ -27,7 +27,7 @@ export const Rating: FC<IProps> = ({ currentUserId, list }) => {
           data-is-current-user={id === currentUserId}>
           <Text strong>{rating}</Text>
 
-          <Avatar>{name.slice(0, 1)}</Avatar>
+          <Avatar>{name[0]}</Avatar>
 
           <Text strong>{name}</Text>
 

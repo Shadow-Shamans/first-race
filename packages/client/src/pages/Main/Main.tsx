@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Card, Typography } from 'antd'
-import { classNames } from '@/shared/utils/classNames'
+import classNames from 'classnames'
 import { Rating } from '@/components/Rating'
 
 import coins from '@/assets/images/coins.png'
@@ -71,7 +71,7 @@ export const Main: FC = () => {
         <Text className={styles.title}>Попади в топ!</Text>
 
         <Card className={styles.card}>
-          <Rating currentUserId={1} list={leaderBoardMock} />
+          <Rating list={leaderBoardMock} />
         </Card>
       </div>
     </section>

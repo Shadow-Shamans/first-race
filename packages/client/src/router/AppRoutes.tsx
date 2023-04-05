@@ -10,9 +10,9 @@ const Registration = lazy(() => import('@/pages/Registration'))
 const Main = lazy(() => import('@/pages/Main'))
 const Forum = lazy(() => import('@/pages/Forum'))
 const Profile = lazy(() => import('@/pages/Profile'))
-const Rating = lazy(() => import('@/pages/Rating'))
 const Game = lazy(() => import('@/pages/Game'))
-const NotFound = lazy(() => import('@/pages/NotFound'))
+const Rating = lazy(() => import('@/pages/Rating'))
+const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 
 export const AppRoutes = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
@@ -41,7 +41,10 @@ export const AppRoutes = () => {
           }
         />
         <Route path="/game" element={<Game />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={<ErrorPage code="400" text="Вы не туда попали(" />}
+        />
       </Routes>
     </Suspense>
   )
