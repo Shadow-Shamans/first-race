@@ -1,7 +1,10 @@
 :root {
   --black: #000000;
-  --white: #FFFFFF;
-  --primary: #FFD969;
-  --secondary: #E6E6E6;
+  --white: #ffffff;
+  --primary: #ffd969;
+  --secondary: #e6e6e6;
   --badge: #CD6262
+
+  /* Sizes */
+  --height-top-nav: 182px;
 }

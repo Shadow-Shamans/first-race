@@ -9,10 +9,11 @@
 
 .controls {
   position: absolute;
-  top: calc(var(--height-top-nav) + 10px);
+  top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  box-sizing: border-box;
 }
 
 .button {
