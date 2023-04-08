@@ -12,7 +12,7 @@
   align-items: center;
   padding-top: 20px;
   background: none;
-  padding: 0;
+  padding: 10px;
 }
 
 .title {
@@ -27,4 +27,32 @@
 
 .badge {
   border-radius: 4px;
+}
+
+.darkBg {
+  background-color: #000;
+}
+
+.whiteBg {
+  background-color: #fff;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button {
+  background-image: url('../../assets/images/Vector.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 31px;
+  height: 31px;
+  outline: none;
+  border: none;
+  margin-left: 10px;
+  background-color: transparent;
 }

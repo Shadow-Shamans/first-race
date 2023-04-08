@@ -13,12 +13,13 @@ const useForumMessages = () => {
   const [state, setState] = useState<IForumMessagesState>(initialMessagesState)
   const [loadingItem, setLoadingItem] = useState<boolean>(false)
   const [messagesList, setMessagesList] = useState<IForumTopicMessage[]>([])
+
   useEffect(() => {
     setState(prev => ({ ...prev, initialLoading: true }))
     setTimeout(() => {
       setState(prev => ({
         ...prev,
-        messages: fakeMessages,
+        messages: fakeMessages.slice(0, MESSAGES_PER_LOAD),
         initialLoading: false,
         totalElements: fakeMessages.length,
       }))
@@ -37,7 +38,7 @@ const useForumMessages = () => {
         }))
       )
     )
-    // TODO убрать таймер и заменить реальным рестом
+    // TODO убрать таймер и заменить реальным рестом RTK
     setTimeout(() => {
       setState(prev => ({
         ...prev,
@@ -55,8 +56,8 @@ const useForumMessages = () => {
         )
       )
       setLoadingItem(false)
-    }, 1000)
-  }, [])
+    }, 5000)
+  }, [state, messagesList])
 
   return {
     messagesList,
