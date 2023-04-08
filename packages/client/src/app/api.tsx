@@ -3,7 +3,9 @@ import type { TTestData } from './types'
 
 export const testDataApi = createApi({
   reducerPath: 'testDataApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:${__SERVER_PORT__}` }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `http://localhost:${__SERVER_PORT__}`,
+  }),
   endpoints: builder => ({
     getTestData: builder.query<TTestData, string>({
       query: () => `/`,

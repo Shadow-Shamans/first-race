@@ -5,14 +5,15 @@ import PrivateRoute from '@/shared/hocs/PrivateRouter'
 import { Route, Routes } from 'react-router-dom'
 import { Spin } from 'antd'
 
-const Login = lazy(() => import('../pages/Login'))
-const Registration = lazy(() => import('../pages/Registration'))
-const Main = lazy(() => import('../pages/Main'))
-const Forum = lazy(() => import('../pages/Forum'))
-const Profile = lazy(() => import('../pages/Profile'))
-const Game = lazy(() => import('../pages/Game'))
-const NotFound = lazy(() => import('../pages/NotFound'))
-const ForumTopic = lazy(() => import('../pages/ForumTopic'))
+const Login = lazy(() => import('@/pages/Login'))
+const Registration = lazy(() => import('@/pages/Registration'))
+const Main = lazy(() => import('@/pages/Main'))
+const Forum = lazy(() => import('@/pages/Forum'))
+const ForumTopic = lazy(() => import('@/pages/ForumTopic'))
+const Profile = lazy(() => import('@/pages/Profile'))
+const Game = lazy(() => import('@/pages/Game'))
+const Rating = lazy(() => import('@/pages/Rating'))
+const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 
 export const AppRoutes = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
@@ -23,6 +24,7 @@ export const AppRoutes = () => {
         <Route path="/main" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/rating" element={<Rating />} />
         <Route
           path="/forum"
           element={
@@ -48,7 +50,10 @@ export const AppRoutes = () => {
           }
         />
         <Route path="/game" element={<Game />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={<ErrorPage code="400" text="Вы не туда попали(" />}
+        />
       </Routes>
     </Suspense>
   )
