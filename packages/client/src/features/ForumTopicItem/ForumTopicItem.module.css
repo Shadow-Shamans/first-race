@@ -11,6 +11,7 @@
 .lastMessage {
   font-weight: 700;
   font-size: 14px;
+  margin-left: 10px;
 }
 
 .badge {
@@ -27,4 +28,10 @@
 .totalMessages {
   font-weight: 700;
   font-size: 16px;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
