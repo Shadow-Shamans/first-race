@@ -8,3 +8,8 @@
   height: 32px;
   line-height: 32px;
 }
+
+.link {
+  display: flex;
+  justify-content: right;
+}

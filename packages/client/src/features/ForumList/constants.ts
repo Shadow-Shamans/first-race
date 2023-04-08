@@ -9,14 +9,6 @@ export const initialForumState: IForumState = {
   totalElement: 21,
 }
 
-export const loadMoreBtnSx = {
-  fontSize: '16px',
-  fontWeight: 700,
-  background: 'none',
-  border: 'none',
-  boxShadow: 'none',
-}
-
 export const ITEMS_PER_LOAD = 5
 
 export const emptyObject: IForumItem = {

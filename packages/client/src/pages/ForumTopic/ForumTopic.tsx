@@ -1,11 +1,18 @@
 import { FC } from 'react'
 import { Layout, Typography, Badge } from 'antd'
-import styles from './ForumTopic.module.css'
 import ForumMessages from '@/features/ForumMessages'
+import useForumMessages from './useForumMessages'
+import styles from './ForumTopic.module.css'
 
 export const ForumTopic: FC = () => {
-  const topic = 'баги'
-  const badgeColor = 'green'
+  const {
+    initialLoading,
+    messagesList,
+    badgeColor,
+    topic,
+    loadingItem,
+    handleLoadMore,
+  } = useForumMessages()
   return (
     <Layout className={styles.layout}>
       <Layout.Header className={styles.header}>
@@ -21,7 +28,12 @@ export const ForumTopic: FC = () => {
         />
       </Layout.Header>
       <Layout.Content>
-        <ForumMessages />
+        <ForumMessages
+          messages={messagesList}
+          isLoading={initialLoading}
+          loadingItem={loadingItem}
+          handleLoadMore={handleLoadMore}
+        />
       </Layout.Content>
     </Layout>
   )

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Layout } from 'antd'
-import styles from './Forum.module.css'
 import ForumList from '@/features/ForumList'
+import styles from './Forum.module.css'
 
 export const Forum: FC = () => (
   <Layout className={styles.layout}>
