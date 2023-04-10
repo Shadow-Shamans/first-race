@@ -45,7 +45,7 @@
 }
 
 .button {
-  background-image: url('../../assets/images/Vector.png');
+  background-image: url('@/assets/images/Vector.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

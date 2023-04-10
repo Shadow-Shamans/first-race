@@ -1,9 +1,10 @@
 import { IForumTopicMessage } from '@/pages/ForumTopic/types'
-import { Avatar, Button, List, Skeleton, Typography } from 'antd'
+import { Button, List } from 'antd'
 import { FC } from 'react'
-import { loadMoreBtnSx } from '@/assets/styles/buttons'
+import { loadMoreBtnStyles } from '@/assets/styles/buttons'
 import { forumTopicTempData } from '@/pages/ForumTopic/mockData'
 import styles from './ForumMessages.module.css'
+import { ForumMessage } from './ForumMessage'
 
 interface IProps {
   messages: IForumTopicMessage[]
@@ -22,7 +23,7 @@ export const ForumMessages: FC<IProps> = ({
     !isLoading && !loadingItem ? (
       <div className={styles.loadMoreBtn}>
         <Button
-          style={loadMoreBtnSx}
+          style={loadMoreBtnStyles}
           onClick={handleLoadMore}
           disabled={messages.length === forumTopicTempData.messages.length}>
           {messages.length === forumTopicTempData.messages.length
@@ -53,34 +54,3 @@ export const ForumMessages: FC<IProps> = ({
     />
   )
 }
-
-interface IMessageProps {
-  message: IForumTopicMessage
-  isLoading: boolean
-  idx: number
-}
-
-const ForumMessage: FC<IMessageProps> = ({ message, isLoading, idx }) => (
-  <List.Item>
-    <Skeleton avatar title={false} loading={isLoading} active>
-      <List.Item.Meta
-        className={`${
-          idx % 2 === 0 ? styles.listItem : styles.listItemReverse
-        }`}
-        key={message.userId}
-        avatar={<Avatar shape="circle" size="default" src={message.avatar} />}
-        description={
-          <div
-            className={`${styles.messageBody}  ${
-              idx % 2 === 0 ? styles.messageBodyReverse : ''
-            }`}>
-            <Typography className={styles.content}>
-              {message.content}
-            </Typography>
-            <Typography className={styles.date}>{message.date}</Typography>
-          </div>
-        }
-      />
-    </Skeleton>
-  </List.Item>
-)

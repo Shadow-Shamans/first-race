@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { forumTempData } from '@/pages/Forum/mockData'
 import ForumTopicItem from '../ForumTopicItem'
 import { useForum } from './useForum'
-import { loadMoreBtnSx } from '@/assets/styles/buttons'
+import { loadMoreBtnStyles } from '@/assets/styles/buttons'
 import styles from './ForumList.module.css'
 
 export const ForumList: FC = () => {
@@ -14,7 +14,7 @@ export const ForumList: FC = () => {
     !forumState.initialLoading && !loadingItem ? (
       <div className={styles.loadMoreBtn}>
         <Button
-          style={loadMoreBtnSx}
+          style={loadMoreBtnStyles}
           onClick={handleLoadMore}
           disabled={list.length === forumTempData.length}>
           {list.length === forumTempData.length
