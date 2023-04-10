@@ -9,6 +9,7 @@ const Login = lazy(() => import('@/pages/Login'))
 const Registration = lazy(() => import('@/pages/Registration'))
 const Main = lazy(() => import('@/pages/Main'))
 const Forum = lazy(() => import('@/pages/Forum'))
+const ForumTopic = lazy(() => import('@/pages/ForumTopic'))
 const Profile = lazy(() => import('@/pages/Profile'))
 const Game = lazy(() => import('@/pages/Game'))
 const Rating = lazy(() => import('@/pages/Rating'))
@@ -29,6 +30,14 @@ export const AppRoutes = () => {
           element={
             <PrivateRoute isLoggedin={isLoggedIn}>
               <Forum />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/forum/topic/:id"
+          element={
+            <PrivateRoute isLoggedin={isLoggedIn}>
+              <ForumTopic />
             </PrivateRoute>
           }
         />

@@ -1,0 +1,48 @@
+.messageBody {
+  background: #ECECEC;
+  border-radius: 10px;
+  width: 628px;
+  padding: 10px;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}
+.date {
+  color: #818181;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.loadmoreList {
+  max-height: 600px;
+  overflow-y: scroll;
+  border: none;
+  border-block-end: none;
+}
+
+.loadMoreBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.listItem {
+  border-block-end: none;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.listItemReverse {
+  flex-direction: row-reverse;
+  margin-top: 10px;
+}
+
+.messageBodyReverse {
+  align-self: flex-end;
+}
