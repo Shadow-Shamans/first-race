@@ -1,0 +1,13 @@
+.layout {
+  padding: 20px;
+  width: 980px;
+  margin: 50px auto;
+}
+
+.darkBg {
+  background-color: #000;
+}
+
+.whiteBg {
+  background-color: #fff;
+}

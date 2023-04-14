@@ -1,0 +1,24 @@
+.button {
+  fill: var(--primary);
+  background-image: url('@/assets/icons/buttonRectangle.svg');
+  background-repeat: no-repeat;
+  min-width: 168px;
+}
+
+.button > button {
+  height: 56px;
+  border-radius: unset;
+
+  background-color: unset;
+  border: none;
+  box-shadow: unset;
+  outline: none;
+}
+
+/*
+  HACK: при клике на кнопку генерятся дополнительные дивы в кнопке,
+  это нужно, чтобы не было видно синего градиента от них
+*/
+.button > button > div {
+  display: none;
+}

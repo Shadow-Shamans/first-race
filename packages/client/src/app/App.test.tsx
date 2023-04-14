@@ -1,12 +1,12 @@
-import App from './App'
 import { render, screen } from '@testing-library/react'
 
-const appContent = 'Вот тут будет жить ваше приложение :)'
+import { App } from './App'
 
-// @ts-ignore
+const appContent = 'Главная'
+
 global.fetch = jest.fn(() =>
   Promise.resolve({ json: () => Promise.resolve('hey') })
-)
+) as jest.Mock
 
 test('Example test', async () => {
   render(<App />)
