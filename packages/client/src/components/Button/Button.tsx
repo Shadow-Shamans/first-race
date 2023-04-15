@@ -16,7 +16,7 @@ const { Text } = Typography
 export const Button: FC<IProps> = ({ type, children, onClick }) => {
   return (
     <div className={styles.button}>
-      <AntdButton block onClick={onClick}>
+      <AntdButton block onClick={onClick} data-testid="app-button">
         <Text strong>{children}</Text>
       </AntdButton>
     </div>
