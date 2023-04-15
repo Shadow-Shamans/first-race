@@ -8,8 +8,8 @@ import clock from '@/assets/clock.png'
 import close from '@/assets/close.png'
 import success from '@/assets/success.png'
 import reload from '@/assets/reload.png'
-import play from '@/assets/play.png'
-import pause from '@/assets/reload.png'
+import play from '@/assets/play.svg'
+import pause from '@/assets/pause.svg'
 
 import styles from './GameIcon.module.css'
 
@@ -27,7 +27,7 @@ export type TIconName =
 
 interface IProps {
   name: TIconName
-  sizeButton?: number
+  sizeContainer?: number
   sizeIcon?: number
 }
 
@@ -45,18 +45,18 @@ const iconList: Record<TIconName, string> = {
 }
 
 export const GameIcon: FC<IProps> = props => {
-  const { name, sizeButton, sizeIcon, ...restProps } = props
+  const { name, sizeContainer, sizeIcon, ...restProps } = props
   const iconSrc = iconList[name]
-  const inlineStylesButton = sizeButton
-    ? { height: `${sizeButton}`, width: `${sizeButton}` }
+  const inlineStylesContainer = sizeContainer
+    ? { height: `${sizeContainer}px`, width: `${sizeContainer}px` }
     : {}
   const inlineStylesIcon = sizeIcon
-    ? { height: `${sizeIcon}`, width: `${sizeIcon}` }
+    ? { height: `${sizeIcon}px`, width: `${sizeIcon}px` }
     : {}
 
   return (
     <span
-      style={inlineStylesButton}
+      style={inlineStylesContainer}
       className={styles.container}
       {...restProps}>
       <img style={inlineStylesIcon} className={styles.img} src={iconSrc} />
