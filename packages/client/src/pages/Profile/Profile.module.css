@@ -1,0 +1,36 @@
+.wrapper {
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.avatar {
+  /* Rewrite ant rules */
+  width: 102px!important;
+  display: block!important;
+  margin: 0 auto 20px;
+}
+
+.button {
+  width: 100%;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: calc(100vh - 185px);
+}
+
+.card {
+  padding: 0 20px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+@media (max-width: 613px) {
+  .inner {
+    padding: 0 20px;
+  }
+}
