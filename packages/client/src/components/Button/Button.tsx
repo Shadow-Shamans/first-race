@@ -3,7 +3,7 @@ import { Button as AntdButton, Typography } from 'antd'
 
 import styles from './Button.module.css'
 
-type TType = 'primary' | 'secondary'
+type TType = 'primary' | 'link' | 'text' | 'ghost' | 'default' | 'dashed'
 
 interface IProps {
   type: TType
@@ -16,7 +16,7 @@ const { Text } = Typography
 export const Button: FC<IProps> = ({ type, children, onClick }) => {
   return (
     <div className={styles.button}>
-      <AntdButton block onClick={onClick} data-testid="app-button">
+      <AntdButton type={type} block onClick={onClick} data-testid="app-button">
         <Text strong>{children}</Text>
       </AntdButton>
     </div>
