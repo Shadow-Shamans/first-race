@@ -1,13 +1,14 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { Menu } from './Menu'
-import { BrowserRouter } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
+import { MemoryRouter } from 'react-router-dom'
 
 describe('Menu test cases', () => {
   it('Should render Menu', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Menu />
-      </BrowserRouter>
+      </MemoryRouter>
     )
     expect(screen.getByText('Главная')).toBeInTheDocument()
     expect(screen.getByText('Логин')).toBeInTheDocument()
@@ -18,10 +19,28 @@ describe('Menu test cases', () => {
   })
   it('Should render all menu items', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Menu />
-      </BrowserRouter>
+      </MemoryRouter>
     )
     expect(screen.getAllByTestId('menu-item')).toHaveLength(5)
+  })
+  it('Should render all menu items', () => {
+    render(
+      <MemoryRouter>
+        <Menu />
+      </MemoryRouter>
+    )
+    expect(screen.getAllByTestId('menu-item')).toHaveLength(5)
+  })
+  it('Should render new route', () => {
+    render(
+      <MemoryRouter>
+        <Menu />
+      </MemoryRouter>
+    )
+    const history = createMemoryHistory()
+    history.push('/login')
+    expect(history.location.pathname).toBe('/login')
   })
 })
