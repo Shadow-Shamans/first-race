@@ -14,5 +14,5 @@ export default {
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT || 3001,
   },
-  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.js']
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts']
 }

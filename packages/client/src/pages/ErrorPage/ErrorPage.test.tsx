@@ -1,18 +1,18 @@
 import { render, screen } from '@testing-library/react'
-import { Forum } from './Forum'
 import { Provider } from 'react-redux'
 import store from '@/store'
 import { BrowserRouter } from 'react-router-dom'
+import { ErrorPage } from './ErrorPage'
 
-describe('Forum test cases', () => {
-  it('Should render forum page', () => {
+describe('ErrorPage test cases', () => {
+  it('Should render Error page', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Forum />
+          <ErrorPage code={404} text="Ресурс не найден" />
         </Provider>
       </BrowserRouter>
     )
-    expect(screen.getByText('Создать новый')).toBeInTheDocument()
+    expect(screen.getByText('Ресурс не найден')).toBeInTheDocument()
   })
 })
