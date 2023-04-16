@@ -25,14 +25,6 @@ describe('Menu test cases', () => {
     )
     expect(screen.getAllByTestId('menu-item')).toHaveLength(5)
   })
-  it('Should render all menu items', () => {
-    render(
-      <MemoryRouter>
-        <Menu />
-      </MemoryRouter>
-    )
-    expect(screen.getAllByTestId('menu-item')).toHaveLength(5)
-  })
   it('Should render new route', () => {
     render(
       <MemoryRouter>
