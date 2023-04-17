@@ -12,6 +12,7 @@ export default {
     '.+\\.(css|styl|less|sass|scss|svg|png)$': 'jest-css-modules-transform',
   },
   globals: {
-    __SERVER_PORT__: process.env.SERVER_PORT,
+    __SERVER_PORT__: process.env.SERVER_PORT || 3001,
   },
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts']
 }
