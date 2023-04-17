@@ -17,6 +17,7 @@ const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 
 export const AppRoutes = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
+
   return (
     <Suspense fallback={<Spin tip="Loading" size="large" />}>
       <Routes>
@@ -28,7 +29,7 @@ export const AppRoutes = () => {
         <Route
           path="/forum"
           element={
-            <PrivateRoute isLoggedin={isLoggedIn}>
+            <PrivateRoute isLoggedIn={isLoggedIn}>
               <Forum />
             </PrivateRoute>
           }
@@ -36,7 +37,7 @@ export const AppRoutes = () => {
         <Route
           path="/forum/topic/:id"
           element={
-            <PrivateRoute isLoggedin={isLoggedIn}>
+            <PrivateRoute isLoggedIn={isLoggedIn}>
               <ForumTopic />
             </PrivateRoute>
           }
@@ -44,7 +45,7 @@ export const AppRoutes = () => {
         <Route
           path="/profile"
           element={
-            <PrivateRoute isLoggedin={isLoggedIn}>
+            <PrivateRoute isLoggedIn={isLoggedIn}>
               <Profile />
             </PrivateRoute>
           }
