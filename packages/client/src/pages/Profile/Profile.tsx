@@ -46,30 +46,15 @@ export const Profile: FC = () => {
   const imageUrl = null
   const [form] = Form.useForm()
 
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Загрузить аватар</div>
-    </div>
-  )
-
-  const handleAvatarChange = () => {
-    try {
-      console.log('Action - Avatar change')
-    } catch (errorInfo) {
-      console.log(errorInfo)
-    }
-  }
-
   const handleFormChange = async () => {
     try {
       const values = await form.validateFields()
 
       if (!values.errorFields) {
-        console.log(values)
+        // TODO: Add form error handler
       }
     } catch (errorInfo) {
-      console.log(errorInfo)
+      // TODO: Add form error handler
     }
   }
 
@@ -81,7 +66,6 @@ export const Profile: FC = () => {
             <Upload
               name="avatar"
               listType="picture-circle"
-              onChange={handleAvatarChange}
               showUploadList={{
                 showDownloadIcon: true,
               }}
@@ -89,7 +73,10 @@ export const Profile: FC = () => {
               {imageUrl ? (
                 <Avatar src={imageUrl} alt="avatar" style={{ width: '100%' }} />
               ) : (
-                uploadButton
+                <>
+                  <PlusOutlined />
+                  <div style={{ marginTop: 8 }}>Загрузить аватар</div>
+                </>
               )}
             </Upload>
 
@@ -121,10 +108,8 @@ export const Profile: FC = () => {
             Количество очков: 2000
           </Card>
           <Card className={styled.card}>
-            <LinkToPage text="Новая игра" to="/game" />
-            <LinkToPage text="Продолжить игру" to="/game" />
-            <LinkToPage text="Магазин" to="/game" />
-            <LinkToPage text="Форум" to="/forum" />
+            {/* TODO Replace real action of logout and shop */}
+            <LinkToPage text="Магазин" to="#" />
             <LinkToPage text="Выйти" to="#" />
           </Card>
         </Col>
