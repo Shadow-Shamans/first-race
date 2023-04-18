@@ -1,9 +1,6 @@
 .messageBody {
-  background: #ECECEC;
   border-radius: 10px;
-  width: 628px;
   padding: 10px;
-  color: #000;
   display: flex;
   justify-content: space-between;
   margin-left: auto;

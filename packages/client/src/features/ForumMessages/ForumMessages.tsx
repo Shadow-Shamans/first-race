@@ -5,6 +5,7 @@ import { loadMoreBtnStyles } from '@/assets/styles/buttons'
 import { forumTopicTempData } from '@/pages/ForumTopic/mockData'
 import styles from './ForumMessages.module.css'
 import { ForumMessage } from './ForumMessage'
+import { useTheme } from '@/app'
 
 interface IProps {
   messages: IForumTopicMessage[]
@@ -19,6 +20,7 @@ export const ForumMessages: FC<IProps> = ({
   loadingItem,
   handleLoadMore,
 }) => {
+  const { isDarkMode } = useTheme()
   const loadMore =
     !isLoading && !loadingItem ? (
       <div className={styles.loadMoreBtn}>
@@ -49,6 +51,7 @@ export const ForumMessages: FC<IProps> = ({
             key={message.content}
             message={message}
             isLoading={message.isLoading as boolean}
+            isDarkMode={isDarkMode}
           />
         )
       }}
