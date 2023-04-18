@@ -7,12 +7,14 @@ interface IMessageProps {
   message: IForumTopicMessage
   isLoading: boolean
   idx: number
+  isDarkMode: boolean
 }
 
 export const ForumMessage: FC<IMessageProps> = ({
   message,
   isLoading,
   idx,
+  isDarkMode,
 }) => (
   <List.Item>
     <Skeleton avatar title={false} loading={isLoading} active>
@@ -21,13 +23,23 @@ export const ForumMessage: FC<IMessageProps> = ({
           idx % 2 === 0 ? styles.listItem : styles.listItemReverse
         }`}
         key={message.userId}
-        avatar={<Avatar shape="circle" size="default" src={message.avatar} />}
+        avatar={
+          <Avatar
+            shape="circle"
+            size="default"
+            src={message.avatar}
+            className={`${idx % 2 !== 0 ? styles.avatarReverse : ''}`}
+          />
+        }
         description={
           <div
-            className={`${styles.messageBody}  ${
-              idx % 2 === 0 ? styles.messageBodyReverse : ''
-            }`}>
-            <Typography className={styles.content}>
+            style={{ backgroundColor: isDarkMode ? '#393646' : '#ECECEC' }}
+            className={styles.messageBody}>
+            <Typography
+              className={styles.content}
+              style={{
+                color: isDarkMode ? 'rgba(255, 255, 255, 0.85)' : '#000',
+              }}>
               {message.content}
             </Typography>
             <Typography className={styles.date}>{message.date}</Typography>

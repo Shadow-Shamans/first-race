@@ -2,4 +2,5 @@
   width: 100%;
   max-width: 980px;
   margin: 30px auto;
+  min-height: calc(100vh - 185px);
 }
