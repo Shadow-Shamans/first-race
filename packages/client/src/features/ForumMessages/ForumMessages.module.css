@@ -1,9 +1,6 @@
 .messageBody {
-  background: #ECECEC;
   border-radius: 10px;
-  width: 628px;
   padding: 10px;
-  color: #000;
   display: flex;
   justify-content: space-between;
 }
@@ -13,6 +10,7 @@
   font-weight: 700;
   color: #000;
 }
+
 .date {
   color: #818181;
   font-size: 14px;
@@ -43,6 +41,6 @@
   margin-top: 10px;
 }
 
-.messageBodyReverse {
-  align-self: flex-end;
+.avatarReverse {
+  margin-left: 15px;
 }

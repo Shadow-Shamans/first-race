@@ -2,7 +2,6 @@ import { FC } from 'react'
 import { Layout, Typography, Badge, Input, Button } from 'antd'
 import ForumMessages from '@/features/ForumMessages'
 import useForumMessages from './useForumMessages'
-import { useTheme } from '@/app'
 import styles from './ForumTopic.module.css'
 
 const { TextArea } = Input
@@ -20,12 +19,8 @@ export const ForumTopic: FC = () => {
     loadingItem,
     handleLoadMore,
   } = useForumMessages()
-  const { isDarkMode } = useTheme()
   return (
-    <Layout
-      className={`${styles.layout} ${
-        isDarkMode ? styles.darkBg : styles.whiteBg
-      }`}>
+    <Layout className={`${styles.layout}`}>
       <Layout.Header className={styles.header}>
         <Typography className={styles.title}>
           Зависает на первом уровне
