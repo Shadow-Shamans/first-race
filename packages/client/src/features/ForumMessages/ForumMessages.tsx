@@ -32,9 +32,10 @@ export const ForumMessages: FC<IProps> = ({
         </Button>
       </div>
     ) : null
+
   return (
     <List
-      className={styles.loadmoreList}
+      className={styles.loadMoreList}
       loading={isLoading}
       bordered={false}
       itemLayout="horizontal"

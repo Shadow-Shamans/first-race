@@ -6,6 +6,8 @@
   color: #000;
   display: flex;
   justify-content: space-between;
+  margin-left: auto;
+  margin-right: 16px;
 }
 
 .content {
@@ -13,13 +15,14 @@
   font-weight: 700;
   color: #000;
 }
+
 .date {
   color: #818181;
   font-size: 14px;
   font-weight: 700;
 }
 
-.loadmoreList {
+.loadMoreList {
   max-height: 600px;
   overflow-y: scroll;
   border: none;
@@ -44,5 +47,6 @@
 }
 
 .messageBodyReverse {
-  align-self: flex-end;
+  margin-right: auto;
+  margin-left: 0;
 }
