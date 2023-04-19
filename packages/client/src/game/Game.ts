@@ -1,5 +1,6 @@
 import bg from '@/assets/grass.png'
 import { CANVAS_WIDTH, CANVAS_HEIGHT, TILE_SIZE } from './constants'
+import { drawLayer, drawGrid } from './utils'
 
 interface IGameOptions {
   canvas: HTMLCanvasElement
@@ -87,6 +88,13 @@ export class Game {
       tileWidth,
       tileHeight
     )
+
+    drawLayer({
+      ctx: this._ctx,
+      columnsNumber: this._numberCollumns,
+      rowNumbers: this._numberRows,
+      listDrawFunc: [drawGrid],
+    })
   }
 
   init = () => {

@@ -1,5 +1,5 @@
 import { TILE_SIZE } from '@/game'
-import type { Position } from './types'
+import type { Position } from '../types'
 
 export class SegmentTile {
   position: Position
