@@ -64,7 +64,7 @@ export class Game {
   }
 
   private _render() {
-    console.log('_render game')
+    // console.log('_render game')
 
     // todo: скрытая зависимость от метода GameElement._setCanvasSize
     // используется для отслеживания измеенеий window.resize

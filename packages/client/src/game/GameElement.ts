@@ -2,6 +2,7 @@ import { TILE_SIZE } from './constants'
 import { Game } from './Game'
 import type { Game as GameType } from './Game'
 import styles from './Game.css'
+import { MouseControls } from './controls'
 
 const style = `<style>${styles}</style>`
 
@@ -56,12 +57,18 @@ export class GameElement extends HTMLElement {
     console.log('mount')
     this._game.init()
     window.addEventListener('resize', this._resize)
+    console.log(MouseControls)
+    this._canvas.addEventListener('mousemove', MouseControls.mouseMoveHandler)
   }
 
   disconnectedCallback() {
     console.log('unmount')
     this._game.clearGameDataAfterUnmount()
     window.removeEventListener('resize', this._resize)
+    this._canvas.removeEventListener(
+      'mousemove',
+      MouseControls.mouseMoveHandler
+    )
   }
 
   errorHandler(msg: string) {

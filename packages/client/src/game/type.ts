@@ -14,5 +14,3 @@ export type DrawLayer = (options: {
   rowNumbers: number
   listDrawFunc: DrawLayerFunc[]
 }) => void
-
-export type MouseData = { x: number; y: number; dragable: boolean }
