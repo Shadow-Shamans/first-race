@@ -1,3 +1,4 @@
 export const TILE_SIZE = 128
-export const CANVAS_WIDTH = 1920
-export const CANVAS_HEIGHT = 1080
+
+// variables.css --height-top-nav
+export const HEIGHT_TOP_NAV = 182

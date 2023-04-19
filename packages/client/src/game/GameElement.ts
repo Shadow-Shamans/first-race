@@ -1,4 +1,4 @@
-import { TILE_SIZE } from './constants'
+import { HEIGHT_TOP_NAV, TILE_SIZE } from './constants'
 import { Game } from './Game'
 import type { Game as GameType } from './Game'
 import styles from './Game.css'
@@ -86,7 +86,9 @@ export class GameElement extends HTMLElement {
 
   private _setCanvasSize = () => {
     const numberCollumns = Math.floor(window.innerWidth / TILE_SIZE)
-    const numberRows = Math.floor(window.innerHeight / TILE_SIZE)
+    const numberRows = Math.floor(
+      (window.innerHeight - HEIGHT_TOP_NAV - TILE_SIZE / 2) / TILE_SIZE
+    )
     this._canvas.width = numberCollumns * TILE_SIZE
     this._canvas.height = numberRows * TILE_SIZE
   }
