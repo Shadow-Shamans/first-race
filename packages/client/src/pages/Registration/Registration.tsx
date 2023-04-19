@@ -1,18 +1,23 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { Button, Form } from 'antd'
 import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
 import { generateId } from '@/shared/utils/generateId'
 import styled from './Registration.module.css'
+import { useSignupMutation } from '@/shared/services/AuthService'
+import { useAppDispatch } from '@/app/hooks'
+import { setUserId } from '@/features/User/userSlice'
+import { toogleAuth } from '@/features/Auth/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const RegistrationInputs = [
   {
     placeholder: 'Имя',
-    name: 'name',
+    name: 'first_name',
   },
   {
     placeholder: 'Фамилия',
-    name: 'last_name',
+    name: 'second_name',
   },
   {
     placeholder: 'Email',
@@ -33,19 +38,32 @@ const RegistrationInputs = [
 ]
 
 export const Registration: FC = () => {
+  const appDispatch = useAppDispatch()
   const [form] = Form.useForm()
+  const [signup, mutationResult] = useSignupMutation()
+  const navigate = useNavigate()
 
   const handleCheck = async () => {
     try {
       const values = await form.validateFields()
 
       if (!values.errorFields) {
-        console.log(values)
+        signup(values)
       }
     } catch (errorInfo) {
       console.log(errorInfo)
     }
   }
+
+  //TODO
+  //Может вызывать дополнительные рендеры за счет объекта mutationResult в зависимости useEffect
+  React.useEffect(() => {
+    if (mutationResult.data) {
+      appDispatch(setUserId(mutationResult.data.id))
+      appDispatch(toogleAuth(true))
+      navigate('/main')
+    }
+  }, [mutationResult])
 
   return (
     <div className={styled.inner}>

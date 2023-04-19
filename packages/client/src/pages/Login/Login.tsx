@@ -1,9 +1,17 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { Button, Form } from 'antd'
 import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
 import { generateId } from '@/shared/utils/generateId'
 import styled from './Login.module.css'
+import {
+  useSigninMutation,
+  useLazyGetUserDataQuery,
+} from '@/shared/services/AuthService'
+import { useAppDispatch } from '@/app/hooks'
+import { useNavigate } from 'react-router-dom'
+import { toogleAuth } from '@/features/Auth/authSlice'
+import { setUserData } from '@/features/User'
 
 const LoginInputs = [
   {
@@ -17,19 +25,37 @@ const LoginInputs = [
 ]
 
 export const Login: FC = () => {
+  const appDispatch = useAppDispatch()
   const [form] = Form.useForm()
+  const [signin, mutationResult] = useSigninMutation()
+  const navigate = useNavigate()
+  const [trigger, result] = useLazyGetUserDataQuery()
 
   const handleCheck = async () => {
     try {
       const values = await form.validateFields()
 
       if (!values.errorFields) {
-        console.log(values)
+        signin(values)
+        appDispatch(toogleAuth(true))
       }
     } catch (errorInfo) {
       console.log(errorInfo)
     }
   }
+
+  React.useEffect(() => {
+    if (mutationResult.status === 'rejected') {
+      trigger()
+    }
+  }, [mutationResult])
+
+  React.useEffect(() => {
+    if (result.data) {
+      appDispatch(setUserData(result.data))
+      navigate('/main')
+    }
+  }, [result])
 
   return (
     <div className={styled.inner}>

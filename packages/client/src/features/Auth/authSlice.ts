@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 interface IAuth {
   isLoggedIn: boolean
@@ -6,15 +6,17 @@ interface IAuth {
 
 // TODO при ините делать запрос user чтобы проверять залогинен ли юзер
 const initialState: IAuth = {
-  isLoggedIn: true,
+  isLoggedIn: false,
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    toogle: state => {
-      state.isLoggedIn = !state.isLoggedIn
+    toogleAuth: (state, action: PayloadAction<boolean>) => {
+      state.isLoggedIn = action.payload
     },
   },
 })
+
+export const { toogleAuth } = authSlice.actions
