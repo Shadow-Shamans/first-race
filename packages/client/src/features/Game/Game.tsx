@@ -69,10 +69,10 @@ export const GameFeature = () => {
       </div>
       <div className={styles.gameButtonContainer}>
         <button className={styles.button} onClick={handleStart}>
-          <GameIcon name="success" />
+          <GameIcon name="play" />
         </button>
         <button className={styles.button} onClick={handlePause}>
-          <GameIcon name="reload" />
+          <GameIcon name="pause" />
         </button>
         <button className={styles.button} onClick={handleFinish}>
           <GameIcon name="close" />
