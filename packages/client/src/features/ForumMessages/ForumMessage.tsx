@@ -16,40 +16,47 @@ export const ForumMessage: FC<IMessageProps> = ({
   isLoading,
   idx,
   isDarkMode,
-}) => (
-  <List.Item>
-    <Skeleton avatar title={false} loading={isLoading} active>
-      <List.Item.Meta
-        className={classNames({
-          [styles.listItem]: idx % 2 === 0,
-          [styles.listItemReverse]: idx % 2 !== 0,
-        })}
-        key={message.userId}
-        avatar={
-          <Avatar
-            shape="circle"
-            size="default"
-            src={message.avatar}
-            className={classNames({
-              [styles.avatarReverse]: idx % 2 !== 0,
-            })}
-          />
-        }
-        description={
-          <div
-            style={{ backgroundColor: isDarkMode ? '#393646' : '#ECECEC' }}
-            className={styles.messageBody}>
-            <Typography
-              className={styles.content}
-              style={{
-                color: isDarkMode ? 'rgba(255, 255, 255, 0.85)' : '#000',
-              }}>
-              {message.content}
-            </Typography>
-            <Typography className={styles.date}>{message.date}</Typography>
-          </div>
-        }
-      />
-    </Skeleton>
-  </List.Item>
-)
+}) => {
+  // Заглушка пока нет бека
+  const isFromMe = idx % 2 === 0
+
+  return (
+    <List.Item>
+      <Skeleton avatar title={false} loading={isLoading} active>
+        <List.Item.Meta
+          className={classNames(
+            isFromMe ? styles.listItem : styles.listItemReverse
+          )}
+          key={message.userId}
+          avatar={
+            <Avatar
+              shape="circle"
+              size="default"
+              src={message.avatar}
+              className={classNames({
+                [styles.avatarReverse]: !isFromMe,
+              })}
+            />
+          }
+          description={
+            <div
+              style={{ backgroundColor: isDarkMode ? '#393646' : '#ECECEC' }}
+              className={classNames(styles.messageBody, {
+                [styles.messageBodyReverse]: isFromMe,
+              })}>
+              <Typography
+                className={styles.content}
+                style={{
+                  color: isDarkMode ? 'rgba(255, 255, 255, 0.85)' : '#000',
+                }}>
+                {message.content}
+              </Typography>
+
+              <Typography className={styles.date}>{message.date}</Typography>
+            </div>
+          }
+        />
+      </Skeleton>
+    </List.Item>
+  )
+}
