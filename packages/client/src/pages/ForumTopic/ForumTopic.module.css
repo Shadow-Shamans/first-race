@@ -29,14 +29,6 @@
   border-radius: 4px;
 }
 
-.darkBg {
-  background-color: #000;
-}
-
-.whiteBg {
-  background-color: #fff;
-}
-
 .footer {
   display: flex;
   flex-direction: row;

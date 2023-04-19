@@ -2,12 +2,12 @@ import { FC, ReactElement } from 'react'
 import { Navigate } from 'react-router-dom'
 
 interface IProps {
-  isLoggedin: boolean
+  isLoggedIn: boolean
   children: ReactElement
 }
 
-export const PrivateRoute: FC<IProps> = ({ isLoggedin, children }) => {
-  if (!isLoggedin) {
+export const PrivateRoute: FC<IProps> = ({ isLoggedIn, children }) => {
+  if (!isLoggedIn) {
     return <Navigate to="/login" />
   }
   return children

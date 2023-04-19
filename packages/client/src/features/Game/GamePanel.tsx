@@ -34,19 +34,19 @@ export const GamePanel: FC<IProps> = props => {
   return (
     <div className={styles.container}>
       <span className={styles.item}>
-        <GameIcon name="king" />
+        <GameIcon sizeContainer={24} name="king" />
         {bonus}
       </span>
       <span className={styles.item}>
-        <GameIcon name="chronometer" />
+        <GameIcon sizeContainer={24} name="chronometer" />
         {time}
       </span>
       <span className={styles.item}>
-        <GameIcon name="score" />
+        <GameIcon sizeContainer={24} name="score" />
         {score}
       </span>
       <span className={styles.item}>
-        <GameIcon name="coin" />
+        <GameIcon sizeContainer={24} name="coin" />
         {coins}
       </span>
     </div>

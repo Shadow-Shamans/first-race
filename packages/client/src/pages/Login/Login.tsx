@@ -78,6 +78,7 @@ export const Login: FC = () => {
           <Button
             type="primary"
             onClick={handleCheck}
+            data-testid="button"
             className={styled.button}>
             Войти
           </Button>
