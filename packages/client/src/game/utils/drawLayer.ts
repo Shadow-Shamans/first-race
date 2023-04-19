@@ -1,7 +1,7 @@
 import { TILE_SIZE } from '../constants'
-import { DrawLayer } from '../type'
+import { TDrawLayer } from '../types'
 
-export const drawLayer: DrawLayer = opt => {
+export const drawLayer: TDrawLayer = opt => {
   const { columnsNumber, rowNumbers, ctx, listDrawFunc } = opt
 
   listDrawFunc.forEach(drawFunc => {

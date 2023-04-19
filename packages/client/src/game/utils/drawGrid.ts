@@ -1,12 +1,7 @@
 import { TILE_SIZE } from '../constants'
-import type { DrawLayerFunc, Position } from '../type'
+import type { TDrawLayerFunc, TPosition } from '../types'
 
-interface IOptions {
-  ctx: CanvasRenderingContext2D
-  position: Position
-}
-
-export const drawGrid: DrawLayerFunc = (opt: IOptions) => {
+export const drawGrid: TDrawLayerFunc = opt => {
   const { ctx, position } = opt
   const xPos = position.x
   const yPos = position.y

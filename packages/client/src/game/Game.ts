@@ -1,5 +1,6 @@
 import bg from '@/assets/grass.png'
-import { CANVAS_WIDTH, CANVAS_HEIGHT, TILE_SIZE } from './constants'
+import { TILE_SIZE } from './constants'
+import { SegmentTile } from './modules'
 import { drawLayer, drawGrid } from './utils'
 
 interface IGameOptions {
@@ -14,7 +15,6 @@ interface IGameOptions {
  *
  *
  */
-
 export class Game {
   private _canvas: HTMLCanvasElement
   private _ctx: CanvasRenderingContext2D
@@ -25,6 +25,7 @@ export class Game {
   private _running: boolean
   private _numberCollumns: number
   private _numberRows: number
+  private _segment: SegmentTile[]
 
   xPos: number
   ref: unknown
@@ -41,6 +42,11 @@ export class Game {
 
     this._numberCollumns = this._canvas.width / TILE_SIZE
     this._numberRows = this._canvas.height / TILE_SIZE
+
+    // todo: remove temporary for check SegmentTile
+    this._segment = [
+      new SegmentTile({ position: { x: 384, y: 384 }, ctx: this._ctx }),
+    ]
   }
 
   private _gameLoop() {
@@ -74,8 +80,8 @@ export class Game {
     const tileWidth = this._tileSize
     const tileHeight = this._tileSize
     this._clear()
-    this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height)
     this._ctx.fillStyle = 'green'
+    this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height)
 
     this._ctx.drawImage(
       this._bg,
@@ -89,11 +95,17 @@ export class Game {
       tileHeight
     )
 
+    this._ctx.fill()
+
     drawLayer({
       ctx: this._ctx,
       columnsNumber: this._numberCollumns,
       rowNumbers: this._numberRows,
       listDrawFunc: [drawGrid],
+    })
+
+    this._segment.forEach(segment => {
+      segment.update()
     })
   }
 

@@ -1,19 +1,25 @@
 import { TILE_SIZE } from '@/game'
-import type { Position } from '../types'
+import { MouseControls } from '../controls'
+import type { TPosition } from '../types'
+
+interface ISegmentOptions {
+  position: TPosition
+  ctx: CanvasRenderingContext2D
+}
 
 export class SegmentTile {
-  position: Position
+  position: TPosition
   tileSize: number
   color: string
   occupied: boolean
   _ctx: CanvasRenderingContext2D
 
-  constructor({ position = { x: 0, y: 0 } }, ctx: CanvasRenderingContext2D) {
-    this.position = position
+  constructor(opt: ISegmentOptions) {
+    this.position = opt.position
     this.tileSize = TILE_SIZE
     this.color = 'rgba(255, 255, 255, 0.15)'
     this.occupied = false
-    this._ctx = ctx
+    this._ctx = opt.ctx
   }
 
   draw() {
@@ -24,18 +30,18 @@ export class SegmentTile {
       this.tileSize,
       this.tileSize
     )
+    this._ctx.fill()
   }
 
-  update(mouse: Position) {
+  update() {
     this.draw()
+    const { x, y } = this.position
 
-    if (
-      mouse.x > this.position.x &&
-      mouse.x < this.position.x + this.tileSize &&
-      mouse.y > this.position.y &&
-      mouse.y < this.position.y + this.tileSize
-    ) {
-      this.color = 'white'
-    } else this.color = 'rgba(255, 255, 255, 0.15)'
+    if (MouseControls.isOveElement(x, y)) {
+      console.log('hover Segment')
+      this.color = 'red'
+    } else {
+      this.color = 'rgba(255, 255, 255, 0.15)'
+    }
   }
 }
