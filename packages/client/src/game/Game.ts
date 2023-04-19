@@ -1,7 +1,7 @@
 import bg from '@/assets/grass.png'
 import { CANVAS_WIDTH, CANVAS_HEIGHT, TILE_SIZE } from './constants'
 
-interface GameOptions {
+interface IGameOptions {
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
 }
@@ -28,7 +28,7 @@ export class Game {
   xPos: number
   ref: unknown
 
-  constructor(opt: GameOptions) {
+  constructor(opt: IGameOptions) {
     this._canvas = opt.canvas
     this._ctx = opt.ctx
 
