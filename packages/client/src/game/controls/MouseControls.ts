@@ -35,4 +35,19 @@ export class MouseControls {
       y: e.clientY,
     }
   }
+
+  static mouseDownHandler = (e: MouseEvent) => {
+    this._instance.draggable = true
+    console.log('mouseDownHandler', this._instance, e)
+  }
+
+  static mouseUpHandler = (e: MouseEvent) => {
+    this._instance.draggable = false
+    console.log('mouseUpHandler', this._instance, e)
+  }
+
+  static mouseOutHandler = (e: MouseEvent) => {
+    this._instance.draggable = false
+    console.log('mouseOutHandler', this._instance, e)
+  }
 }

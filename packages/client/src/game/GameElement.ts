@@ -57,8 +57,10 @@ export class GameElement extends HTMLElement {
     console.log('mount')
     this._game.init()
     window.addEventListener('resize', this._resize)
-    console.log(MouseControls)
     this._canvas.addEventListener('mousemove', MouseControls.mouseMoveHandler)
+    this._canvas.addEventListener('mousedown', MouseControls.mouseDownHandler)
+    this._canvas.addEventListener('mouseup', MouseControls.mouseUpHandler)
+    this._canvas.addEventListener('mouseout', MouseControls.mouseOutHandler)
   }
 
   disconnectedCallback() {
@@ -69,6 +71,12 @@ export class GameElement extends HTMLElement {
       'mousemove',
       MouseControls.mouseMoveHandler
     )
+    this._canvas.removeEventListener(
+      'mousedown',
+      MouseControls.mouseDownHandler
+    )
+    this._canvas.removeEventListener('mouseup', MouseControls.mouseDownHandler)
+    this._canvas.removeEventListener('mouseout', MouseControls.mouseOutHandler)
   }
 
   errorHandler(msg: string) {
