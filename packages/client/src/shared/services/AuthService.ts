@@ -54,7 +54,7 @@ export const authAPI = createApi({
         body: data,
       }),
     }),
-    logout: build.mutation({
+    logout: build.mutation<void, void>({
       query: () => ({
         url: `/auth/logout`,
         method: 'POST',
@@ -87,4 +87,5 @@ export const {
   useSigninMutation,
   useLazyGetUserDataQuery,
   useUpdateUserProfileMutation,
+  useLogoutMutation,
 } = authAPI

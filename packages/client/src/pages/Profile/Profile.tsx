@@ -11,8 +11,12 @@ import { leaderBoardMock } from '@/mocks/ratingMock'
 import { generateId } from '@/shared/utils/generateId'
 import { selectUserData } from '@/features/User/selectors'
 import { useAppDispatch, useAppSelector } from '@/app'
-import { useUpdateUserProfileMutation } from '@/shared/services/AuthService'
+import {
+  useLogoutMutation,
+  useUpdateUserProfileMutation,
+} from '@/shared/services/AuthService'
 import { IUser, setUserData } from '@/features/User/userSlice'
+import { toogleAuth } from '@/features/Auth/authSlice'
 
 const Fields = [
   {
@@ -55,6 +59,7 @@ export const Profile: FC = () => {
   const [form] = Form.useForm()
   const data = useAppSelector(selectUserData)
   const [updateUserProfile, mutationResult] = useUpdateUserProfileMutation()
+  const [logout, result] = useLogoutMutation()
 
   const handleFormChange = async () => {
     try {
@@ -94,6 +99,25 @@ export const Profile: FC = () => {
       appDispatch(setUserData(newDate))
     }
   }, [mutationResult])
+
+  const handleLogout = () => {
+    logout()
+    appDispatch(toogleAuth(false))
+    appDispatch(
+      setUserData({
+        ...data,
+        ...{
+          id: null,
+          first_name: '',
+          avatar: null,
+          second_name: '',
+          email: '',
+          login: '',
+          phone: '',
+        },
+      })
+    )
+  }
 
   return (
     <div className={styled.wrapper}>
@@ -154,7 +178,9 @@ export const Profile: FC = () => {
           <Card className={styled.card}>
             {/* TODO Replace real action of logout and shop */}
             <LinkToPage text="Магазин" to="#" />
-            <LinkToPage text="Выйти" to="#" />
+            <div onClick={handleLogout}>
+              <LinkToPage text="Выйти" to="/main" />
+            </div>
           </Card>
         </Col>
       </Row>
