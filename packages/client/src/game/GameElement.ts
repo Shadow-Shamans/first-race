@@ -1,7 +1,8 @@
-import { TILE_SIZE } from './constants'
+import { HEIGHT_TOP_NAV, TILE_SIZE } from './constants'
 import { Game } from './Game'
 import type { Game as GameType } from './Game'
 import styles from './Game.css'
+import { MouseControls } from './controls'
 
 const style = `<style>${styles}</style>`
 
@@ -56,12 +57,26 @@ export class GameElement extends HTMLElement {
     console.log('mount')
     this._game.init()
     window.addEventListener('resize', this._resize)
+    this._canvas.addEventListener('mousemove', MouseControls.mouseMoveHandler)
+    this._canvas.addEventListener('mousedown', MouseControls.mouseDownHandler)
+    this._canvas.addEventListener('mouseup', MouseControls.mouseUpHandler)
+    this._canvas.addEventListener('mouseout', MouseControls.mouseOutHandler)
   }
 
   disconnectedCallback() {
     console.log('unmount')
     this._game.clearGameDataAfterUnmount()
     window.removeEventListener('resize', this._resize)
+    this._canvas.removeEventListener(
+      'mousemove',
+      MouseControls.mouseMoveHandler
+    )
+    this._canvas.removeEventListener(
+      'mousedown',
+      MouseControls.mouseDownHandler
+    )
+    this._canvas.removeEventListener('mouseup', MouseControls.mouseDownHandler)
+    this._canvas.removeEventListener('mouseout', MouseControls.mouseOutHandler)
   }
 
   errorHandler(msg: string) {
@@ -71,7 +86,9 @@ export class GameElement extends HTMLElement {
 
   private _setCanvasSize = () => {
     const numberCollumns = Math.floor(window.innerWidth / TILE_SIZE)
-    const numberRows = Math.floor(window.innerHeight / TILE_SIZE)
+    const numberRows = Math.floor(
+      (window.innerHeight - HEIGHT_TOP_NAV - TILE_SIZE / 2) / TILE_SIZE
+    )
     this._canvas.width = numberCollumns * TILE_SIZE
     this._canvas.height = numberRows * TILE_SIZE
   }

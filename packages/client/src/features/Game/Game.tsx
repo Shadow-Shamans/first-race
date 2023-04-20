@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/app'
 import { GameElement } from '@/game'
-import { Layout, Typography } from 'antd'
+import { Layout } from 'antd'
 
 import { useEffect, useRef, useState } from 'react'
 import styles from './Game.module.css'
@@ -63,7 +63,6 @@ export const GameFeature = () => {
 
   return (
     <Layout className={styles.container}>
-      <Typography.Title level={1}>Game start</Typography.Title>
       <div className={styles.controls}>
         <GamePanel game={game} />
       </div>
