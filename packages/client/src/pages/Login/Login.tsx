@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Button, Form } from 'antd'
 import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
@@ -43,13 +43,13 @@ export const Login: FC = () => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (mutationResult.status === 'rejected') {
       trigger()
     }
   }, [mutationResult])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (result.data) {
       appDispatch(setUserData(result.data))
       appDispatch(toogleAuth(true))

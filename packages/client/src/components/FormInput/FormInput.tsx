@@ -10,11 +10,13 @@ interface IProps {
 }
 
 export const FormInput: FC<IProps> = ({ placeholder, name, form, value }) => {
-  const { setFieldsValue } = form as FormInstance<any>
+  if (form) {
+    const { setFieldsValue } = form as FormInstance<any>
 
-  React.useEffect(() => {
-    setFieldsValue({ [name]: value })
-  }, [setFieldsValue])
+    React.useEffect(() => {
+      setFieldsValue({ [name]: value })
+    }, [setFieldsValue])
+  }
 
   return (
     <Form.Item

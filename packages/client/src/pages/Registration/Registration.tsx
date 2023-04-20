@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Button, Form } from 'antd'
 import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
@@ -61,13 +61,13 @@ export const Registration: FC = () => {
 
   //TODO
   //Может вызывать дополнительные рендеры за счет объекта mutationResult в зависимости useEffect
-  React.useEffect(() => {
+  useEffect(() => {
     if (mutationResult.isSuccess === true) {
       trigger()
     }
   }, [mutationResult])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (result.data) {
       appDispatch(setUserData(result.data))
       appDispatch(toogleAuth(true))
