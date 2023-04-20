@@ -1,18 +1,26 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Button, Form } from 'antd'
 import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
 import { generateId } from '@/shared/utils/generateId'
 import styled from './Registration.module.css'
+import {
+  useLazyGetUserDataQuery,
+  useSignupMutation,
+} from '@/shared/services/AuthService'
+import { useAppDispatch } from '@/app/hooks'
+import { setUserData } from '@/features/User/userSlice'
+import { toogleAuth } from '@/features/Auth/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const RegistrationInputs = [
   {
     placeholder: 'Имя',
-    name: 'name',
+    name: 'first_name',
   },
   {
     placeholder: 'Фамилия',
-    name: 'last_name',
+    name: 'second_name',
   },
   {
     placeholder: 'Email',
@@ -33,19 +41,39 @@ const RegistrationInputs = [
 ]
 
 export const Registration: FC = () => {
+  const appDispatch = useAppDispatch()
   const [form] = Form.useForm()
+  const [signup, mutationResult] = useSignupMutation()
+  const navigate = useNavigate()
+  const [trigger, result] = useLazyGetUserDataQuery()
 
   const handleCheck = async () => {
     try {
       const values = await form.validateFields()
 
       if (!values.errorFields) {
-        console.log(values)
+        signup(values)
       }
     } catch (errorInfo) {
       console.log(errorInfo)
     }
   }
+
+  //TODO
+  //Может вызывать дополнительные рендеры за счет объекта mutationResult в зависимости useEffect
+  useEffect(() => {
+    if (mutationResult.isSuccess === true) {
+      trigger()
+    }
+  }, [mutationResult])
+
+  useEffect(() => {
+    if (result.data) {
+      appDispatch(setUserData(result.data))
+      appDispatch(toogleAuth(true))
+      navigate('/main')
+    }
+  }, [result])
 
   return (
     <div className={styled.inner}>

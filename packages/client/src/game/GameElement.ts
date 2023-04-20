@@ -1,25 +1,25 @@
-import bg from '@/assets/grass.png'
+import { HEIGHT_TOP_NAV, TILE_SIZE } from './constants'
+import { Game } from './Game'
+import type { Game as GameType } from './Game'
 import styles from './Game.css'
-import { CANVAS_WIDTH, CANVAS_HEIGHT, TILE_SIZE } from './constants'
+import { MouseControls } from './controls'
 
 const style = `<style>${styles}</style>`
 
+/**
+ * Этот компонент предназначен для создания кастомного элемента
+ * который будет использоваться в реакте в качестве интерфейса
+ * ко всем открытым методам игры.
+ * Сама игра разпологается в классе Game
+ *
+ */
 export class GameElement extends HTMLElement {
   private _root: ShadowRoot
   private _canvas: HTMLCanvasElement
   private _ctx: CanvasRenderingContext2D
-  private _CANVAS_WIDTH: number
-  private _CANVAS_HEIGHT: number
-  private _bg: HTMLImageElement
-  private _running: boolean
-  private _tileSize = TILE_SIZE
-  private _gridRow = 10
-  private _gridColl = 5
-  private _score = 0
-  private _coins = 0
+  private _game: GameType
 
-  xPos: number
-  ref: unknown
+  ref: unknown | GameElement
 
   constructor() {
     super()
@@ -33,14 +33,14 @@ export class GameElement extends HTMLElement {
     this._root = this.shadowRoot as ShadowRoot
     this._root.innerHTML = style
     this._canvas = document.createElement('canvas')
-    this._CANVAS_WIDTH = this._canvas.width = window.innerWidth
-    this._CANVAS_HEIGHT = this._canvas.height = window.innerHeight
     this._root.appendChild(this._canvas)
     this._ctx = this._canvas.getContext('2d') as CanvasRenderingContext2D
-    this._bg = new Image()
-    this._bg.src = bg
-    this._running = false
-    this.xPos = 0
+    this._setCanvasSize()
+
+    this._game = new Game({
+      canvas: this._canvas,
+      ctx: this._ctx,
+    })
   }
 
   static get observedAttributes() {
@@ -55,12 +55,28 @@ export class GameElement extends HTMLElement {
 
   connectedCallback() {
     console.log('mount')
-    this._gameLoop()
+    this._game.init()
+    window.addEventListener('resize', this._resize)
+    this._canvas.addEventListener('mousemove', MouseControls.mouseMoveHandler)
+    this._canvas.addEventListener('mousedown', MouseControls.mouseDownHandler)
+    this._canvas.addEventListener('mouseup', MouseControls.mouseUpHandler)
+    this._canvas.addEventListener('mouseout', MouseControls.mouseOutHandler)
   }
 
   disconnectedCallback() {
-    this.pause()
     console.log('unmount')
+    this._game.clearGameDataAfterUnmount()
+    window.removeEventListener('resize', this._resize)
+    this._canvas.removeEventListener(
+      'mousemove',
+      MouseControls.mouseMoveHandler
+    )
+    this._canvas.removeEventListener(
+      'mousedown',
+      MouseControls.mouseDownHandler
+    )
+    this._canvas.removeEventListener('mouseup', MouseControls.mouseDownHandler)
+    this._canvas.removeEventListener('mouseout', MouseControls.mouseOutHandler)
   }
 
   errorHandler(msg: string) {
@@ -68,79 +84,45 @@ export class GameElement extends HTMLElement {
     throw Error(msg)
   }
 
-  private _gameLoop() {
-    if (this._running) {
-      this._update()
-    }
-
-    this._render()
-
-    requestAnimationFrame(() => this._gameLoop())
-  }
-
-  private _clear() {
-    this._ctx.clearRect(0, 0, this._CANVAS_WIDTH, this._CANVAS_HEIGHT)
-  }
-
-  private _update() {
-    console.log('_update game')
-    this._clear()
-    this.xPos += 1
-  }
-
-  private _render() {
-    console.log('_render game')
-
-    const tileWidth = this._tileSize
-    const tileHeight = this._tileSize
-    this._clear()
-    this._ctx.fillRect(0, 0, this._CANVAS_WIDTH, this._CANVAS_HEIGHT)
-    this._ctx.fillStyle = 'green'
-
-    this._ctx.drawImage(
-      this._bg,
-      0,
-      0,
-      tileWidth,
-      tileHeight,
-      this.xPos,
-      0,
-      tileWidth,
-      tileHeight
+  private _setCanvasSize = () => {
+    const numberCollumns = Math.floor(window.innerWidth / TILE_SIZE)
+    const numberRows = Math.floor(
+      (window.innerHeight - HEIGHT_TOP_NAV - TILE_SIZE / 2) / TILE_SIZE
     )
+    this._canvas.width = numberCollumns * TILE_SIZE
+    this._canvas.height = numberRows * TILE_SIZE
   }
 
-  public start = () => {
-    console.log('start game')
-    this._running = true
+  private _resize = () => {
+    this._setCanvasSize()
   }
 
-  public pause = () => {
-    console.log('pause game')
-    this._running = false
+  start() {
+    this._game.start()
   }
 
-  public finish = () => {
-    console.log('finish game')
-    this._running = false
-    this.xPos = 0
-    this._clear()
+  pause() {
+    this._game.pause()
   }
 
-  public get score() {
-    return this._score
+  finish() {
+    this._game.finish()
   }
 
-  public set score(value: number) {
-    this._score = value
+  get score() {
+    return this._game.score
   }
 
-  public get coins() {
-    return this._coins
+  set score(value: number) {
+    this._game.score = value
   }
 
-  public set coins(value: number) {
-    this._coins = value
+  get coins() {
+    return this._game.coins
+  }
+
+  set coins(value: number) {
+    this._game.coins = value
   }
 }
 

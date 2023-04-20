@@ -30,7 +30,8 @@ export const Menu: FC = () => {
           <li
             key={path}
             className={classNames(styles.item, { [styles.active]: isActive })}
-            onClick={() => handleClick(path)}>
+            onClick={() => handleClick(path)}
+            data-testid="menu-item">
             <Text strong>{label}</Text>
           </li>
         )

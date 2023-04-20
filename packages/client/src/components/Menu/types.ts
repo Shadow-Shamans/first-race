@@ -5,6 +5,7 @@ export type TPath =
   | '/profile'
   | '/forum'
   | '/game'
+  | '/rating'
 
 type TMenuItem = {
   label: string
@@ -31,5 +32,9 @@ export const menuItems: TMenuItem[] = [
   {
     label: 'Форум',
     path: '/forum',
+  },
+  {
+    label: 'Лидерборд',
+    path: '/rating',
   },
 ]

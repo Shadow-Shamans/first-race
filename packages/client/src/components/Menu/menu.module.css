@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 60px;
+  gap: 40px;
 }
 
 .item {
@@ -23,4 +23,3 @@
   background-color: var(--primary);
   transform: translateX(-50%);
 }
-

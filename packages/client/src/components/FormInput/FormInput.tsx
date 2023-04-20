@@ -1,13 +1,23 @@
-import { Form, Input } from 'antd'
+import { Form, FormInstance, Input } from 'antd'
 import validateForms from '@/shared/utils/validateForms'
-import { FC } from 'react'
+import React, { FC } from 'react'
 
 interface IProps {
   placeholder: string
   name: string
+  form?: FormInstance<any>
+  value?: string
 }
 
-export const FormInput: FC<IProps> = ({ placeholder, name }) => {
+export const FormInput: FC<IProps> = ({ placeholder, name, form, value }) => {
+  if (form) {
+    const { setFieldsValue } = form as FormInstance<any>
+
+    React.useEffect(() => {
+      setFieldsValue({ [name]: value })
+    }, [setFieldsValue])
+  }
+
   return (
     <Form.Item
       name={name}

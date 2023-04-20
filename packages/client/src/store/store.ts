@@ -11,6 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
+import { authAPI } from '@/shared/services/AuthService'
 
 export const store = configureStore({
   reducer,
@@ -22,7 +23,9 @@ export const store = configureStore({
         // https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(testDataApi.middleware),
+    })
+      .concat(testDataApi.middleware)
+      .concat(authAPI.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>
