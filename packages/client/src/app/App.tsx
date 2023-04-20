@@ -19,11 +19,11 @@ export const App = () => (
       <PersistGate loading={'Loading...'} persistor={persistor}>
         <ThemeProvider>
           <Router>
-            <Layout>
+            <Layout style={{ minHeight: '100vh' }}>
               <ThemeSwitcher />
               <Header />
 
-              <Content>
+              <Content style={{ position: 'relative' }}>
                 <AppRoutes />
               </Content>
             </Layout>
