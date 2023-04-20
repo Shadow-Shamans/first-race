@@ -37,7 +37,6 @@ export const Login: FC = () => {
 
       if (!values.errorFields) {
         signin(values)
-        appDispatch(toogleAuth(true))
       }
     } catch (errorInfo) {
       console.log(errorInfo)
@@ -53,6 +52,7 @@ export const Login: FC = () => {
   React.useEffect(() => {
     if (result.data) {
       appDispatch(setUserData(result.data))
+      appDispatch(toogleAuth(true))
       navigate('/main')
     }
   }, [result])

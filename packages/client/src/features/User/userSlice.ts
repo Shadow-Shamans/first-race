@@ -7,7 +7,7 @@ export interface IUser {
   second_name: string
   theme: ThemeNames
   avatar: string | null
-  email: ''
+  email: string
   login: string
   phone: string
 }
@@ -30,9 +30,6 @@ export const userSlice = createSlice({
     setTheme: (state, action: PayloadAction<ThemeNames>) => {
       state.theme = action.payload
     },
-    setUserId: (state, action: PayloadAction<number>) => {
-      state.id = action.payload
-    },
     setUserData: (state, action: PayloadAction<IUser>) => {
       state.id = action.payload.id
       state.first_name = action.payload.first_name
@@ -45,4 +42,4 @@ export const userSlice = createSlice({
   },
 })
 
-export const { setTheme, setUserId, setUserData } = userSlice.actions
+export const { setTheme, setUserData } = userSlice.actions

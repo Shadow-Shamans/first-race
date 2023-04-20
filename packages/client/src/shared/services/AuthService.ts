@@ -15,6 +15,14 @@ interface ISignIn {
   password: string
 }
 
+interface IUpdateUserData {
+  first_name: string
+  second_name: string
+  login: string
+  email: string
+  phone: string
+}
+
 export const authAPI = createApi({
   reducerPath: 'authAPI',
   baseQuery: fetchBaseQuery({
@@ -52,10 +60,11 @@ export const authAPI = createApi({
         method: 'POST',
       }),
     }),
-    updateUserProfile: build.mutation({
-      query: () => ({
+    updateUserProfile: build.mutation<IUpdateUserData, IUpdateUserData>({
+      query: data => ({
         url: `/user/profile`,
         method: 'PUT',
+        body: data,
       }),
     }),
     updateUserPassword: build.mutation({
@@ -73,5 +82,9 @@ export const authAPI = createApi({
   }),
 })
 
-export const { useSignupMutation, useSigninMutation, useLazyGetUserDataQuery } =
-  authAPI
+export const {
+  useSignupMutation,
+  useSigninMutation,
+  useLazyGetUserDataQuery,
+  useUpdateUserProfileMutation,
+} = authAPI
