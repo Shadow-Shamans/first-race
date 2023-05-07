@@ -1,6 +1,23 @@
 import { useState } from 'react'
 
-const request = (element) => {
+type RequestFullscreen = typeof document.documentElement.requestFullscreen
+type ExitFullscreen = typeof document.exitFullscreen
+
+declare global {
+  interface HTMLElement {
+    webkitRequestFullscreen: RequestFullscreen
+    msRequestFullscreen: RequestFullscreen
+  }
+
+  interface Document {
+    webkitExitFullscreen: ExitFullscreen
+    msExitFullscreen: ExitFullscreen
+  }
+}
+
+const request = (element: HTMLElement) => {
+  if (!element) return
+
   if (element.requestFullscreen) {
     element.requestFullscreen()
   } else if (element.webkitRequestFullscreen) {
@@ -20,7 +37,7 @@ const exit = () => {
   }
 }
 
-const useFullscreen = (element) => {
+const useFullscreen = (element: HTMLElement) => {
   const [enabled, setFullscreen] = useState(false)
 
   const toggleFullscreen = () => {
@@ -31,6 +48,5 @@ const useFullscreen = (element) => {
 
   return [enabled, toggleFullscreen]
 }
-
 
 export default useFullscreen
