@@ -99,8 +99,8 @@ export class Player {
 
   private _collaideWithPlatform = () => {
     if (this.ball.collide(this.options)) {
-      this.ball.bumpPlatform(this)
-      this.ball.sounds.bump.play()
+      this.ball.bumpPlatform(this.options)
+      this.ball.sounds.bump?.play()
     }
   }
 }

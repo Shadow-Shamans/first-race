@@ -4,7 +4,7 @@ import { Layer } from './Layer'
 import { StateScreen } from './StateScreen'
 import { platformHeight, ballRadius, assets } from './constants'
 
-type ElemGame = {
+export type ElemGame = {
   x: number
   y: number
   w: number
