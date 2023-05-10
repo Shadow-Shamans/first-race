@@ -22,7 +22,6 @@ export const App = () => (
             <Layout style={{ minHeight: '100vh' }}>
               <ThemeSwitcher />
               <Header />
-
               <Content style={{ position: 'relative' }}>
                 <AppRoutes />
               </Content>
