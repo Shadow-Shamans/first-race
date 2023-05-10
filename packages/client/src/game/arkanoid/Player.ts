@@ -97,9 +97,16 @@ export class Player {
     }
   }
 
+  _getTouchOffset = (x: number) => {
+    const diff = this.options.x + this.options.w - x
+    const offset = this.options.w - diff
+    const result = (2 * offset) / this.options.w
+    return result - 1
+  }
+
   private _collaideWithPlatform = () => {
     if (this.ball.collide(this.options)) {
-      this.ball.bumpPlatform(this.options)
+      this.ball.bumpPlatform(this)
       this.ball.sounds.bump?.play()
     }
   }

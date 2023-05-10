@@ -3,6 +3,7 @@ import { Block } from './Block'
 import { Layer } from './Layer'
 import { StateScreen } from './StateScreen'
 import { platformHeight, ballRadius, assets } from './constants'
+import { Player } from './Player'
 
 export type ElemGame = {
   x: number
@@ -72,15 +73,11 @@ export class Ball {
     return false
   }
 
-  bumpPlatform = (platform: ElemGame) => {
-    if (platform.x) {
-      this.x += platform.x
-    }
-
+  bumpPlatform = (platform: Player) => {
     if (this.dy > 0) {
       this.dy = -this.speed
-      // let touchX = this.x + this.w / 2
-      this.dx = this.speed * -1 //platform.getTouchOffset(touchX);
+      const touchX = this.x + this.w / 2
+      this.dx = this.speed * platform._getTouchOffset(touchX)
     }
   }
 
