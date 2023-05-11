@@ -4,10 +4,10 @@ import { selectIsLoggedIn } from '@/features/Auth'
 import PrivateRoute from '@/shared/hocs/PrivateRouter'
 import { Route, Routes } from 'react-router-dom'
 import { Loader } from '@/components/Loader'
+import Main from '@/pages/Main'
 
 const Login = lazy(() => import('@/pages/Login'))
 const Registration = lazy(() => import('@/pages/Registration'))
-const Main = lazy(() => import('@/pages/Main'))
 const Forum = lazy(() => import('@/pages/Forum'))
 const ForumTopic = lazy(() => import('@/pages/ForumTopic'))
 const Profile = lazy(() => import('@/pages/Profile'))
