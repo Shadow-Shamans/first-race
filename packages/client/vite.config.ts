@@ -6,14 +6,18 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 dotenv.config()
 
+dotenv.config({
+  path: '../../.env',
+})
+
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
   },
-  define: {
-    __SERVER_PORT__: process.env.SERVER_PORT,
-  },
+  // define: {
+  //   __SERVER_PORT__: process.env.SERVER_PORT,
+  // },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
