@@ -50,10 +50,10 @@ export class Game {
       this._playerLayer,
       this.mouse,
       this.keyboard,
-      this.blocks,
       this.text,
       this.stateScreen
     )
+    this.player.blocks = this.blocks
     this.bg = new Bg(bgLayer)
     this.sounds = {
       bump: null,
@@ -70,7 +70,6 @@ export class Game {
 
     this._prealoadAssets()
     this.loopControls = new Loop(this.update, this.display)
-    window.game = this
   }
 
   private _prealoadAssets() {
@@ -110,6 +109,10 @@ export class Game {
     if (this.stateScreen.state === 'fall' || this.stateScreen.state === 'win') {
       this.isRunning = false
       this.blocks = []
+      if (this.blocks.length !== this.rows * this.cols) {
+        this._buildLavel()
+        this.player.blocks = this.blocks
+      }
     }
 
     if (

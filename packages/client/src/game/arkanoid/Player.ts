@@ -1,5 +1,5 @@
 import { Ball } from './Ball'
-import { Block } from './Block'
+import type { Block } from './Block'
 import type { KeyboardControls } from './KeyboardControls'
 import type { Layer } from './Layer'
 import type { MouseControls } from './MouseControls'
@@ -8,6 +8,7 @@ import type { StateScreen } from './StateScreen'
 import { platformHeight, platformWidth } from './constants'
 
 export class Player {
+  blocks: Block[] = []
   options: {
     x: number
     y: number
@@ -24,7 +25,6 @@ export class Player {
     private _layer: Layer,
     private _mouse: MouseControls,
     private _keyboard: KeyboardControls,
-    private _blocks: Block[],
     private _text: Text,
     private _stateGame: StateScreen
   ) {
@@ -81,7 +81,7 @@ export class Player {
   }
 
   private _collaideBlocks = () => {
-    for (const block of this._blocks) {
+    for (const block of this.blocks) {
       if (block.active && this.ball.collide(block)) {
         this.ball.bumpBlock(block)
         this._text.addScore()
@@ -106,6 +106,7 @@ export class Player {
   }
 
   private _setDefaultState = () => {
+    this.blocks = []
     return {
       x: this._layer.sW / 2 - platformWidth / 2,
       y: this._layer.sH - platformHeight,
