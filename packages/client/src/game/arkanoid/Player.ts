@@ -28,15 +28,7 @@ export class Player {
     private _text: Text,
     private _stateGame: StateScreen
   ) {
-    this.options = {
-      x: this._layer.sW / 2 - platformWidth / 2,
-      y: this._layer.sH - platformHeight,
-      w: platformWidth,
-      h: platformHeight,
-      vx: 700,
-      vy: 0,
-      color: `orange`,
-    }
+    this.options = this._setDefaultState()
     this.ball = new Ball(this._layer, this._stateGame)
     console.log(this._mouse)
   }
@@ -71,6 +63,8 @@ export class Player {
 
     if (this._stateGame.state === 'fall' || this._stateGame.state === 'win') {
       this.isRunning = false
+      this.options = this._setDefaultState()
+      this.ball.setDefaultStateBall()
     }
   }
 
@@ -108,6 +102,18 @@ export class Player {
     if (this.ball.collide(this.options)) {
       this.ball.bumpPlatform(this)
       this.ball.sounds.bump?.play()
+    }
+  }
+
+  private _setDefaultState = () => {
+    return {
+      x: this._layer.sW / 2 - platformWidth / 2,
+      y: this._layer.sH - platformHeight,
+      w: platformWidth,
+      h: platformHeight,
+      vx: 700,
+      vy: 0,
+      color: `orange`,
     }
   }
 }

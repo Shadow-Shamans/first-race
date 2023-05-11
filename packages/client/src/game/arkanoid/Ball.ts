@@ -30,12 +30,18 @@ export class Ball {
   }
 
   constructor(private _layer: Layer, private _stateGame: StateScreen) {
-    this.x = this._layer.sW / 2
-    this.y = this._layer.sH - platformHeight - this.r
+    this.x = 0
+    this.y = 0
+    this.setDefaultStateBall()
     this.sounds = {
       bump: new Audio(assets.bump),
       gameOver: new Audio(assets.gameOver),
     }
+  }
+
+  setDefaultStateBall = () => {
+    this.x = this._layer.sW / 2
+    this.y = this._layer.sH - platformHeight - this.r
     this.dy = -this.speed
     this.dx = getRandomNumber(-this.speed, this.speed)
   }

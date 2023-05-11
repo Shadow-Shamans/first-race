@@ -34,18 +34,20 @@ export class Game {
 
   private _resourceLoaaded = 0
   private _resourceCount = 0
+  private _playerLayer: Layer
 
   constructor(private _container: HTMLElement) {
     const bgLayer = new Layer(this._container, 1)
     const textLayer = new Layer(this._container, 2)
-    const playerLayer = new Layer(this._container, 3)
+    this._playerLayer = new Layer(this._container, 3)
     const layerScreen = new Layer(this._container, 4)
     this.mouse = new MouseControls(this._container)
     this.keyboard = new KeyboardControls(KeysPlayer)
     this.text = new Text(textLayer)
     this.stateScreen = new StateScreen(layerScreen)
+    this._buildLavel()
     this.player = new Player(
-      playerLayer,
+      this._playerLayer,
       this.mouse,
       this.keyboard,
       this.blocks,
@@ -66,18 +68,9 @@ export class Game {
     this._resourceCount =
       Object.keys(this.sounds).length + Object.keys(this.sprites).length
 
-    const gapForLeftAndRightEdge = (playerLayer.sW - xBlockArea * this.cols) / 2
-    const gapForTop = yBlockArea + 10
-    for (let row = 0; row < this.rows; row++) {
-      for (let col = 0; col < this.cols; col++) {
-        const xPos = xBlockArea * col + gapForLeftAndRightEdge
-        const yPos = yBlockArea * row + gapForTop
-        this.blocks.push(new Block(playerLayer, xPos, yPos))
-      }
-    }
-
     this._prealoadAssets()
     this.loopControls = new Loop(this.update, this.display)
+    window.game = this
   }
 
   private _prealoadAssets() {
@@ -114,8 +107,19 @@ export class Game {
     this.player.update(correction)
     this.mouse.update()
 
-    if (this.keyboard.keys.Enter && this.stateScreen.state === 'start') {
+    if (this.stateScreen.state === 'fall' || this.stateScreen.state === 'win') {
+      this.isRunning = false
+      this.blocks = []
+    }
+
+    if (
+      this.keyboard.keys.Enter &&
+      (this.stateScreen.state === 'start' ||
+        this.stateScreen.state === 'fall' ||
+        this.stateScreen.state === 'win')
+    ) {
       this.stateScreen.state = 'isRunning'
+      this.isRunning = true
       this.stateScreen.sounds.gameStart?.play()
     }
   }
@@ -123,12 +127,29 @@ export class Game {
   display = () => {
     this.player.display()
     this.text.display()
-    this.blocks.forEach(block => {
-      block.display()
-    })
+
+    if (this.isRunning) {
+      this.blocks.forEach(block => {
+        block.display()
+      })
+    }
 
     this.bg.display()
 
     this.stateScreen.display()
+  }
+
+  private _buildLavel = () => {
+    const gapForLeftAndRightEdge =
+      (this._playerLayer.sW - xBlockArea * this.cols) / 2
+    const gapForTop = yBlockArea + 10
+
+    for (let row = 0; row < this.rows; row++) {
+      for (let col = 0; col < this.cols; col++) {
+        const xPos = xBlockArea * col + gapForLeftAndRightEdge
+        const yPos = yBlockArea * row + gapForTop
+        this.blocks.push(new Block(this._playerLayer, xPos, yPos))
+      }
+    }
   }
 }
