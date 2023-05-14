@@ -1,7 +1,9 @@
 import { FC } from 'react'
 import { Card, Typography } from 'antd'
 import classNames from 'classnames'
+import { useAppSelector } from '@/app'
 import { Rating } from '@/components/Rating'
+import { selectUserList } from '@/features/Leaderboard'
 
 import coins from '@/assets/images/coins.png'
 import mainCards from '@/assets/images/mainCards.png'
@@ -10,13 +12,13 @@ import mainRoads from '@/assets/images/mainRoads.png'
 import grayRectangle from '@/assets/icons/grayRectangle.svg'
 import blackRectangle from '@/assets/icons/blackRectangle.svg'
 
-import { leaderBoardMock } from '@/mocks/ratingMock'
-
 import styles from './main.module.css'
 
 const { Text } = Typography
 
 export const Main: FC = () => {
+  const userList = useAppSelector(selectUserList)
+
   return (
     <section className={styles.root}>
       <Text className={classNames(styles.title, styles.leftTopTitle)}>
@@ -71,7 +73,7 @@ export const Main: FC = () => {
         <Text className={styles.title}>Попади в топ!</Text>
 
         <Card className={styles.card}>
-          <Rating list={leaderBoardMock} />
+          <Rating list={userList.slice(0, 5)} />
         </Card>
       </div>
     </section>

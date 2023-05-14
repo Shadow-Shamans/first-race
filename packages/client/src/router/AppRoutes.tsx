@@ -25,7 +25,14 @@ export const AppRoutes = () => {
         <Route path="/main" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/rating" element={<Rating />} />
+        <Route
+          path="/rating"
+          element={
+            <PrivateRoute isLoggedIn={isLoggedIn}>
+              <Rating />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/forum"
           element={

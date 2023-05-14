@@ -27,3 +27,7 @@
 .score {
   justify-self: flex-end;
 }
+
+.list {
+  width: 100%;
+}
