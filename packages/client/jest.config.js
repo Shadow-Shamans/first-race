@@ -9,10 +9,11 @@ export default {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
-    '.+\\.(css|styl|less|sass|scss|svg|png)$': 'jest-css-modules-transform',
+    '.+\\.(css|styl|less|sass|scss|svg|png|mp3|wav)$':
+      'jest-css-modules-transform',
   },
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT || 3001,
   },
-  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts']
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
 }

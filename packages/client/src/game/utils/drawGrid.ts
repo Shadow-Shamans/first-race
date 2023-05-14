@@ -1,5 +1,5 @@
 import { TILE_SIZE } from '../constants'
-import type { TDrawLayerFunc, TPosition } from '../types'
+import type { TDrawLayerFunc } from '../types'
 
 export const drawGrid: TDrawLayerFunc = opt => {
   const { ctx, position } = opt
