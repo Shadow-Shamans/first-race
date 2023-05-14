@@ -8,7 +8,16 @@ import block from './assets/block.png'
 import platform from './assets/platform.png'
 import background from './assets/background.png'
 
-export const KeysPlayer = [`KeyA`, `KeyW`, `KeyS`, `KeyD`, `Space`, `Enter`]
+export const KeysPlayer = [
+  `KeyA`,
+  `KeyW`,
+  `KeyS`,
+  `KeyD`,
+  `Space`,
+  `Enter`,
+  `ArrowRight`,
+  `ArrowLeft`,
+]
 
 export const platformHeight = 32
 export const platformWidth = 224

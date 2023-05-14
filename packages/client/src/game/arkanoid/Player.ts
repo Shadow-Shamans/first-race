@@ -36,12 +36,15 @@ export class Player {
   update = (correction: number) => {
     const righEdgePlatform = this.options.x + this.options.w
     const leftEdgePltatform = this.options.x
+    const isLeftKey = this._keyboard.keys.KeyA || this._keyboard.keys.ArrowLeft
+    const isRightKey =
+      this._keyboard.keys.KeyD || this._keyboard.keys.ArrowRight
 
-    if (this._keyboard.keys.KeyD && this._layer.sW > righEdgePlatform) {
+    if (isRightKey && this._layer.sW > righEdgePlatform) {
       this.options.x += this.options.vx * correction
     }
 
-    if (this._keyboard.keys.KeyA && 0 < leftEdgePltatform) {
+    if (isLeftKey && 0 < leftEdgePltatform) {
       this.options.x -= this.options.vx * correction
     }
 
