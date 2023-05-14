@@ -1,6 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import { userSlice } from '@/features/User'
-import { testDataApi } from '@/app/api'
 import { authSlice } from '@/features/Auth/authSlice'
 import { gameSlice } from '@/features/Game'
 import { authAPI } from '@/shared/services/AuthService'
@@ -8,7 +7,6 @@ import { authAPI } from '@/shared/services/AuthService'
 export const rootReducer = combineReducers({
   [userSlice.name]: userSlice.reducer,
   [authSlice.name]: authSlice.reducer,
-  [testDataApi.reducerPath]: testDataApi.reducer,
   [gameSlice.name]: gameSlice.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
 })

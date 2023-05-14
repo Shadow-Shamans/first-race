@@ -1,6 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-
-import { testDataApi } from '@/app/api'
 import { rootReducer } from './rootReducer'
 import { authAPI } from '@/shared/services/AuthService'
 
@@ -10,9 +8,7 @@ export const createStore = (initialState = {}) => {
     devTools: process.env.NODE_ENV !== 'producton',
     preloadedState: initialState,
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware()
-        .concat(testDataApi.middleware)
-        .concat(authAPI.middleware),
+      getDefaultMiddleware().concat(authAPI.middleware),
   })
 }
 
