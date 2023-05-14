@@ -1,5 +1,6 @@
 import { DOMAttributes } from 'react'
 import { GameElement } from '@/game'
+import { RootState } from './store'
 import './Game'
 
 declare const __SERVER_PORT__: number
@@ -34,4 +35,10 @@ interface SyncEvent extends ExtendableEvent {
 
 interface ServiceWorkerGlobalScopeEventMap {
   sync: SyncEvent
+}
+
+declare global {
+  interface Window {
+    initialState: string | null
+  }
 }

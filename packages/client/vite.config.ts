@@ -4,9 +4,7 @@ import react from '@vitejs/plugin-react'
 import dotenv from 'dotenv'
 import { VitePWA } from 'vite-plugin-pwa'
 
-dotenv.config({
-  path: '../../.env',
-})
+dotenv.config({ path: '../../.env' })
 
 // https://vitejs.dev/config/
 export default defineConfig({

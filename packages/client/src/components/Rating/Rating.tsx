@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Typography, Avatar } from 'antd'
+import { leaderBoardMock } from '@/mocks/ratingMock'
 
 import styles from './Rating.module.css'
 
@@ -16,6 +17,10 @@ interface IProps {
 }
 
 const { Text } = Typography
+
+export const RatingPage = () => {
+  return <Rating list={leaderBoardMock} />
+}
 
 export const Rating: FC<IProps> = ({ currentUserId, list }) => {
   return (
