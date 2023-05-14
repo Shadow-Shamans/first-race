@@ -1,6 +1,7 @@
 import type { StateGame } from './types'
 import { Layer } from './Layer'
 import { assets } from './constants'
+import { centerRadialGradient } from './utils'
 
 export class StateScreen {
   state: StateGame = 'start'
@@ -54,21 +55,12 @@ export class StateScreen {
 
   private _startGame() {
     const { ctx, sW, sH } = this._layer
-    const middleX = sW / 2
-    const middleY = sH / 2
-    const radius = middleX
-    const grd = ctx.createRadialGradient(
-      middleX,
-      middleY,
-      radius * 0.5,
-      middleX,
-      middleY,
-      radius
-    )
-    grd.addColorStop(0, this.colors.raspbery)
-    grd.addColorStop(1, this.colors.magenta)
-
-    ctx.fillStyle = grd
+    centerRadialGradient(ctx, {
+      w: sW,
+      h: sH,
+      color1: this.colors.raspbery,
+      color2: this.colors.magenta,
+    })
 
     ctx.fillRect(0, 0, sW, sH)
 
@@ -87,7 +79,7 @@ export class StateScreen {
     ctx.save()
     ctx.font = '24px Darumadrop One, cursive'
     ctx.fillStyle = '#fff'
-    const messageInfo = 'press entre to start game'
+    const messageInfo = 'press entre'
     const sizeInfoText = ctx.measureText(messageInfo).width
     const posXmidInfo = sW / 2 - sizeInfoText / 2
     const posYmidInfo = sH / 2
@@ -97,34 +89,43 @@ export class StateScreen {
 
   private _endGameWin() {
     const { ctx, sW, sH } = this._layer
-    ctx.fillStyle = this.colors.xanthous
+
+    centerRadialGradient(ctx, {
+      w: sW,
+      h: sH,
+      color1: this.colors.xanthous,
+      color2: this.colors.raspbery,
+    })
+
     ctx.fillRect(0, 0, sW, sH)
+
     ctx.fillStyle = 'white'
     const message = '🥁 You Win! 🚀'
     const sizeText = ctx.measureText(message).width
     const posXmid = sW / 2 - sizeText / 2
     const posYmid = sH / 2 - this.fontSize / 2
     ctx.fillText(message, posXmid, posYmid)
+
+    ctx.save()
+    ctx.font = '24px Darumadrop One, cursive'
+    ctx.fillStyle = '#fff'
+    const messageInfo = 'press entre to try again'
+    const sizeInfoText = ctx.measureText(messageInfo).width
+    const posXmidInfo = sW / 2 - sizeInfoText / 2
+    const posYmidInfo = sH / 2
+    ctx.fillText(messageInfo, posXmidInfo, posYmidInfo + 150)
+    ctx.restore()
   }
 
   private _endGameFall() {
     const { ctx, sW, sH } = this._layer
-    const middleX = sW / 2
-    const middleY = sH / 2
-    const radius = middleX
-    const grd = ctx.createRadialGradient(
-      middleX,
-      middleY,
-      radius * 0.5,
-      middleX,
-      middleY,
-      radius
-    )
-    grd.addColorStop(0, this.colors.dodgerBlue)
-    grd.addColorStop(1, this.colors.biceBlue)
 
-    ctx.fillStyle = grd
-
+    centerRadialGradient(ctx, {
+      w: sW,
+      h: sH,
+      color1: this.colors.dodgerBlue,
+      color2: this.colors.biceBlue,
+    })
     ctx.fillRect(0, 0, sW, sH)
 
     ctx.save()
@@ -142,7 +143,7 @@ export class StateScreen {
     ctx.save()
     ctx.font = '24px Darumadrop One, cursive'
     ctx.fillStyle = '#fff'
-    const messageInfo = 'try again press entre'
+    const messageInfo = 'press entre to try again'
     const sizeInfoText = ctx.measureText(messageInfo).width
     const posXmidInfo = sW / 2 - sizeInfoText / 2
     const posYmidInfo = sH / 2

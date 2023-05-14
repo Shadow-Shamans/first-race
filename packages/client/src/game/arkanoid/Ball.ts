@@ -26,7 +26,6 @@ export class Ball {
   isRunning = false
   sounds: {
     bump: HTMLAudioElement | null
-    gameOver: HTMLAudioElement | null
   }
 
   constructor(private _layer: Layer, private _stateGame: StateScreen) {
@@ -35,7 +34,6 @@ export class Ball {
     this.setDefaultStateBall()
     this.sounds = {
       bump: new Audio(assets.bump),
-      gameOver: new Audio(assets.gameOver),
     }
   }
 
@@ -120,7 +118,7 @@ export class Ball {
       this.sounds.bump?.play()
     } else if (ballBottom > worldBottom) {
       this._stateGame.state = 'fall'
-      this.sounds.gameOver?.play()
+      this._stateGame.sounds.gameFail?.play()
     }
   }
 }

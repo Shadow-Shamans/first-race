@@ -4,7 +4,7 @@ export class Text {
   score = 0
   items = 0
   x = 32
-  y = 32 + 16
+  y = 32
   message = 'To start the game press space'
 
   constructor(private _layer: Layer) {

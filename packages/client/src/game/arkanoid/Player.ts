@@ -87,6 +87,11 @@ export class Player {
         this.ball.bumpBlock(block)
         this._text.addScore()
         this.ball.sounds.bump?.play()
+
+        if (this._text.score === this.blocks.length) {
+          this._stateGame.state = 'win'
+          this._stateGame.sounds.gameWin?.play()
+        }
       }
     }
   }
