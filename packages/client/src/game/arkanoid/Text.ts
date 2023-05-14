@@ -5,7 +5,7 @@ export class Text {
   items = 0
   x = 32
   y = 32 + 16
-  message = 'Start game press Space'
+  message = 'To start the game press space'
 
   constructor(private _layer: Layer) {
     this._layer.ctx.font = '20px Arial'
@@ -20,5 +20,10 @@ export class Text {
   addScore = () => {
     this.score += 1
     this.message = `Score: ${this.score}`
+  }
+
+  clear = () => {
+    this.score = 0
+    this.message = 'To start the game press space'
   }
 }

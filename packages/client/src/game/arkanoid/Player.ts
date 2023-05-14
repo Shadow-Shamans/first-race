@@ -52,19 +52,20 @@ export class Player {
     if (this.isRunning) {
       this.ball.isRunning = true
       this.ball.update(correction)
-      this._text.message = 'Score: 0'
       this._collaideBlocks()
       this._collaideWithPlatform()
     }
 
     if (this._keyboard.keys.Space && this._stateGame.state === 'isRunning') {
       this.isRunning = true
+      this._text.message = 'Score: 0'
     }
 
     if (this._stateGame.state === 'fall' || this._stateGame.state === 'win') {
       this.isRunning = false
       this.options = this._setDefaultState()
       this.ball.setDefaultStateBall()
+      this._text.clear()
     }
   }
 
@@ -85,7 +86,6 @@ export class Player {
       if (block.active && this.ball.collide(block)) {
         this.ball.bumpBlock(block)
         this._text.addScore()
-        this._text.display()
         this.ball.sounds.bump?.play()
       }
     }
