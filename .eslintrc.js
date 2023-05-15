@@ -17,5 +17,6 @@ module.exports = {
   rules: {
     '@typescript-eslint/ban-ts-comment': 1,
     "semi": [2, "never"],
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
 }

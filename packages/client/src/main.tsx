@@ -5,9 +5,7 @@ import { initServiceWorker } from './shared/utils/sw'
 
 const mode = import.meta.env.MODE
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <App />
-)
+ReactDOM.hydrateRoot(document.getElementById('root') as HTMLElement, <App />)
 
 if (mode === 'production') {
   initServiceWorker()
