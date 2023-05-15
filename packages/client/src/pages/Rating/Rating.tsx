@@ -4,6 +4,7 @@ import { Rating as RatingItems } from '@/components/Rating'
 import { useGetLeaderboardMutation } from '@/shared/services/LeaderboardService'
 import { useAppDispatch, useAppSelector } from '@/app'
 import { selectUserList, setUserList } from '@/features/Leaderboard'
+import { selectUserData } from '@/features/User'
 
 import styles from './rating.module.css'
 
@@ -12,6 +13,7 @@ const limit = 20
 
 export const Rating: FC = () => {
   const userList = useAppSelector(selectUserList)
+  const { id: userId } = useAppSelector(selectUserData)
   const appDispatch = useAppDispatch()
 
   const [getLeaderboard, mutationResult] = useGetLeaderboardMutation()
@@ -46,7 +48,7 @@ export const Rating: FC = () => {
 
   return (
     <section className={styles.wrapper}>
-      <RatingItems currentUserId={1} list={userList} />
+      <RatingItems currentUserId={userId} list={userList} />
 
       {userList.length >= pageSize && (
         <Pagination

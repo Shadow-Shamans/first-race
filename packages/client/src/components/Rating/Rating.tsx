@@ -9,7 +9,7 @@ export interface IRatingList extends IScoreData {
 }
 
 interface IProps {
-  currentUserId?: number
+  currentUserId?: number | null
   list: IRatingList[]
 }
 
