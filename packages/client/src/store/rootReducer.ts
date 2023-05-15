@@ -5,8 +5,8 @@ import { testDataApi } from '@/app/api'
 import { authSlice } from '@/features/Auth/authSlice'
 import { gameSlice } from '@/features/Game'
 import { authAPI } from '@/shared/services/AuthService'
-import { leaderboardAPI } from '../shared/services/LeaderboardService'
-import { leaderboardSlice } from '../features/Leaderboard'
+import { leaderboardAPI } from '@/shared/services/LeaderboardService'
+import { leaderboardSlice } from '@/features/Leaderboard'
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 
 const createNoopStorage = () => {
