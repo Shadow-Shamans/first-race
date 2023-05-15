@@ -9,6 +9,7 @@ import styled from './Profile.module.css'
 
 import { generateId } from '@/shared/utils/generateId'
 import { selectUserData } from '@/features/User/selectors'
+import { selectUserList } from '@/features/Leaderboard'
 import { useAppDispatch, useAppSelector } from '@/app'
 import {
   useLogoutMutation,
@@ -16,7 +17,6 @@ import {
 } from '@/shared/services/AuthService'
 import { IUser, setUserData } from '@/features/User/userSlice'
 import { toogleAuth } from '@/features/Auth/authSlice'
-import { selectUserList } from '../../features/Leaderboard'
 
 const Fields = [
   {

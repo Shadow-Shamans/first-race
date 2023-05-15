@@ -12,7 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist'
 import { authAPI } from '@/shared/services/AuthService'
-import { leaderboardAPI } from '../shared/services/LeaderboardService'
+import { leaderboardAPI } from '@/shared/services/LeaderboardService'
 
 export const store = configureStore({
   reducer,
