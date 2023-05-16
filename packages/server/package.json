@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc --p ./tsconfig.prod.json",
+    "build": "rimraf dist && tsc --p ./tsconfig.prod.json",
     "preview": "node ./dist/index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "lint": "eslint .",
@@ -11,6 +11,7 @@
     "test": "jest ."
   },
   "dependencies": {
+    "@evilmartians/lefthook": "^1.1.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.2",

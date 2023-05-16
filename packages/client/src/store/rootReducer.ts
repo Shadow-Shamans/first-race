@@ -3,6 +3,26 @@ import { userSlice } from '@/features/User'
 import { authSlice } from '@/features/Auth/authSlice'
 import { gameSlice } from '@/features/Game'
 import { authAPI } from '@/shared/services/AuthService'
+// import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
+
+// const createNoopStorage = () => {
+//   return {
+//     getItem() {
+//       return Promise.resolve(null)
+//     },
+//     setItem(_key: string, value: unknown) {
+//       return Promise.resolve(value)
+//     },
+//     removeItem() {
+//       return Promise.resolve()
+//     },
+//   }
+// }
+
+// const storage =
+//   typeof window === 'undefined'
+//     ? createNoopStorage()
+//     : createWebStorage('local')
 
 export const rootReducer = combineReducers({
   [userSlice.name]: userSlice.reducer,
