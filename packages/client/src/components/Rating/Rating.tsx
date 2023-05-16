@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Typography, Avatar } from 'antd'
 import { IScoreData } from '@/shared/services/LeaderboardService'
+import { generateId } from '@/shared/utils/generateId'
 
 import styles from './Rating.module.css'
 
@@ -20,7 +21,7 @@ export const Rating: FC<IProps> = ({ currentUserId, list }) => {
     <ul className={styles.list}>
       {list.map(({ userId, rating, username, score }, index) => (
         <li
-          key={userId + index}
+          key={generateId()}
           className={styles.item}
           data-is-current-user={userId === currentUserId}>
           <Text strong>{rating}</Text>
