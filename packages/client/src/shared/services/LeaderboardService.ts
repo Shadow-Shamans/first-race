@@ -22,7 +22,7 @@ interface ILeaderboardRequest {
   limit: number
 }
 
-interface ILeaderboardResponse {
+export interface ILeaderboardResponse {
   data: IScoreData
 }
 

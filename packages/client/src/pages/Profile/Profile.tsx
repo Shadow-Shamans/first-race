@@ -17,6 +17,7 @@ import {
 } from '@/shared/services/AuthService'
 import { IUser, setUserData } from '@/features/User/userSlice'
 import { toogleAuth } from '@/features/Auth/authSlice'
+import { useRating } from '../../shared/hooks/useRating'
 
 const Fields = [
   {
@@ -57,8 +58,8 @@ export const Profile: FC = () => {
   const appDispatch = useAppDispatch()
   const imageUrl = null
   const [form] = Form.useForm()
+  const { userList } = useRating()
   const data = useAppSelector(selectUserData)
-  const userList = useAppSelector(selectUserList)
   const [updateUserProfile, mutationResult] = useUpdateUserProfileMutation()
   const [logout, result] = useLogoutMutation()
 

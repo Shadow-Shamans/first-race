@@ -1,9 +1,8 @@
 import { FC } from 'react'
 import { Card, Typography } from 'antd'
 import classNames from 'classnames'
-import { useAppSelector } from '@/app'
 import { Rating } from '@/components/Rating'
-import { selectUserList } from '@/features/Leaderboard'
+import { useRating } from '@/shared/hooks/useRating'
 
 import coins from '@/assets/images/coins.png'
 import mainCards from '@/assets/images/mainCards.png'
@@ -17,7 +16,7 @@ import styles from './main.module.css'
 const { Text } = Typography
 
 export const Main: FC = () => {
-  const userList = useAppSelector(selectUserList)
+  const { userList } = useRating()
 
   return (
     <section className={styles.root}>
