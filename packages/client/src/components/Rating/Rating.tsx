@@ -19,7 +19,7 @@ const { Text } = Typography
 export const Rating: FC<IProps> = ({ currentUserId, list }) => {
   return (
     <ul className={styles.list}>
-      {list.map(({ userId, rating, username, score }, index) => (
+      {list.map(({ userId, rating, username, score }) => (
         <li
           key={generateId()}
           className={styles.item}
