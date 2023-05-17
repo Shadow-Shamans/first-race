@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist'
 import { authAPI } from '@/shared/services/AuthService'
+import { leaderboardAPI } from '@/shared/services/LeaderboardService'
 
 export const store = configureStore({
   reducer,
@@ -25,7 +26,8 @@ export const store = configureStore({
       },
     })
       .concat(testDataApi.middleware)
-      .concat(authAPI.middleware),
+      .concat(authAPI.middleware)
+      .concat(leaderboardAPI.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

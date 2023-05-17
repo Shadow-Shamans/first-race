@@ -7,9 +7,9 @@ import { FormInput } from '@/components/FormInput'
 
 import styled from './Profile.module.css'
 
-import { leaderBoardMock } from '@/mocks/ratingMock'
 import { generateId } from '@/shared/utils/generateId'
 import { selectUserData } from '@/features/User/selectors'
+import { selectUserList } from '@/features/Leaderboard'
 import { useAppDispatch, useAppSelector } from '@/app'
 import {
   useLogoutMutation,
@@ -17,6 +17,7 @@ import {
 } from '@/shared/services/AuthService'
 import { IUser, setUserData } from '@/features/User/userSlice'
 import { toogleAuth } from '@/features/Auth/authSlice'
+import { useRating } from '../../shared/hooks/useRating'
 
 const Fields = [
   {
@@ -57,6 +58,7 @@ export const Profile: FC = () => {
   const appDispatch = useAppDispatch()
   const imageUrl = null
   const [form] = Form.useForm()
+  const { userList } = useRating()
   const data = useAppSelector(selectUserData)
   const [updateUserProfile, mutationResult] = useUpdateUserProfileMutation()
   const [logout, result] = useLogoutMutation()
@@ -166,7 +168,7 @@ export const Profile: FC = () => {
         </Col>
         <Col span={11}>
           <Card className={styled.card}>
-            <Rating list={leaderBoardMock} currentUserId={1} />
+            <Rating list={userList.slice(0, 5)} currentUserId={1} />
           </Card>
           <Card className={styled.card}>
             Пройденные уровни: 2
