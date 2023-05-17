@@ -9,7 +9,7 @@ import express from 'express'
 import * as fs from 'fs'
 import * as path from 'path'
 
-const isDev = () => process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development'
 
 async function startServer() {
   const app = express()
@@ -21,7 +21,7 @@ async function startServer() {
   const srcPath = path.dirname(require.resolve('client/package.json'))
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs')
 
-  if (isDev()) {
+  if (isDev) {
     vite = await createViteServer({
       server: { middlewareMode: true },
       root: srcPath,
@@ -35,7 +35,7 @@ async function startServer() {
     res.json('👋 Howdy from the server :)')
   })
 
-  if (!isDev()) {
+  if (!isDev) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
   }
 
@@ -44,7 +44,7 @@ async function startServer() {
     try {
       let template: string
 
-      if (!isDev()) {
+      if (!isDev) {
         template = fs.readFileSync(
           path.resolve(distPath, 'index.html'),
           'utf-8'
@@ -56,7 +56,7 @@ async function startServer() {
 
       let render: (url?: string) => Promise<string>
 
-      if (!isDev()) {
+      if (!isDev) {
         render = (await import(ssrClientPath)).render
       } else {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
@@ -72,7 +72,7 @@ async function startServer() {
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {
-      if (isDev()) {
+      if (isDev) {
         vite?.ssrFixStacktrace(e as Error)
       }
       next(e)
