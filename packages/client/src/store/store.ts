@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from './rootReducer'
 import { authAPI } from '@/shared/services/AuthService'
+import { leaderboardAPI } from '@/shared/services/LeaderboardService'
 
 export const createStore = (initialState = {}) => {
   return configureStore({
@@ -8,10 +9,11 @@ export const createStore = (initialState = {}) => {
     devTools: process.env.NODE_ENV !== 'producton',
     preloadedState: initialState,
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(authAPI.middleware),
+      getDefaultMiddleware()
+        .concat(authAPI.middleware)
+        .concat(leaderboardAPI.middleware),
   })
 }
-
 export const storeInstance = createStore()
 
 export type RootState = ReturnType<typeof storeInstance.getState>

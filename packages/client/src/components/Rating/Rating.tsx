@@ -1,40 +1,34 @@
 import { FC } from 'react'
 import { Typography, Avatar } from 'antd'
-import { leaderBoardMock } from '@/mocks/ratingMock'
+import { IScoreData } from '@/shared/services/LeaderboardService'
+import { generateId } from '@/shared/utils/generateId'
 
 import styles from './Rating.module.css'
 
-export type TRatingList = {
-  id: number
+export interface IRatingList extends IScoreData {
   rating: number
-  name: string
-  score: string
 }
 
 interface IProps {
-  currentUserId?: number
-  list: TRatingList[]
+  currentUserId?: number | null
+  list: IRatingList[]
 }
 
 const { Text } = Typography
 
-export const RatingPage = () => {
-  return <Rating list={leaderBoardMock} />
-}
-
 export const Rating: FC<IProps> = ({ currentUserId, list }) => {
   return (
-    <ul>
-      {list.map(({ id, rating, name, score }) => (
+    <ul className={styles.list}>
+      {list.map(({ userId, rating, username, score }, index) => (
         <li
-          key={id}
+          key={generateId()}
           className={styles.item}
-          data-is-current-user={id === currentUserId}>
+          data-is-current-user={userId === currentUserId}>
           <Text strong>{rating}</Text>
 
-          <Avatar>{name[0]}</Avatar>
+          <Avatar>{username[0]}</Avatar>
 
-          <Text strong>{name}</Text>
+          <Text strong>{username}</Text>
 
           <Text strong className={styles.score}>
             {score}

@@ -3,12 +3,27 @@ import { userSlice } from '@/features/User'
 import { authSlice } from '@/features/Auth/authSlice'
 import { gameSlice } from '@/features/Game'
 import { authAPI } from '@/shared/services/AuthService'
+import { leaderboardAPI } from '@/shared/services/LeaderboardService'
+import { leaderboardSlice } from '@/features/Leaderboard'
+
+// const rootPersistConfig = {
+//   key: storageKey,
+//   storage,
+//   whitelist: [
+//     userSlice.name,
+//     authSlice.name,
+//     gameSlice.name,
+//     leaderboardSlice.name,
+//   ],
+// }
 
 export const rootReducer = combineReducers({
   [userSlice.name]: userSlice.reducer,
   [authSlice.name]: authSlice.reducer,
   [gameSlice.name]: gameSlice.reducer,
+  [leaderboardSlice.name]: leaderboardSlice.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
+  [leaderboardAPI.reducerPath]: leaderboardAPI.reducer,
 })
 
 // TODO поставить persist на SSR
