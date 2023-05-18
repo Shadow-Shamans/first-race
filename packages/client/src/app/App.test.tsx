@@ -1,14 +1,18 @@
 import { render, screen } from '@testing-library/react'
-
 import { App } from './App'
+import { Provider } from 'react-redux'
+import storeInstance from '@/store'
+import { MemoryRouter } from 'react-router-dom'
 
 const appContent = 'Главная'
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({ json: () => Promise.resolve('hey') })
-) as jest.Mock
-
-test('Example test', async () => {
-  render(<App />)
+test('App test cases', () => {
+  render(
+    <Provider store={storeInstance}>
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    </Provider>
+  )
   expect(screen.getByText(appContent)).toBeDefined()
 })

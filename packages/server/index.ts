@@ -1,12 +1,9 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
-
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 
-dotenv.config({
-  path: '../../.env',
-})
+dotenv.config({ path: '../../.env' })
 
 import express from 'express'
 import * as fs from 'fs'
@@ -57,7 +54,7 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template)
       }
 
-      let render: () => Promise<string>
+      let render: (url?: string) => Promise<string>
 
       if (!isDev) {
         render = (await import(ssrClientPath)).render
@@ -65,10 +62,13 @@ async function startServer() {
         render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
           .render
       }
+      const [initialReduxStore, appHtml] = await render(req.baseUrl)
 
-      const appHtml = await render()
+      const initStateSerialized = JSON.stringify(initialReduxStore)
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml)
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace('{{state}}', initStateSerialized)
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {

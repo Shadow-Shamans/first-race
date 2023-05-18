@@ -1,5 +1,5 @@
-import { store } from './store'
+import { storeInstance } from './store'
 
 export * from './store'
 
-export default store
+export default storeInstance

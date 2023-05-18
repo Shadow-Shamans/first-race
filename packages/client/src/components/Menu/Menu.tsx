@@ -2,16 +2,18 @@ import { useState, FC } from 'react'
 import { Typography } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
-import { menuItems, TPath } from './types'
+import { TPath } from './types'
 import { Button } from '@/components/Button'
+import { useAppSelector } from '@/app'
+import { selectIsLoggedIn } from '@/features/Auth'
+import { menuItems } from './constants'
 
 import styles from './menu.module.css'
-
-const { Text } = Typography
 
 export const Menu: FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const isLoggedIn = useAppSelector(selectIsLoggedIn)
 
   const [current, setCurrent] = useState<TPath>(location.pathname as TPath)
 
@@ -23,20 +25,20 @@ export const Menu: FC = () => {
 
   return (
     <ul className={styles.list}>
-      {menuItems.map(({ label, path }) => {
+      {menuItems.map(({ label, path, isPrivate }) => {
         const isActive = current === path
-
-        return (
-          <li
-            key={path}
-            className={classNames(styles.item, { [styles.active]: isActive })}
-            onClick={() => handleClick(path)}
-            data-testid="menu-item">
-            <Text strong>{label}</Text>
-          </li>
-        )
+        if (!isPrivate || (isPrivate && isLoggedIn)) {
+          return (
+            <li
+              key={path}
+              className={classNames(styles.item, { [styles.active]: isActive })}
+              onClick={() => handleClick(path)}
+              data-testid="menu-item">
+              <Typography.Text strong>{label}</Typography.Text>
+            </li>
+          )
+        }
       })}
-
       <li>
         <Button type="primary" onClick={() => handleClick('/game')}>
           Играть

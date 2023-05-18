@@ -7,34 +7,8 @@ export type TPath =
   | '/game'
   | '/rating'
 
-type TMenuItem = {
+export type TMenuItem = {
   label: string
   path: TPath
+  isPrivate: boolean
 }
-
-export const menuItems: TMenuItem[] = [
-  {
-    label: 'Главная',
-    path: '/main',
-  },
-  {
-    label: 'Логин',
-    path: '/login',
-  },
-  {
-    label: 'Регистрация',
-    path: '/registration',
-  },
-  {
-    label: 'Профиль',
-    path: '/profile',
-  },
-  {
-    label: 'Форум',
-    path: '/forum',
-  },
-  {
-    label: 'Лидерборд',
-    path: '/rating',
-  },
-]
