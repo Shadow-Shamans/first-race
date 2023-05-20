@@ -35,3 +35,9 @@ interface SyncEvent extends ExtendableEvent {
 interface ServiceWorkerGlobalScopeEventMap {
   sync: SyncEvent
 }
+
+declare global {
+  interface Window {
+    initialState: string | null
+  }
+}

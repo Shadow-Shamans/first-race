@@ -1,20 +1,39 @@
 import { FC } from 'react'
-import { FloatButton } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
+import { Pagination } from 'antd'
 import { Rating as RatingItems } from '@/components/Rating'
+import { useGetLeaderboardMutation } from '@/shared/services/LeaderboardService'
+import { useAppSelector } from '@/app'
+import { selectUserData } from '@/features/User'
+import { useRating } from '@/shared/hooks/useRating'
 
 import styles from './rating.module.css'
 
-import { leaderBoardMock } from '@/mocks/ratingMock'
+const pageSize = 10
+const limit = 20
 
 export const Rating: FC = () => {
+  const { id: userId } = useAppSelector(selectUserData)
+
+  const [getLeaderboard, mutationResult] = useGetLeaderboardMutation()
+
+  const { cursor, userList } = useRating()
+
+  const handlePaginationChange = () => {
+    getLeaderboard({ ratingFieldName: 'score', cursor, limit })
+  }
+
   return (
     <section className={styles.wrapper}>
-      <RatingItems currentUserId={1} list={leaderBoardMock} />
-      <FloatButton
-        onClick={() => console.log('Search')}
-        icon={<SearchOutlined />}
-      />
+      <RatingItems currentUserId={userId} list={userList} />
+
+      {userList.length >= pageSize && (
+        <Pagination
+          defaultCurrent={1}
+          total={userList.length}
+          pageSize={pageSize}
+          onChange={handlePaginationChange}
+        />
+      )}
     </section>
   )
 }
