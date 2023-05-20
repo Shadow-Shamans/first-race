@@ -11,6 +11,8 @@ import * as path from 'path'
 
 const isDev = process.env.NODE_ENV === 'development'
 
+console.log('test commit')
+
 async function startServer() {
   const app = express()
   app.use(cors())
