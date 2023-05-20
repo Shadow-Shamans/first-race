@@ -74,3 +74,8 @@
 
 Если вам понадобится только один сервис, просто уточните какой в команде
 `docker compose up {sevice_name}`, например `docker compose up server`
+
+## Заупск SSR
+Перейти в папку client и выполлнить команду yarn build
+Убедиться что в корне client создалось две папки: build со статикой клиента и ssr-build с js файлами для SSR (функция render)
+Запустить команду из корня yarn dev:server
