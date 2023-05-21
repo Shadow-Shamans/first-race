@@ -76,6 +76,6 @@
 `docker compose up {sevice_name}`, например `docker compose up server`
 
 ## Заупск SSR
-Перейти в папку client и выполлнить команду yarn build
-Убедиться что в корне client создалось две папки: build со статикой клиента и ssr-build с js файлами для SSR (функция render)
-Запустить команду из корня yarn dev:server
+В корне проекта запустить команду yarn run predev:server
+Убедиться то в папке packages/client появились две папки dist && ssr-dist
+Запустить проект локально в режиме разработки yarn run dev:server
