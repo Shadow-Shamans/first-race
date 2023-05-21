@@ -76,6 +76,5 @@
 `docker compose up {sevice_name}`, например `docker compose up server`
 
 ## Заупск SSR
-В корне проекта запустить команду yarn run predev:server
-Убедиться то в папке packages/client появились две папки dist && ssr-dist
 Запустить проект локально в режиме разработки yarn run dev:server
+Убедиться то в папке packages/client появились две папки dist && ssr-dist
