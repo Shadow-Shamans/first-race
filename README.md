@@ -74,3 +74,7 @@
 
 Если вам понадобится только один сервис, просто уточните какой в команде
 `docker compose up {sevice_name}`, например `docker compose up server`
+
+## Заупск SSR
+Запустить проект локально в режиме разработки yarn run dev:server
+Убедиться то в папке packages/client появились две папки dist && ssr-dist
