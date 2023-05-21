@@ -20,11 +20,10 @@ export class KeyboardControls {
   }
 
   private _changeState = (e: KeyboardEvent) => {
-    console.log(this.keys, e.code)
-
     if (!this._keysList.includes(e.code)) {
       return
     }
     this.keys[e.code] = e.type === 'keydown' ? true : false
+    //console.log(this.keys, e.code)
   }
 }

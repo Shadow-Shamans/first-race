@@ -6,6 +6,7 @@ import type { MouseControls } from './MouseControls'
 import type { Text } from './Text'
 import type { StateScreen } from './StateScreen'
 import { platformHeight, platformWidth } from './constants'
+import { StateGame } from './types'
 
 export class Player {
   blocks: Block[] = []
@@ -26,7 +27,11 @@ export class Player {
     private _mouse: MouseControls,
     private _keyboard: KeyboardControls,
     private _text: Text,
-    private _stateGame: StateScreen
+    private _stateGame: StateScreen,
+    private _handleStateChangeCallback: (
+      state: StateGame,
+      score?: number
+    ) => void
   ) {
     this.options = this._setDefaultState()
     this.ball = new Ball(this._layer, this._stateGame)
@@ -91,8 +96,9 @@ export class Player {
         this._text.addScore()
         this.ball.sounds.bump?.play()
 
-        if (this._text.score === this.blocks.length) {
+        if (this._text.score === 3) {
           this._stateGame.state = 'win'
+          this._handleStateChangeCallback('win', this._text.score)
           this._stateGame.sounds.gameWin?.play()
         }
       }
