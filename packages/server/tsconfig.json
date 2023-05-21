@@ -11,6 +11,7 @@
     "removeComments": true,
     "strict": true,
     "noImplicitAny": true,
+    "experimentalDecorators": true,
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,

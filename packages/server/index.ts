@@ -2,6 +2,8 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
+import { forumRouter } from './routes'
+import { createClientAndConnect } from './db'
 
 dotenv.config({ path: '../../.env' })
 
@@ -31,9 +33,7 @@ async function startServer() {
     app.use(vite.middlewares)
   }
 
-  app.get('/api', (_, res) => {
-    res.json('👋 Howdy from the server :)')
-  })
+  app.use('/api/forum', forumRouter)
 
   if (!isDev) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
@@ -85,3 +85,4 @@ async function startServer() {
 }
 
 startServer()
+createClientAndConnect()
