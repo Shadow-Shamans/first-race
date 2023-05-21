@@ -4,15 +4,24 @@ import { Layout } from 'antd'
 
 import styles from './GameArkanoid.module.css'
 import { StateGame } from '@/game/arkanoid/types'
+import { useAddScoreMutation } from '@/shared/services/LeaderboardService'
+import { selectUserData } from '@/features/User/selectors'
+import { useAppSelector } from '@/app'
 
 export const GameFeature = () => {
   const gameRef = useRef<HTMLDivElement>(null)
+  const [addScore, result] = useAddScoreMutation()
+  const { id: userId, login: username } = useAppSelector(selectUserData)
 
   const handleStateChange = (state: StateGame, score?: number) => {
-    if (state === 'win') {
-      console.log({ state, score })
+    if (state === 'win' && score && username && userId) {
+      addScore({ score, username, userId })
     }
   }
+
+  useEffect(() => {
+    console.log({ result })
+  }, [result])
 
   useEffect(() => {
     if (gameRef.current) {

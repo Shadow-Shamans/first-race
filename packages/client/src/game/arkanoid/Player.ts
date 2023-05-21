@@ -96,7 +96,7 @@ export class Player {
         this._text.addScore()
         this.ball.sounds.bump?.play()
 
-        if (this._text.score === 3) {
+        if (this._text.score === this.blocks.length) {
           this._stateGame.state = 'win'
           this._handleStateChangeCallback('win', this._text.score)
           this._stateGame.sounds.gameWin?.play()

@@ -42,11 +42,11 @@ export const leaderboardAPI = createApi({
   }),
 
   endpoints: build => ({
-    addScore: build.mutation<IScore, void>({
+    addScore: build.mutation<IScore, IScoreData>({
       query: data => ({
         url: '',
         method: 'POST',
-        body: { data, teamName: 'shamans' },
+        body: { data, teamName: 'shamans', ratingFieldName: 'score' },
       }),
     }),
 
