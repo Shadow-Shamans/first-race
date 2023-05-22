@@ -10,7 +10,7 @@ import { useAppSelector } from '@/app'
 
 export const GameFeature = () => {
   const gameRef = useRef<HTMLDivElement>(null)
-  const [addScore, result] = useAddScoreMutation()
+  const [addScore] = useAddScoreMutation()
   const { id: userId, login: username } = useAppSelector(selectUserData)
 
   const handleStateChange = (state: StateGame, score?: number) => {
@@ -18,10 +18,6 @@ export const GameFeature = () => {
       addScore({ score, username, userId })
     }
   }
-
-  useEffect(() => {
-    console.log({ result })
-  }, [result])
 
   useEffect(() => {
     if (gameRef.current) {
