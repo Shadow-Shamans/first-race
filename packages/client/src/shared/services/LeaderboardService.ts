@@ -30,7 +30,7 @@ export const leaderboardAPI = createApi({
   reducerPath: 'leaderboardAPI',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://ya-praktikum.tech/api/v2/leaderboard',
+    baseUrl: 'https://ya-praktikum.tech/api/v2',
 
     prepareHeaders: headers => {
       headers.set('Content-Type', 'application/json; charset=utf-8')
@@ -42,11 +42,11 @@ export const leaderboardAPI = createApi({
   }),
 
   endpoints: build => ({
-    addScore: build.mutation<IScore, void>({
+    addScore: build.mutation<IScore, IScoreData>({
       query: data => ({
-        url: '',
+        url: '/leaderboard',
         method: 'POST',
-        body: { data, teamName: 'shamans' },
+        body: { data, teamName: 'shamans', ratingFieldName: 'score' },
       }),
     }),
 

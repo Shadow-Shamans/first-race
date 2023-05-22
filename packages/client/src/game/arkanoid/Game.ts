@@ -8,6 +8,7 @@ import { KeysPlayer, xBlockArea, yBlockArea, assets } from './constants'
 import { Text } from './Text'
 import { Block } from './Block'
 import { StateScreen } from './StateScreen'
+import { StateGame } from './types'
 
 export class Game {
   player: Player
@@ -36,7 +37,13 @@ export class Game {
   private _resourceCount = 0
   private _playerLayer: Layer
 
-  constructor(private _container: HTMLElement) {
+  constructor(
+    private _container: HTMLElement,
+    private _handleStateChangeCallback: (
+      state: StateGame,
+      score?: number
+    ) => void
+  ) {
     const bgLayer = new Layer(this._container, 1)
     const textLayer = new Layer(this._container, 2)
     this._playerLayer = new Layer(this._container, 3)
@@ -51,7 +58,8 @@ export class Game {
       this.mouse,
       this.keyboard,
       this.text,
-      this.stateScreen
+      this.stateScreen,
+      this._handleStateChangeCallback
     )
     this.player.blocks = this.blocks
     this.bg = new Bg(bgLayer)
@@ -154,5 +162,9 @@ export class Game {
         this.blocks.push(new Block(this._playerLayer, xPos, yPos))
       }
     }
+  }
+
+  get stateGame() {
+    return this.stateScreen.state
   }
 }
