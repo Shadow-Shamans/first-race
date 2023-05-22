@@ -24,6 +24,5 @@ export class KeyboardControls {
       return
     }
     this.keys[e.code] = e.type === 'keydown' ? true : false
-    //console.log(this.keys, e.code)
   }
 }
