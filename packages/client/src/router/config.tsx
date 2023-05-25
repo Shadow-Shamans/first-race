@@ -43,13 +43,13 @@ export const routesConfig = [
     path: '/forum',
     exact: true,
     component: <Forum />,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     path: '/forum/topic/:id',
     exact: true,
     component: <ForumTopic />,
-    isPrivate: true,
+    isPrivate: false,
   },
   {
     path: '/profile',

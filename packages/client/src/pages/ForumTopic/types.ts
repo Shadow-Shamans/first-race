@@ -1,22 +1,6 @@
-export interface IForumTopicMessage {
-  userId: string
-  avatar: string
+export interface IForumMessage {
+  id: string
   content: string
-  date: string
-  isLoading?: boolean
-}
-
-export interface IForumTopic {
-  topicTitle: string
-  topicTag: string
-  badgeColor: string
-  messages: IForumTopicMessage[]
-}
-
-export interface IForumMessagesState {
-  initialLoading: boolean
-  isError: boolean
-  messages: IForumTopicMessage[]
-  messagesShift: number
-  totalElements: number
+  replyCount: number
+  createdDate: string
 }
