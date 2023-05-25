@@ -5,15 +5,15 @@
     "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
     "build": "lerna run build",
     "dev:client": "lerna run dev  --scope=client",
-    "dev:server": "lerna run dev --scope=server",
-    "build:client:ssr": "lerna run build:ssr --scope=client",
-    "build:client": "lerna run build --scope=client",
-    "predev:server": "yarn build:client:ssr && yarn build:client",
     "dev": "lerna run dev",
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview"
+    "preview": "lerna run preview",
+    "build:client:ssr": "lerna run build:ssr --scope=client",
+    "build:client": "lerna run build --scope=client",
+    "predev:server": "yarn build:client:ssr && yarn build:client",
+    "dev:server": "lerna run dev --scope=server"
   },
   "license": "MIT",
   "workspaces": [
