@@ -15,6 +15,7 @@ services:
     environment:
       - CLIENT_PORT=${CLIENT_PORT}
       - SERVER_PORT=${SERVER_PORT}
+
   server:
     container_name: prakticum-server
     image: prackicum-server
@@ -32,7 +33,9 @@ services:
       SERVER_PORT: ${SERVER_PORT}
 
   postgres:
+    container_name: prakticum-database
     image: postgres:14
+    restart: always
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     environment:
@@ -50,3 +53,13 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
+  
+  pgadmin:
+    container_name: prakticum-database-admin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"

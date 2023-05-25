@@ -6,10 +6,6 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 dotenv.config({ path: '../../.env' })
 
-dotenv.config({
-  path: '../../.env',
-})
-
 export default defineConfig({
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
