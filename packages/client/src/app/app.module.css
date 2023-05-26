@@ -1,0 +1,8 @@
+.layout {
+  min-height: 100vh;
+  background: url('../assets/images/rectangle_bg.png') center top 57px / auto no-repeat;;
+}
+
+.content {
+  position: 'relative';
+}

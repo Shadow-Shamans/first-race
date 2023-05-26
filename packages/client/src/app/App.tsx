@@ -5,16 +5,17 @@ import { Header } from '@/components/Header'
 import { AppRoutes } from '@/router'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 
+import styled from './app.module.css'
 import './index.css'
 
 export const App = () => {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <Layout style={{ minHeight: '100vh' }}>
+        <Layout className={styled.layout}>
           <ThemeSwitcher />
           <Header />
-          <Layout.Content style={{ position: 'relative' }}>
+          <Layout.Content className={styled.content}>
             <AppRoutes />
           </Layout.Content>
         </Layout>

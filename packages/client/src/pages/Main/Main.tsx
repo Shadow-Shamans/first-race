@@ -4,12 +4,9 @@ import classNames from 'classnames'
 import { Rating } from '@/components/Rating'
 import { useRating } from '@/shared/hooks/useRating'
 
-import coins from '@/assets/images/coins.png'
-import mainCards from '@/assets/images/mainCards.png'
-import mainRoads from '@/assets/images/mainRoads.png'
-
-import grayRectangle from '@/assets/icons/grayRectangle.svg'
-import blackRectangle from '@/assets/icons/blackRectangle.svg'
+import rectangle from '@/assets/icons/rectangle.svg'
+import productImg from '@/assets/images/product.png'
+import joystick from '@/assets/images/joystick.png'
 
 import styles from './main.module.css'
 
@@ -20,25 +17,19 @@ export const Main: FC = () => {
 
   return (
     <section className={styles.root}>
-      <Text className={classNames(styles.title, styles.leftTopTitle)}>
-        Управляй!
-      </Text>
-
       <div className={styles.picturesWrapper}>
-        <div>
+        <div className={styles.rectangleWrapper}>
           <img
-            className={classNames(styles.rectangle, styles.bottomRectangle)}
-            src={grayRectangle}
-            alt=""
-          />
-          <img
-            className={classNames(styles.rectangle, styles.topRectangle)}
-            src={blackRectangle}
+            className={classNames(styles.rectangle)}
+            src={rectangle}
             alt=""
           />
 
           <Text strong className={classNames(styles.text, styles.textWrapper)}>
-            Мы с командой Shadow Shamans взяли и сделали офигенную игру! Теперь{' '}
+            Мы&nbsp;с&nbsp;командой Shadow Shamans взяли и&nbsp;сделали
+            офигенную игру!
+            <br />
+            Теперь{' '}
             <Text mark className={styles.text}>
               твоя очередь действовать!
             </Text>
@@ -46,30 +37,24 @@ export const Main: FC = () => {
         </div>
 
         <img
-          className={classNames(styles.picture, styles.left)}
-          src={mainRoads}
+          className={classNames(styles.picture)}
+          src={productImg}
           alt="game roads"
         />
+      </div>
 
-        <Text className={classNames(styles.title, styles.rightTitle)}>
-          Строй!
-        </Text>
-
-        <img className={styles.coins} src={coins} alt="coins" />
-
+      <div className={styles.sloganWrapper}>
+        <Text className={styles.title}>Настройся...</Text>
         <img
-          className={classNames(styles.picture, styles.right)}
-          src={mainCards}
-          alt="game cards"
+          className={classNames(styles.joystick)}
+          src={joystick}
+          alt="game roads"
         />
-
-        <Text className={classNames(styles.title, styles.leftBottomTitle)}>
-          Зарабатывай!
-        </Text>
+        <Text className={styles.title}>На&nbsp;победу!</Text>
       </div>
 
       <div className={styles.leaderBoard}>
-        <Text className={styles.title}>Попади в топ!</Text>
+        <Text className={styles.title}>Попади в&nbsp;топ!</Text>
 
         <Card className={styles.card}>
           <Rating list={userList.slice(0, 5)} />
