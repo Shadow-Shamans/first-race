@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
 dotenv.config({ path: '../../.env' })
 
@@ -14,7 +15,7 @@ const isDev = process.env.NODE_ENV === 'development'
 async function startServer() {
   const app = express()
   app.use(cors())
-  const port = Number(process.env.SERVER_PORT) || 3001
+  const port = Number(process.env.SERVER_PORT) || 3000
 
   let vite: ViteDevServer | undefined
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
@@ -30,6 +31,17 @@ async function startServer() {
 
     app.use(vite.middlewares)
   }
+
+  app.use(
+    '/api/v2',
+    createProxyMiddleware({
+      changeOrigin: true,
+      cookieDomainRewrite: {
+        '*': '',
+      },
+      target: 'https://ya-praktikum.tech',
+    })
+  )
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)')
@@ -66,10 +78,14 @@ async function startServer() {
 
       const initStateSerialized = JSON.stringify(initialReduxStore)
 
+      const queryCode = req.query.code || ''
+
       const html = template
         .replace(`<!--ssr-outlet-->`, appHtml)
         .replace('{{state}}', initStateSerialized)
+        .replace('{{authCode}}', JSON.stringify(queryCode))
 
+      // res.status(200).set({ 'Content-Type': 'text/html', 'x-code':  `${req.query.code}`}).end(html)
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {
       if (isDev) {

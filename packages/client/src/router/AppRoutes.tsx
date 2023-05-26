@@ -3,9 +3,13 @@ import { routesConfig } from './config'
 import { useAppSelector } from '@/app/hooks'
 import { selectIsLoggedIn } from '@/features/Auth'
 import PrivateRoute from '@/shared/hocs/PrivateRouter'
+import useAuth from '@/shared/hooks/useAuth'
 
 export const AppRoutes = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
+
+  useAuth()
+
   return (
     <Routes>
       {routesConfig.map(route => {

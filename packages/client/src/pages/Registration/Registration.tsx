@@ -4,14 +4,11 @@ import { LinkToPage } from '@/components/LinkToPage'
 import { FormInput } from '@/components/FormInput'
 import { generateId } from '@/shared/utils/generateId'
 import styled from './Registration.module.css'
-import {
-  useLazyGetUserDataQuery,
-  useSignupMutation,
-} from '@/shared/services/AuthService'
+import { useSignupMutation } from '@/shared/services/AuthService'
 import { useAppDispatch } from '@/app/hooks'
-import { setUserData } from '@/features/User/userSlice'
 import { toogleAuth } from '@/features/Auth/authSlice'
 import { useNavigate } from 'react-router-dom'
+import { YandexOAuth } from '@/components/YandexOAuth'
 
 const RegistrationInputs = [
   {
@@ -45,7 +42,6 @@ export const Registration: FC = () => {
   const [form] = Form.useForm()
   const [signup, mutationResult] = useSignupMutation()
   const navigate = useNavigate()
-  const [trigger, result] = useLazyGetUserDataQuery()
 
   const handleCheck = async () => {
     try {
@@ -55,25 +51,16 @@ export const Registration: FC = () => {
         signup(values)
       }
     } catch (errorInfo) {
-      console.log(errorInfo)
+      console.error(errorInfo)
     }
   }
 
-  //TODO
-  //Может вызывать дополнительные рендеры за счет объекта mutationResult в зависимости useEffect
   useEffect(() => {
     if (mutationResult.isSuccess === true) {
-      trigger()
-    }
-  }, [mutationResult])
-
-  useEffect(() => {
-    if (result.data) {
-      appDispatch(setUserData(result.data))
       appDispatch(toogleAuth(true))
       navigate('/main')
     }
-  }, [result])
+  }, [mutationResult])
 
   return (
     <div className={styled.inner}>
@@ -103,6 +90,7 @@ export const Registration: FC = () => {
           <LinkToPage text="Уже зарегистрированы?" to="/login" />
         </Form.Item>
       </Form>
+      <YandexOAuth />
     </div>
   )
 }

@@ -39,5 +39,6 @@ interface ServiceWorkerGlobalScopeEventMap {
 declare global {
   interface Window {
     initialState: string | null
+    authCode: string
   }
 }

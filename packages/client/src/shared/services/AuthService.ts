@@ -23,6 +23,11 @@ interface IUpdateUserData {
   phone: string
 }
 
+interface IOAuth {
+  code: string
+  redirect_uri: string
+}
+
 export const authAPI = createApi({
   reducerPath: 'authAPI',
   baseQuery: fetchBaseQuery({
@@ -79,6 +84,21 @@ export const authAPI = createApi({
         method: 'PUT',
       }),
     }),
+    oAuthLogin: build.mutation<
+      { requestId: string; error: { originalStatus?: number } },
+      IOAuth
+    >({
+      query: data => ({
+        url: `/oauth/yandex`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    getOauthData: build.query<{ service_id: string }, void>({
+      query: () => ({
+        url: `/oauth/yandex/service-id?redirect_uri=http%3A%2F%2Flocalhost%3A3000`,
+      }),
+    }),
   }),
 })
 
@@ -88,4 +108,6 @@ export const {
   useLazyGetUserDataQuery,
   useUpdateUserProfileMutation,
   useLogoutMutation,
+  useOAuthLoginMutation,
+  useLazyGetOauthDataQuery,
 } = authAPI
