@@ -1,5 +1,4 @@
 .layout {
-  padding-bottom: 10px;
   width: 980px;
   margin: 50px auto;
 }
@@ -7,44 +6,8 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 27px;
-  border-bottom: 1px solid #e6e6e6;
   align-items: center;
-  padding-top: 20px;
   background: none;
-  padding: 10px;
+  padding: 0;
 }
 
-.title {
-  font-weight: 700;
-  font-size: 24px;
-}
-
-.badgeText {
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.badge {
-  border-radius: 4px;
-}
-
-.footer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.button {
-  background-image: url('@/assets/images/Vector.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 31px;
-  height: 31px;
-  outline: none;
-  border: none;
-  margin-left: 10px;
-  background-color: transparent;
-}

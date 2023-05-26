@@ -1,0 +1,9 @@
+.block {
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
