@@ -6,31 +6,53 @@
 
 .picturesWrapper {
   position: relative;
+}
+
+.rectangleWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 582px;
+  height: 312px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  max-width: 900px;
-  margin: 100px auto 0;
+  justify-content: center;
+  transform: translate(75px, -20px);
+}
+
+.rectangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.textWrapper {
+  position: relative;
+  z-index: 4;
+  padding: 110px 68px 91px 76px;
+  color: var(--black);
 }
 
 .picture {
-  border-radius: 10px;
-  max-width: 600px;
+  max-width: 690px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 4;
+  transform: translateX(-27px);
 }
 
-.coins {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.sloganWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0 29px;
+  margin-top: 205px;
+  margin-bottom: 90px;
 }
 
-.left {
-  align-self: flex-start;
-}
-
-.right {
-  align-self: flex-end;
-  margin-top: -60px;
+.joystick {
+  max-width: 119px;
 }
 
 .title {
@@ -39,24 +61,7 @@
   line-height: 66px;
 }
 
-.rightTitle {
-  position: absolute;
-  right: 0;
-  top: 150px;
-}
-
-.leftTopTitle {
-  margin-left: 80px;
-}
-
-.leftBottomTitle {
-  position: absolute;
-  left: -40px;
-  bottom: 20px;
-}
-
 .leaderBoard {
-  margin-top: 230px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,28 +72,6 @@
   margin-top: 44px;
   margin-bottom: 200px;
   border-radius: 10px;
-}
-
-.rectangle {
-  position: absolute;
-}
-
-.topRectangle {
-  top: -220px;
-  right: -70px;
-}
-
-.bottomRectangle {
-  top: -200px;
-  right: -100px;
-}
-
-.textWrapper {
-  position: absolute;
-  top: -104px;
-  right: 12px;
-  width: 380px;
-  color: var(--black);
 }
 
 .text {
