@@ -13,9 +13,8 @@ describe('Main page test cases', () => {
         </Provider>
       </BrowserRouter>
     )
-    expect(screen.getByText('Управляй!')).toBeInTheDocument()
-    expect(screen.getByText('Строй!')).toBeInTheDocument()
-    expect(screen.getByText('Зарабатывай!')).toBeInTheDocument()
+    expect(screen.getByText('Настройся...')).toBeInTheDocument()
+    expect(screen.getByText('На победу!')).toBeInTheDocument()
     expect(screen.getByText('Попади в топ!')).toBeInTheDocument()
   })
 })
