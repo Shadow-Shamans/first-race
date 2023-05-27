@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Form, Avatar, Divider, Upload, Button, Row, Col, Card } from 'antd'
 import { Rating } from '@/components/Rating'
-import { PlusOutlined } from '@ant-design/icons'
+import placeholderAvatar from '@/assets/placeholder_avatar.svg'
 import { FormInput } from '@/components/FormInput'
 
 import styled from './Profile.module.css'
@@ -10,13 +10,15 @@ import { generateId } from '@/shared/utils/generateId'
 import { selectUserData } from '@/features/User/selectors'
 import { useAppDispatch, useAppSelector } from '@/app'
 import {
+  useChangeUserAvatarMutation,
   useLogoutMutation,
   useUpdateUserProfileMutation,
 } from '@/shared/services/AuthService'
 import { IUser, setUserData } from '@/features/User/userSlice'
 import { toogleAuth, toggleCode } from '@/features/Auth/authSlice'
-import { useRating } from '../../shared/hooks/useRating'
-import { useEffect } from 'react'
+import { useRating } from '@/shared/hooks/useRating'
+import { useUploadImg } from '@/shared/hooks'
+import { getPathImg } from '@/shared/utils'
 
 const Fields = [
   {
@@ -55,12 +57,20 @@ type TProfileData = {
 
 export const Profile: FC = () => {
   const appDispatch = useAppDispatch()
-  const imageUrl = null
   const [form] = Form.useForm()
   const { userList } = useRating()
   const data = useAppSelector(selectUserData)
   const [updateUserProfile, mutationResult] = useUpdateUserProfileMutation()
+  const [updateAvatar, updateAvatarMutationResult] =
+    useChangeUserAvatarMutation()
   const [logout, result] = useLogoutMutation()
+  const srcAvatar = getPathImg(data.avatar) || placeholderAvatar
+  const {
+    imageUrl: avatarImgUrl,
+    handleChange,
+    validateImage,
+    formData,
+  } = useUploadImg(srcAvatar)
 
   const handleFormChange = async () => {
     try {
@@ -69,6 +79,10 @@ export const Profile: FC = () => {
       if (!values.errorFields) {
         //display_name заглушка для Swagger
         updateUserProfile({ ...values, display_name: '' })
+      }
+
+      if (formData) {
+        updateAvatar(formData)
       }
     } catch (errorInfo) {
       console.error(errorInfo)
@@ -85,7 +99,7 @@ export const Profile: FC = () => {
     })
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (mutationResult.isSuccess === true) {
       const newDate: IUser = {
         ...data,
@@ -95,10 +109,19 @@ export const Profile: FC = () => {
         login: mutationResult.data.login,
         phone: mutationResult.data.phone,
       }
-
+      console.log({ data: mutationResult.data })
       appDispatch(setUserData(newDate))
     }
-  }, [mutationResult])
+  }, [mutationResult.status])
+
+  useEffect(() => {
+    const { isSuccess, data: _resData } = updateAvatarMutationResult
+
+    if (isSuccess && _resData) {
+      const { avatar } = _resData
+      appDispatch(setUserData({ ...data, avatar }))
+    }
+  }, [updateAvatarMutationResult.isSuccess])
 
   const handleLogout = () => {
     logout()
@@ -133,18 +156,15 @@ export const Profile: FC = () => {
             <Upload
               name="avatar"
               listType="picture-circle"
-              showUploadList={{
-                showDownloadIcon: true,
-              }}
+              showUploadList={false}
+              beforeUpload={validateImage}
+              onChange={handleChange}
               className={styled.avatar}>
-              {imageUrl ? (
-                <Avatar src={imageUrl} alt="avatar" style={{ width: '100%' }} />
-              ) : (
-                <>
-                  <PlusOutlined />
-                  <div style={{ marginTop: 8 }}>Загрузить аватар</div>
-                </>
-              )}
+              <Avatar
+                src={avatarImgUrl}
+                alt="avatar"
+                className={styled.avatarImg}
+              />
             </Upload>
 
             <Form form={form} name="profile" size="large">
