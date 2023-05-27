@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Form, Avatar, Divider, Upload, Button, Row, Col, Card } from 'antd'
 import { Rating } from '@/components/Rating'
-import { PlusOutlined } from '@ant-design/icons'
+import placeholderAvatar from '@/assets/placeholder_avatar.svg'
 import { FormInput } from '@/components/FormInput'
 
 import styled from './Profile.module.css'
@@ -15,8 +15,9 @@ import {
 } from '@/shared/services/AuthService'
 import { IUser, setUserData } from '@/features/User/userSlice'
 import { toogleAuth, toggleCode } from '@/features/Auth/authSlice'
-import { useRating } from '../../shared/hooks/useRating'
+import { useRating } from '@/shared/hooks/useRating'
 import { useEffect } from 'react'
+import { useUploadImg } from '@/shared/hooks'
 
 const Fields = [
   {
@@ -55,12 +56,16 @@ type TProfileData = {
 
 export const Profile: FC = () => {
   const appDispatch = useAppDispatch()
-  const imageUrl = null
   const [form] = Form.useForm()
   const { userList } = useRating()
   const data = useAppSelector(selectUserData)
   const [updateUserProfile, mutationResult] = useUpdateUserProfileMutation()
   const [logout, result] = useLogoutMutation()
+  const {
+    imageUrl: avatarImgUrl,
+    handleChange,
+    validateImage,
+  } = useUploadImg(placeholderAvatar)
 
   const handleFormChange = async () => {
     try {
@@ -133,18 +138,15 @@ export const Profile: FC = () => {
             <Upload
               name="avatar"
               listType="picture-circle"
-              showUploadList={{
-                showDownloadIcon: true,
-              }}
+              showUploadList={false}
+              beforeUpload={validateImage}
+              onChange={handleChange}
               className={styled.avatar}>
-              {imageUrl ? (
-                <Avatar src={imageUrl} alt="avatar" style={{ width: '100%' }} />
-              ) : (
-                <>
-                  <PlusOutlined />
-                  <div style={{ marginTop: 8 }}>Загрузить аватар</div>
-                </>
-              )}
+              <Avatar
+                src={avatarImgUrl}
+                alt="avatar"
+                className={styled.avatarImg}
+              />
             </Upload>
 
             <Form form={form} name="profile" size="large">
