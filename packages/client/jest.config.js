@@ -13,7 +13,7 @@ export default {
       'jest-css-modules-transform',
   },
   globals: {
-    __SERVER_PORT__: process.env.SERVER_PORT || 3001,
+    __SERVER_PORT__: process.env.SERVER_PORT || 3000,
   },
   setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
 }

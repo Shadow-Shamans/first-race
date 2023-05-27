@@ -1,0 +1,1 @@
+export { YandexOAuth } from './YandexOAuth'

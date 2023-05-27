@@ -29,6 +29,11 @@
   border-radius: 10px;
 }
 
+.logoutText {
+  color: var(--badge);
+  cursor: pointer;
+}
+
 @media (max-width: 613px) {
   .inner {
     padding: 0 20px;

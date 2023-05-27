@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Form, Avatar, Divider, Upload, Button, Row, Col, Card } from 'antd'
 import { Rating } from '@/components/Rating'
-import { LinkToPage } from '@/components/LinkToPage'
 import { PlusOutlined } from '@ant-design/icons'
 import { FormInput } from '@/components/FormInput'
 
@@ -9,15 +8,15 @@ import styled from './Profile.module.css'
 
 import { generateId } from '@/shared/utils/generateId'
 import { selectUserData } from '@/features/User/selectors'
-import { selectUserList } from '@/features/Leaderboard'
 import { useAppDispatch, useAppSelector } from '@/app'
 import {
   useLogoutMutation,
   useUpdateUserProfileMutation,
 } from '@/shared/services/AuthService'
 import { IUser, setUserData } from '@/features/User/userSlice'
-import { toogleAuth } from '@/features/Auth/authSlice'
+import { toogleAuth, toggleCode } from '@/features/Auth/authSlice'
 import { useRating } from '../../shared/hooks/useRating'
+import { useEffect } from 'react'
 
 const Fields = [
   {
@@ -76,7 +75,6 @@ export const Profile: FC = () => {
     }
   }
 
-  //Что-то я туплю - как это по нормальному сделать?
   const profileData: TProfileData[] = []
 
   Fields.some(el =>
@@ -104,22 +102,28 @@ export const Profile: FC = () => {
 
   const handleLogout = () => {
     logout()
-    appDispatch(toogleAuth(false))
-    appDispatch(
-      setUserData({
-        ...data,
-        ...{
-          id: null,
-          first_name: '',
-          avatar: null,
-          second_name: '',
-          email: '',
-          login: '',
-          phone: '',
-        },
-      })
-    )
   }
+
+  useEffect(() => {
+    if (result.requestId) {
+      appDispatch(toogleAuth(false))
+      appDispatch(toggleCode(''))
+      appDispatch(
+        setUserData({
+          ...data,
+          ...{
+            id: null,
+            first_name: '',
+            avatar: null,
+            second_name: '',
+            email: '',
+            login: '',
+            phone: '',
+          },
+        })
+      )
+    }
+  }, [result])
 
   return (
     <div className={styled.wrapper}>
@@ -178,10 +182,8 @@ export const Profile: FC = () => {
             Количество очков: 2000
           </Card>
           <Card className={styled.card}>
-            {/* TODO Replace real action of logout and shop */}
-            <LinkToPage text="Магазин" to="#" />
-            <div onClick={handleLogout}>
-              <LinkToPage text="Выйти" to="/main" />
+            <div onClick={handleLogout} className={styled.logoutText}>
+              Выйти
             </div>
           </Card>
         </Col>
