@@ -21,6 +21,7 @@ interface IUpdateUserData {
   login: string
   email: string
   phone: string
+  avatar: string
 }
 
 interface IOAuth {
@@ -33,7 +34,10 @@ export const authAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://ya-praktikum.tech/api/v2',
     prepareHeaders: headers => {
-      headers.set('Content-Type', 'application/json; charset=utf-8')
+      const contentType = headers.get('Content-Type')
+      if (!contentType) {
+        headers.set('Content-Type', 'application/json; charset=utf-8')
+      }
 
       return headers
     },
@@ -78,10 +82,15 @@ export const authAPI = createApi({
         method: 'PUT',
       }),
     }),
-    changeUserAvatar: build.mutation({
-      query: () => ({
+    changeUserAvatar: build.mutation<IUpdateUserData, FormData>({
+      query: body => ({
         url: `/user/profile/avatar`,
         method: 'PUT',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          accept: 'application/json',
+        },
+        body,
       }),
     }),
     oAuthLogin: build.mutation<
@@ -110,4 +119,5 @@ export const {
   useLogoutMutation,
   useOAuthLoginMutation,
   useLazyGetOauthDataQuery,
+  useChangeUserAvatarMutation,
 } = authAPI
