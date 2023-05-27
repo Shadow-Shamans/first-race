@@ -10,9 +10,8 @@
     "lint": "lerna run lint",
     "format": "lerna run format",
     "preview": "lerna run preview",
-    "build:client:ssr": "lerna run build:ssr --scope=client",
     "build:client": "lerna run build --scope=client",
-    "predev:server": "yarn build:client:ssr && yarn build:client",
+    "predev:server": "yarn build:client",
     "dev:server": "lerna run dev --scope=server"
   },
   "license": "MIT",
