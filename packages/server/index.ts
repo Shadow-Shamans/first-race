@@ -3,6 +3,11 @@ import cors from 'cors'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 import { createProxyMiddleware } from 'http-proxy-middleware'
+import { dbConnect } from './init'
+
+dbConnect().then(async () => {
+  startServer()
+})
 
 dotenv.config({ path: '../../.env' })
 
@@ -99,5 +104,3 @@ async function startServer() {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`)
   })
 }
-
-startServer()
