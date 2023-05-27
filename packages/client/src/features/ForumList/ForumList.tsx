@@ -1,45 +1,64 @@
-import { FC } from 'react'
-import { Button, List } from 'antd'
-import { Link } from 'react-router-dom'
-import { forumTempData } from '@/pages/Forum/mockData'
-import ForumTopicItem from '../ForumTopicItem'
-import { useForum } from './useForum'
-import { loadMoreBtnStyles } from '@/assets/styles/buttons'
+import { FC, useState } from 'react'
+import { Button, List, Modal, message, Input } from 'antd'
+import { useForum } from '@/shared/hooks/useForum'
+import ForumTopicItem from './components/ForumTopicItem'
+
 import styles from './ForumList.module.css'
 
 export const ForumList: FC = () => {
-  const { list, loadingItem, forumState, handleLoadMore } = useForum()
+  const [messageApi, contextHolder] = message.useMessage()
 
-  const loadMore =
-    !forumState.initialLoading && !loadingItem ? (
-      <div className={styles.loadMoreBtn}>
-        <Button
-          style={loadMoreBtnStyles}
-          onClick={handleLoadMore}
-          disabled={list.length === forumTempData.length}>
-          {list.length === forumTempData.length
-            ? 'Тем больше нет'
-            : 'Загрузить еще 5 тем'}
-        </Button>
-      </div>
-    ) : null
+  const { topics, isLoading: isTopicsLoading } = useForum()
+
+  const [isModalOpened, setIsModalOpened] = useState(false)
+  const [modalValue, setModalValue] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleOpenModal = () => setIsModalOpened(true)
+
+  const handleCloseModal = () => setIsModalOpened(false)
+
+  const handleCreateTopic = () => {
+    setIsLoading(true)
+
+    setTimeout(() => {
+      setIsLoading(false)
+      setIsModalOpened(false)
+
+      messageApi.open({
+        type: 'success',
+        content: `Новая тема "${modalValue}" успешно создана`,
+      })
+    }, 1000)
+  }
 
   return (
-    <div>
-      <Link to="/forum-create-new" className={styles.link}>
-        <Button>Создать новый</Button>
-      </Link>
+    <>
+      <Button className={styles.link} onClick={handleOpenModal}>
+        Добавить новую тему
+      </Button>
+
       <List
-        className={styles.loadmoreList}
-        loading={forumState.initialLoading}
+        loading={isTopicsLoading}
         itemLayout="horizontal"
-        size="small"
-        loadMore={loadMore}
-        dataSource={list}
-        renderItem={item => (
-          <ForumTopicItem item={item} isLoading={item.isLoading as boolean} />
-        )}
+        dataSource={topics}
+        renderItem={item => <ForumTopicItem item={item} />}
       />
-    </div>
+
+      <Modal
+        title="Создать новую тему"
+        open={isModalOpened}
+        confirmLoading={isLoading}
+        onOk={handleCreateTopic}
+        onCancel={handleCloseModal}>
+        <Input
+          placeholder="Название темы"
+          value={modalValue}
+          onChange={event => setModalValue(event.target.value)}
+        />
+      </Modal>
+
+      {contextHolder}
+    </>
   )
 }

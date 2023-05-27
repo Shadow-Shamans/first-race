@@ -5,7 +5,7 @@ import store from '@/store'
 import { BrowserRouter } from 'react-router-dom'
 
 describe('Forum test cases', () => {
-  it('Should render forum page', () => {
+  beforeAll(() => {
     render(
       <BrowserRouter>
         <Provider store={store}>
@@ -13,6 +13,11 @@ describe('Forum test cases', () => {
         </Provider>
       </BrowserRouter>
     )
-    expect(screen.getByText('Создать новый')).toBeInTheDocument()
+  })
+
+  it('Should render forum page', () => {
+    const forumRoot = screen.getByTestId('forum_root')
+
+    expect(forumRoot).toBeInTheDocument()
   })
 })

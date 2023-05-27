@@ -1,4 +1,4 @@
-import { Rating } from '@/components/Rating'
+import Rating from '@/pages/Rating'
 import ErrorPage from '@/pages/ErrorPage'
 import Forum from '@/pages/Forum'
 import ForumTopic from '@/pages/ForumTopic'
@@ -36,7 +36,7 @@ export const routesConfig = [
   {
     path: '/rating',
     exact: true,
-    component: <Rating list={[]} />,
+    component: <Rating />,
     isPrivate: true,
   },
   {
