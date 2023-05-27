@@ -38,7 +38,7 @@
 
 *Информация о событии pointerover*
 
-Гугл предлагает такую [статью](https://web.dev/optimize-long-tasks/?utm_source=devtools) про оптимизации долгих задач
+Гугл предлагает такую [статью](https://web.dev/optimize-long-tasks/?utm_source=devtools) по оптимизации долгих задач
 
 #### Во время игры
 
