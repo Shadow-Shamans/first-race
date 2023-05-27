@@ -7,11 +7,19 @@ import { getBase64 } from '@/shared/utils'
 export function useUploadImg(imgSrc: string) {
   const [loading, setLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState<string>(imgSrc)
+  const [formData, setFormData] = useState<FormData | null>(null)
 
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
   ) => {
     if (info.file.status === 'uploading') {
+      const img = info.file.originFileObj as File
+      const _formData = new FormData()
+      console.log({ img })
+
+      _formData.append('avatar', img, `${img?.name}`)
+
+      setFormData(_formData)
       setLoading(true)
       return
     }
@@ -23,5 +31,5 @@ export function useUploadImg(imgSrc: string) {
     }
   }
 
-  return { handleChange, imageUrl, validateImage, loading }
+  return { handleChange, imageUrl, validateImage, loading, formData }
 }
