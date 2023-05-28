@@ -82,16 +82,6 @@ export const authAPI = createApi({
         method: 'PUT',
       }),
     }),
-    changeUserAvatar: build.mutation<IUpdateUserData, FormData>({
-      query: body => ({
-        url: `/user/profile/avatar`,
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        body,
-      }),
-    }),
     oAuthLogin: build.mutation<
       { requestId: string; error: { originalStatus?: number } },
       IOAuth
@@ -118,5 +108,4 @@ export const {
   useLogoutMutation,
   useOAuthLoginMutation,
   useLazyGetOauthDataQuery,
-  useChangeUserAvatarMutation,
 } = authAPI
