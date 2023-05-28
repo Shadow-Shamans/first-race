@@ -1,5 +1,6 @@
 import { IUser } from '@/features/User/userSlice'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+import type { TPasswordChangeDTO, TPasswordChangeRes } from './types'
 
 interface ISignUp {
   first_name: string
@@ -76,10 +77,11 @@ export const authAPI = createApi({
         body: data,
       }),
     }),
-    updateUserPassword: build.mutation({
-      query: () => ({
+    updateUserPassword: build.mutation<TPasswordChangeRes, TPasswordChangeDTO>({
+      query: body => ({
         url: `/user/password`,
         method: 'PUT',
+        body,
       }),
     }),
     oAuthLogin: build.mutation<
@@ -108,4 +110,5 @@ export const {
   useLogoutMutation,
   useOAuthLoginMutation,
   useLazyGetOauthDataQuery,
+  useUpdateUserPasswordMutation,
 } = authAPI

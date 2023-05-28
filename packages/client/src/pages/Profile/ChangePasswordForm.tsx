@@ -1,16 +1,21 @@
+import { useUpdateUserPasswordMutation } from '@/shared/services/AuthService'
+import { TPasswordChangeDTO } from '@/shared/services/types'
 import { Form, Input, Typography, Button } from 'antd'
 
 const { Title } = Typography
 
-const onFinish = (values: any) => {
-  console.log('Success:', values)
-}
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
-}
-
 export const ChangePasswordForm = () => {
+  const [updatePassword, updatePasswordMutationResult] =
+    useUpdateUserPasswordMutation()
+
+  const onFinish = (values: TPasswordChangeDTO) => {
+    updatePassword(values)
+  }
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo)
+  }
+
   return (
     <Form
       name="basic"
