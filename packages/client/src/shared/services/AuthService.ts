@@ -88,7 +88,6 @@ export const authAPI = createApi({
         method: 'PUT',
         headers: {
           'Content-Type': 'multipart/form-data',
-          accept: 'application/json',
         },
         body,
       }),
