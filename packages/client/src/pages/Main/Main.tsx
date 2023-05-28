@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { Card, Typography } from 'antd'
 import classNames from 'classnames'
 import { Rating } from '@/components/Rating'
@@ -14,15 +14,6 @@ const { Text } = Typography
 
 export const Main: FC = () => {
   const { userList } = useRating()
-
-  useEffect(() => {
-    const func = async () => {
-      const response = await fetch('http://localhost:3001/api/forum/topics')
-      const data = await response.json()
-      console.log(data)
-    }
-    func()
-  }, [])
 
   return (
     <section className={styles.root}>

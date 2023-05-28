@@ -26,15 +26,6 @@ const sequelize = new Sequelize(sequelizeOptions)
 
 export const Topic = sequelize.define('Topic', topicModel, {})
 
-// for (let i = 0; i < 5; i++) {
-//   Topic.create({
-//     userId: ++i,
-//     title: `Новый топик ${i + 1}`,
-//     description: `Описание ${i + 1}`,
-//     messageCount: 0,
-//   })
-// }
-
 Topic.create({
   userId: 1,
   title: `Новый топик`,

@@ -102,6 +102,10 @@ async function startServer() {
     }
   })
 
+  app.use(function (_req, res) {
+    res.status(404).render('error')
+  })
+
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`)
   })

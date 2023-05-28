@@ -1,4 +1,4 @@
-import { ICreateTopic } from '../models/Topic'
+import { ICreateTopic, IUpdateTopic } from '../models/types'
 import { Topic } from '../init'
 
 export const getAllTopicsService = async () => {
@@ -8,7 +8,7 @@ export const getAllTopicsService = async () => {
 
 export const createTopicService = async (topicData: ICreateTopic) => {
   const { userId, title, description } = topicData
-  // messageCount как считать ? откуда брать ?
+  // TODO message count
   const newTopic = await Topic.create({
     userId,
     title,
@@ -16,4 +16,49 @@ export const createTopicService = async (topicData: ICreateTopic) => {
     messageCount: 0,
   })
   return newTopic
+}
+
+export const deleteTopicService = async (id: string) => {
+  const currentTopic = await Topic.findOne({
+    where: { id: id },
+  })
+  if (!currentTopic) {
+    return "Topic doesn't exist"
+  }
+  const deletedTopic = await Topic.destroy({
+    where: { id: id },
+  })
+  return deletedTopic
+}
+
+export const getOneTopicService = async (id: string) => {
+  const currentTopic = await Topic.findOne({
+    where: { id: id },
+  })
+  if (!currentTopic) {
+    return 'Topic was not found'
+  }
+  return currentTopic
+}
+
+export const updateTopicService = async (data: IUpdateTopic) => {
+  const { id, description, title } = data
+  const currentTopic = await Topic.findOne({
+    where: { id: id },
+  })
+  if (!currentTopic) {
+    return 'Topic was not found'
+  }
+  const updatedTopic = await Topic.update(
+    {
+      description,
+      title,
+    },
+    {
+      where: {
+        id: id,
+      },
+    }
+  )
+  return updatedTopic
 }

@@ -1,23 +1,16 @@
 import { DataType, Model } from 'sequelize-typescript'
 import { ModelAttributes } from 'sequelize/types'
-import { ITopic } from './types'
+import { IComment } from './types'
 
-export const topicModel: ModelAttributes<Model, ITopic> = {
+export const commentModel: ModelAttributes<Model, IComment> = {
   id: {
     type: DataType.UUID,
     primaryKey: true,
     defaultValue: DataType.UUIDV4,
   },
-  title: {
+  content: {
     type: DataType.STRING,
     allowNull: false,
-  },
-  description: {
-    type: DataType.STRING,
-    allowNull: false,
-  },
-  messageCount: {
-    type: DataType.INTEGER,
   },
   userId: {
     type: DataType.INTEGER,
