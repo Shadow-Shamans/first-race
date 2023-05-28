@@ -8,13 +8,12 @@ export const getAllTopicsService = async () => {
 
 export const createTopicService = async (topicData: ICreateTopic) => {
   const { userId, title, description } = topicData
-  const newDate = new Date()
+  // messageCount как считать ? откуда брать ?
   const newTopic = await Topic.create({
     userId,
     title,
     description,
     messageCount: 0,
-    date: newDate,
   })
   return newTopic
 }

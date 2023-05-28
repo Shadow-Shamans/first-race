@@ -4,16 +4,16 @@ import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import { dbConnect } from './init'
+import { forumRouter } from './routes/forum'
+import express from 'express'
+import * as fs from 'fs'
+import * as path from 'path'
+
+dotenv.config({ path: '../../.env' })
 
 dbConnect().then(async () => {
   startServer()
 })
-
-dotenv.config({ path: '../../.env' })
-
-import express from 'express'
-import * as fs from 'fs'
-import * as path from 'path'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -47,6 +47,8 @@ async function startServer() {
       target: 'https://ya-praktikum.tech',
     })
   )
+
+  app.use('/api/forum', forumRouter)
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)')

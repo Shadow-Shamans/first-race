@@ -7,7 +7,6 @@ export interface ITopic {
   description: string
   userId: string
   messageCount: number
-  date: string
 }
 
 export interface ICreateTopic {
@@ -19,8 +18,8 @@ export interface ICreateTopic {
 export const topicModel: ModelAttributes<Model, ITopic> = {
   id: {
     type: DataType.UUID,
-    allowNull: false,
-    autoIncrement: true,
+    primaryKey: true,
+    defaultValue: DataType.UUIDV4,
   },
   title: {
     type: DataType.STRING,
@@ -31,15 +30,10 @@ export const topicModel: ModelAttributes<Model, ITopic> = {
     allowNull: false,
   },
   messageCount: {
-    type: DataType.NUMBER,
-    allowNull: false,
-  },
-  date: {
-    type: DataType.DATE,
-    allowNull: false,
+    type: DataType.INTEGER,
   },
   userId: {
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     allowNull: false,
   },
 }
