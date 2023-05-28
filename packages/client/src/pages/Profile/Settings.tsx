@@ -5,6 +5,7 @@ import { ChangePasswordForm } from './ChangePasswordForm'
 
 export const Settings = () => {
   const [open, setOpen] = useState(false)
+
   const showModal = () => {
     setOpen(true)
   }
