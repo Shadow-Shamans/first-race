@@ -13,23 +13,29 @@ export function useUploadImg(imgSrc: string) {
     info: UploadChangeParam<UploadFile>
   ) => {
     if (info.file.status === 'uploading') {
-      const img = info.file.originFileObj as File
-      const _formData = new FormData()
-      console.log({ img })
-
-      _formData.append('avatar', img, `${img?.name}`)
-
-      setFormData(_formData)
       setLoading(true)
       return
     }
+
     if (info.file.status === 'done') {
-      getBase64(info.file.originFileObj as RcFile, url => {
+      const img = info.file.originFileObj as File
+
+      getBase64(img as RcFile, url => {
         setLoading(false)
         setImageUrl(url)
       })
     }
   }
 
-  return { handleChange, imageUrl, validateImage, loading, formData }
+  const beforeUpload = (file: RcFile) => {
+    if (validateImage(file)) {
+      const _formData = new FormData()
+
+      _formData.append('avatar', file, `${file?.name}`)
+
+      setFormData(_formData)
+    }
+  }
+
+  return { handleChange, imageUrl, beforeUpload, loading, formData }
 }
