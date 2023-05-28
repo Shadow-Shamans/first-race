@@ -1,17 +1,25 @@
 import { useState } from 'react'
 import { validateImage } from '@/shared/utils'
 import type { UploadChangeParam } from 'antd/es/upload'
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
+import type {
+  RcFile,
+  UploadFile,
+  UploadFileStatus,
+  UploadProps,
+} from 'antd/es/upload/interface'
 import { getBase64 } from '@/shared/utils'
 
-export function useUploadImg(imgSrc: string) {
+export function useUploadImg(imgSrc: string, callBack?: () => void) {
   const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState<UploadFileStatus | undefined>(undefined)
   const [imageUrl, setImageUrl] = useState<string>(imgSrc)
   const [formData, setFormData] = useState<FormData | null>(null)
 
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>
   ) => {
+    setStatus(info.file.status)
+
     if (info.file.status === 'uploading') {
       setLoading(true)
       return
@@ -37,5 +45,5 @@ export function useUploadImg(imgSrc: string) {
     }
   }
 
-  return { handleChange, imageUrl, beforeUpload, loading, formData }
+  return { handleChange, imageUrl, beforeUpload, loading, formData, status }
 }

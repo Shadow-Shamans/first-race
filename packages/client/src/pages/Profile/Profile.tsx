@@ -11,6 +11,7 @@ import { selectUserData } from '@/features/User/selectors'
 import { useAppDispatch, useAppSelector } from '@/app'
 import {
   useChangeUserAvatarMutation,
+  useLazyGetUserDataQuery,
   useLogoutMutation,
   useUpdateUserProfileMutation,
 } from '@/shared/services/AuthService'
@@ -61,15 +62,14 @@ export const Profile: FC = () => {
   const { userList } = useRating()
   const data = useAppSelector(selectUserData)
   const [updateUserProfile, mutationResult] = useUpdateUserProfileMutation()
-  const [updateAvatar, updateAvatarMutationResult] =
-    useChangeUserAvatarMutation()
+  const [getUserData] = useLazyGetUserDataQuery()
   const [logout, result] = useLogoutMutation()
   const srcAvatar = getPathImg(data.avatar) || placeholderAvatar
   const {
     imageUrl: avatarImgUrl,
     handleChange,
-    validateImage,
-    formData,
+    beforeUpload,
+    status: statusUploadAvatar,
   } = useUploadImg(srcAvatar)
 
   const handleFormChange = async () => {
@@ -79,10 +79,6 @@ export const Profile: FC = () => {
       if (!values.errorFields) {
         //display_name заглушка для Swagger
         updateUserProfile({ ...values, display_name: '' })
-      }
-
-      if (formData) {
-        updateAvatar(formData)
       }
     } catch (errorInfo) {
       console.error(errorInfo)
@@ -114,15 +110,6 @@ export const Profile: FC = () => {
     }
   }, [mutationResult.status])
 
-  useEffect(() => {
-    const { isSuccess, data: _resData } = updateAvatarMutationResult
-
-    if (isSuccess && _resData) {
-      const { avatar } = _resData
-      appDispatch(setUserData({ ...data, avatar }))
-    }
-  }, [updateAvatarMutationResult.isSuccess])
-
   const handleLogout = () => {
     logout()
   }
@@ -148,16 +135,25 @@ export const Profile: FC = () => {
     }
   }, [result])
 
+  useEffect(() => {
+    if (statusUploadAvatar === 'done') {
+      getUserData()
+    }
+  }, [statusUploadAvatar])
+
   return (
     <div className={styled.wrapper}>
       <Row justify="space-between">
         <Col span={11}>
           <Card className={styled.card}>
             <Upload
+              action="https://ya-praktikum.tech/api/v2/user/profile/avatar"
+              withCredentials={true}
+              method="PUT"
               name="avatar"
               listType="picture-circle"
               showUploadList={false}
-              beforeUpload={validateImage}
+              beforeUpload={beforeUpload}
               onChange={handleChange}
               className={styled.avatar}>
               <Avatar
