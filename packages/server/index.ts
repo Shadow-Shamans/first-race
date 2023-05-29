@@ -3,12 +3,17 @@ import cors from 'cors'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 import { createProxyMiddleware } from 'http-proxy-middleware'
-
-dotenv.config({ path: '../../.env' })
-
+import { dbConnect } from './init/db'
+import { forumRouter } from './routes/forum'
 import express from 'express'
 import * as fs from 'fs'
 import * as path from 'path'
+
+dotenv.config({ path: '../../.env' })
+
+dbConnect().then(async () => {
+  startServer()
+})
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -42,6 +47,8 @@ async function startServer() {
       target: 'https://ya-praktikum.tech',
     })
   )
+
+  app.use('/api/forum', forumRouter)
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)')
@@ -95,9 +102,11 @@ async function startServer() {
     }
   })
 
+  app.use(function (_req, res) {
+    res.status(404).render('error')
+  })
+
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`)
   })
 }
-
-startServer()
