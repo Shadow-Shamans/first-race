@@ -1,11 +1,11 @@
 import { FC, useState } from 'react'
 import { Button, List, Modal, message, Input } from 'antd'
 import { useForum } from '@/shared/hooks/useForum'
-import ForumTopicItem from './components/ForumTopicItem'
+import ForumTopicItem from './components/TopicItem'
 
 import styles from './ForumList.module.css'
 
-export const ForumList: FC = () => {
+export const TopicList: FC = () => {
   const [messageApi, contextHolder] = message.useMessage()
 
   const { topics, isLoading: isTopicsLoading } = useForum()

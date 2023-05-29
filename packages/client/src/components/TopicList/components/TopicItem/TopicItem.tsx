@@ -10,7 +10,7 @@ interface IProps {
   isLoading?: boolean
 }
 
-export const ForumTopicItem: FC<IProps> = ({ item, isLoading = false }) => (
+export const TopicItem: FC<IProps> = ({ item, isLoading = false }) => (
   <List.Item>
     <Skeleton title={false} loading={isLoading} active>
       <List.Item.Meta
