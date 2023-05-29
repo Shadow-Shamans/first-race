@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { IForumItem } from '@/pages/Forum/types'
 
-import styles from './ForumTopicItem.module.css'
+import styles from './TopicItem.module.css'
 
 interface IProps {
   item: IForumItem

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Layout, Typography } from 'antd'
 import { useMessages } from '@/shared/hooks/useMessages'
-import ForumMessages from '../../components/ForumMessages'
+import { ForumMessages } from '@/components/ForumMessages'
 
 import styles from './ForumTopic.module.css'
 

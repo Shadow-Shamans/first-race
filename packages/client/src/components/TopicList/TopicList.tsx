@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
 import { Button, List, Modal, message, Input } from 'antd'
 import { useForum } from '@/shared/hooks/useForum'
-import ForumTopicItem from './components/TopicItem'
+import { TopicItem } from './components/TopicItem'
 
-import styles from './ForumList.module.css'
+import styles from './TopicList.module.css'
 
 export const TopicList: FC = () => {
   const [messageApi, contextHolder] = message.useMessage()
@@ -33,7 +33,7 @@ export const TopicList: FC = () => {
   }
 
   return (
-    <>
+    <div className={styles.root}>
       <Button className={styles.link} onClick={handleOpenModal}>
         Добавить новую тему
       </Button>
@@ -42,7 +42,7 @@ export const TopicList: FC = () => {
         loading={isTopicsLoading}
         itemLayout="horizontal"
         dataSource={topics}
-        renderItem={item => <ForumTopicItem item={item} />}
+        renderItem={item => <TopicItem item={item} />}
       />
 
       <Modal
@@ -59,6 +59,6 @@ export const TopicList: FC = () => {
       </Modal>
 
       {contextHolder}
-    </>
+    </div>
   )
 }
