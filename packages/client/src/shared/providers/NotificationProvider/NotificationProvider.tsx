@@ -3,17 +3,17 @@ import { useMemo, FC, PropsWithChildren, createContext } from 'react'
 import { notification } from 'antd'
 import { NotificationInstance, ArgsProps } from 'antd/es/notification/interface'
 
-type NotificationType = keyof NotificationInstance
+type TNotificationType = keyof NotificationInstance
 
-interface NotificationContextData {
+interface INotificationContextData {
   handleNotification: (props: {
     opt: ArgsProps
-    type: NotificationType
+    type: TNotificationType
   }) => void
 }
 
-export const NotificationContext = createContext<NotificationContextData>(
-  {} as NotificationContextData
+export const NotificationContext = createContext<INotificationContextData>(
+  {} as INotificationContextData
 )
 
 NotificationContext.displayName = 'NotificationContext'
@@ -23,7 +23,7 @@ export const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const handleNotification = (props: {
     opt: ArgsProps
-    type: NotificationType
+    type: TNotificationType
   }) => {
     const { type, opt } = props
     if (type === 'info') {
@@ -40,7 +40,7 @@ export const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   }
 
-  const contextValue = useMemo<NotificationContextData>(
+  const contextValue = useMemo<INotificationContextData>(
     () => ({ handleNotification }),
     []
   )
