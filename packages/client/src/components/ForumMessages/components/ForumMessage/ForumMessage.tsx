@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Button, Card, Divider, Input, List, Typography } from 'antd'
-import { IForumMessage } from '../../../../pages/ForumTopic/types'
+import { IForumMessage } from '@/pages/ForumTopic/types'
 
 import styles from './ForumMessage.module.css'
 
