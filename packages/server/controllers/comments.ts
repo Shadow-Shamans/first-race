@@ -7,6 +7,6 @@ export const getAllComments = async (req: Request, res: Response) => {
     const allComments = await getAllCommentsService(id)
     res.status(200).json({ data: allComments })
   } catch (error) {
-    res.status(400).json({ error: 'Error. Cannot get comments ' })
+    res.status(400).json({ error: 'Error. Cannot get comments' })
   }
 }
