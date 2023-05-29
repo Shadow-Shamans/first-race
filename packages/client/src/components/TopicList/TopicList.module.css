@@ -1,7 +1,14 @@
 .root {
   margin: 0 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 .link {
   margin-bottom: 20px;
+  align-self: flex-end;
+}
+
+.input {
+  margin: 16px 0;
 }

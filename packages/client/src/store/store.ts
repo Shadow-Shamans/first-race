@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from './rootReducer'
 import { authAPI } from '@/shared/services/AuthService'
 import { leaderboardAPI } from '@/shared/services/LeaderboardService'
+import { forumAPI } from '@/shared/services/ForumService'
 
 export const createStore = (initialState = {}) => {
   return configureStore({
@@ -11,7 +12,8 @@ export const createStore = (initialState = {}) => {
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware()
         .concat(authAPI.middleware)
-        .concat(leaderboardAPI.middleware),
+        .concat(leaderboardAPI.middleware)
+        .concat(forumAPI.middleware),
   })
 }
 export const storeInstance = createStore()

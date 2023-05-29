@@ -1,31 +1,41 @@
 import { List, Skeleton, Typography } from 'antd'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { IForumItem } from '@/pages/Forum/types'
+import { IForumItem } from '@/shared/services/ForumService'
+import { convertDateTime } from '@/shared/utils/dateTime'
 
 import styles from './TopicItem.module.css'
 
 interface IProps {
-  item: IForumItem
+  topic: IForumItem
   isLoading?: boolean
 }
 
-export const TopicItem: FC<IProps> = ({ item, isLoading = false }) => (
-  <List.Item>
-    <Skeleton title={false} loading={isLoading} active>
-      <List.Item.Meta
-        title={
-          <Link to={`/forum/topic/${item.id}`}>
-            <Typography.Title level={4}>{item.title}</Typography.Title>
-          </Link>
-        }
-      />
+export const TopicItem: FC<IProps> = ({ topic, isLoading = false }) => {
+  const [date, time] = convertDateTime(topic.createdAt)
 
-      <Typography.Text strong>{item.messageCount}</Typography.Text>
+  return (
+    <List.Item>
+      <Skeleton title={false} loading={isLoading} active>
+        <List.Item.Meta
+          title={
+            <Link to={`/forum/topic/${topic.id}`}>
+              <Typography.Title level={4}>{topic.title}</Typography.Title>
+            </Link>
+          }
+          description={<Typography.Text>{topic.description}</Typography.Text>}
+        />
 
-      <Typography.Text type="secondary" className={styles.date}>
-        {item.createdDate}
-      </Typography.Text>
-    </Skeleton>
-  </List.Item>
-)
+        <Typography.Text strong className={styles.counter}>
+          {topic.messageCount}
+        </Typography.Text>
+
+        <Typography.Text className={styles.date}>{time}</Typography.Text>
+
+        <Typography.Text type="secondary" className={styles.date}>
+          {date}
+        </Typography.Text>
+      </Skeleton>
+    </List.Item>
+  )
+}

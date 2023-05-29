@@ -5,6 +5,7 @@ import { gameSlice } from '@/features/Game'
 import { authAPI } from '@/shared/services/AuthService'
 import { leaderboardAPI } from '@/shared/services/LeaderboardService'
 import { leaderboardSlice } from '@/features/Leaderboard'
+import { forumAPI } from '@/shared/services/ForumService'
 
 // const rootPersistConfig = {
 //   key: storageKey,
@@ -24,6 +25,7 @@ export const rootReducer = combineReducers({
   [leaderboardSlice.name]: leaderboardSlice.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
   [leaderboardAPI.reducerPath]: leaderboardAPI.reducer,
+  [forumAPI.reducerPath]: forumAPI.reducer,
 })
 
 // TODO поставить persist на SSR

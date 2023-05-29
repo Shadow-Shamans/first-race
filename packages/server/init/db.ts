@@ -30,13 +30,6 @@ export const Comment = sequelize.define('Comment', commentModel, {})
 
 Topic.hasMany(Comment)
 
-Topic.create({
-  userId: 1,
-  title: `Новый топик`,
-  description: `Описание`,
-  messageCount: 0,
-})
-
 export const dbConnect = async (): Promise<Client | null> => {
   try {
     await sequelize.sync()
