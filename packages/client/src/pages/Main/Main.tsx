@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Card, Typography } from 'antd'
 import classNames from 'classnames'
 import { Rating } from '@/components/Rating'

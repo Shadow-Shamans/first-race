@@ -32,8 +32,10 @@ export const getOneTopic = async (req: Request, res: Response) => {
 }
 
 export const createNewTopic = async (req: Request, res: Response) => {
+  console.log(req.body, '[=> req.body.ddededededede')
   try {
     const newTopicData = req.body.data as ICreateTopic
+    console.log(newTopicData, '=> newTopicData dwedewdewede')
     const newTopic = await createTopicService(newTopicData)
     res.status(200).json({ data: newTopic })
   } catch (error) {
