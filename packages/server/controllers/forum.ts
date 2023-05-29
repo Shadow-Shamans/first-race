@@ -21,7 +21,7 @@ export const getOneTopic = async (req: Request, res: Response) => {
   try {
     const id = req.params.id as string
     const oneTopic = await getOneTopicService(id)
-    if (typeof oneTopic === 'string') {
+    if (oneTopic === null) {
       res.status(204).json({ data: oneTopic })
     } else {
       res.status(200).json({ data: oneTopic })

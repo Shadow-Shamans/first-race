@@ -1,6 +1,7 @@
 version: "3.9"
 
 services:
+  # раскомментить когда будут работать связи контейнеров сервера и клиента
   # client:
   #   container_name: prakticum-client
   #   image: prakticum-client

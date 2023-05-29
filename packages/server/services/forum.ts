@@ -1,9 +1,8 @@
 import { ICreateTopic, IUpdateTopic } from '../models/types'
-import { Topic } from '../init'
+import { Topic } from '../init/db'
 
 export const getAllTopicsService = async () => {
-  const allTopics = await Topic.findAll()
-  return allTopics
+  return await Topic.findAll()
 }
 
 export const createTopicService = async (topicData: ICreateTopic) => {
@@ -36,7 +35,7 @@ export const getOneTopicService = async (id: string) => {
     where: { id: id },
   })
   if (!currentTopic) {
-    return 'Topic was not found'
+    return null
   }
   return currentTopic
 }
