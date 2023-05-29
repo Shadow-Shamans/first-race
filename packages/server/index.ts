@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 import { createProxyMiddleware } from 'http-proxy-middleware'
@@ -20,6 +21,10 @@ const isDev = process.env.NODE_ENV === 'development'
 async function startServer() {
   const app = express()
   app.use(cors())
+  // app.use(bodyParser.json({ type: 'application/*+json' }))
+  app.use(bodyParser.json())
+  app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
+  app.use(bodyParser.text({ type: 'text/html' }))
   const port = Number(process.env.SERVER_PORT) || 3000
 
   let vite: ViteDevServer | undefined

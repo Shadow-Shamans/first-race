@@ -16,4 +16,8 @@ export const commentModel: ModelAttributes<Model, IComment> = {
     type: DataType.INTEGER,
     allowNull: false,
   },
+  parentId: {
+    type: DataType.UUID,
+    allowNull: true,
+  },
 }

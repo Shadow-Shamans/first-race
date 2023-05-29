@@ -2,6 +2,7 @@ import type { SequelizeOptions } from 'sequelize-typescript'
 import dotenv from 'dotenv'
 import { Sequelize } from 'sequelize-typescript'
 import { topicModel } from '../models/Topic'
+import { commentModel } from '../models/Comments'
 
 dotenv.config({ path: '../../.env' })
 
@@ -25,6 +26,9 @@ const sequelizeOptions: SequelizeOptions = {
 const sequelize = new Sequelize(sequelizeOptions)
 
 export const Topic = sequelize.define('Topic', topicModel, {})
+export const Comment = sequelize.define('Comment', commentModel, {})
+
+Topic.hasMany(Comment)
 
 Topic.create({
   userId: 1,

@@ -13,7 +13,7 @@ export const getAllTopics = async (_req: Request, res: Response) => {
     const allTopics = await getAllTopicsService()
     res.status(200).json({ data: allTopics })
   } catch (error) {
-    res.status(400).json({ error: 'Error. Cannot get all topic ' })
+    res.status(400).json({ error: 'Error. Cannot get all topic' })
   }
 }
 
@@ -27,7 +27,7 @@ export const getOneTopic = async (req: Request, res: Response) => {
       res.status(200).json({ data: oneTopic })
     }
   } catch (error) {
-    res.status(400).json({ error: 'Error. Cannot get all topic ' })
+    res.status(400).json({ error: 'Error. Cannot get all topic' })
   }
 }
 
@@ -37,7 +37,7 @@ export const createNewTopic = async (req: Request, res: Response) => {
     const newTopic = await createTopicService(newTopicData)
     res.status(200).json({ data: newTopic })
   } catch (error) {
-    res.status(400).json({ error: 'Error. Cannot create new topic ' })
+    res.status(400).json({ error: 'Error. Cannot create new topic' })
   }
 }
 
@@ -51,7 +51,7 @@ export const updateTopic = async (req: Request, res: Response) => {
       res.status(200).json({ data: updatedTopic })
     }
   } catch (error) {
-    res.status(400).json({ error: 'Error. Cannot update topic ' })
+    res.status(400).json({ error: 'Error. Cannot update topic' })
   }
 }
 

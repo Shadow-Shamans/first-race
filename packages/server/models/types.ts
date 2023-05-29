@@ -21,6 +21,7 @@ export interface IComment {
   id: number
   content: string
   userId: string
+  parentId: string
 }
 
 export interface ICreateComment {
