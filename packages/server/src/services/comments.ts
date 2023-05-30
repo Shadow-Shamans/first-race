@@ -1,5 +1,13 @@
 import { Comment } from '../init/db'
 
 export const getAllCommentsService = async (id: string) => {
-  return await Comment.findAll()
+  try {
+    return await Comment.findAll({
+      where: {
+        topicId: id,
+      },
+    })
+  } catch (error) {
+    throw new Error(`GET: Failed to get all topics for category with id ${id}`)
+  }
 }

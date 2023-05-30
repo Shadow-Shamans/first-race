@@ -4,6 +4,7 @@ import { getAllCommentsService } from '../services/comments'
 export const getAllComments = async (req: Request, res: Response) => {
   try {
     const id = req.params.id as string
+    console.log(id, '=> id топика')
     const allComments = await getAllCommentsService(id)
     res.status(200).json({ data: allComments })
   } catch (error) {

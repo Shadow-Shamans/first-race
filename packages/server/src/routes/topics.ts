@@ -6,17 +6,16 @@ import {
   getOneTopic,
   updateTopic,
 } from '../controllers/topics'
-// import { checkAuth } from '../middlewares/auth'
+import { checkAuth } from '../middlewares/auth'
 
-// Как скрыть ручки за авторизацией
 export const topicsRouter = express.Router()
 
-topicsRouter.get(`/all`, getAllTopics)
+topicsRouter.get(`/all`, checkAuth, getAllTopics)
 
-topicsRouter.get(`/:id`, getOneTopic)
+topicsRouter.get(`/:id`, checkAuth, getOneTopic)
 
-topicsRouter.post(`/create`, createNewTopic)
+topicsRouter.post(`/create`, checkAuth, createNewTopic)
 
-topicsRouter.put(`/:id`, updateTopic)
+topicsRouter.put(`/:id`, checkAuth, updateTopic)
 
-topicsRouter.delete(`/:id`, deleteTopic)
+topicsRouter.delete(`/:id`, checkAuth, deleteTopic)

@@ -23,11 +23,11 @@ export interface IComment {
   userId: string
   parentCommentId: string
   topicId: number
-  emojiHappyFace: number
-  emojiSadFace: number
-  emojiAngryFace: number
-  emojiLike: number
-  emojiDislike: number
+  emojiHappyFace?: number
+  emojiSadFace?: number
+  emojiAngryFace?: number
+  emojiLike?: number
+  emojiDislike?: number
 }
 
 export interface ICreateComment {

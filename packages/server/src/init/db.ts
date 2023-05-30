@@ -40,19 +40,19 @@ export const Role = sequelize.define('Role', RoleModel, modalCommonOptions)
 export const User = sequelize.define('User', UserModel, modalCommonOptions)
 
 Topic.hasMany(Comment, {
-  foreignKey: 'topic_id',
+  foreignKey: 'topicId',
 })
 
 Comment.belongsTo(Topic, {
-  foreignKey: 'topic_id',
+  foreignKey: 'topicId',
 })
 
 User.belongsTo(Role, {
-  foreignKey: 'role_id',
+  foreignKey: 'roleId',
 })
 
 Role.hasMany(User, {
-  foreignKey: 'role_id',
+  foreignKey: 'roleId',
 })
 
 export const dbConnect = async (): Promise<Client | null> => {
