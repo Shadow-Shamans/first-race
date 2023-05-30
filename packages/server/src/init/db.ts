@@ -1,8 +1,11 @@
 import type { SequelizeOptions } from 'sequelize-typescript'
 import dotenv from 'dotenv'
 import { Sequelize } from 'sequelize-typescript'
-import { topicModel } from '../models/Topic'
-import { commentModel } from '../models/Comments'
+import { TopicModel } from '../models/Topic'
+import { CommentModel } from '../models/Comment'
+import { RoleModel } from '../models/Role'
+import { UserModel } from '../models/User'
+import type { Dialect } from 'sequelize'
 
 dotenv.config({ path: '../../.env' })
 
@@ -12,6 +15,7 @@ const {
   POSTGRES_DB,
   POSTGRES_PORT,
   DB_HOST,
+  DIALECT,
 } = process.env
 
 const sequelizeOptions: SequelizeOptions = {
@@ -20,21 +24,30 @@ const sequelizeOptions: SequelizeOptions = {
   database: POSTGRES_DB,
   password: String(POSTGRES_PASSWORD),
   port: Number(POSTGRES_PORT),
-  dialect: 'postgres',
+  dialect: DIALECT as Dialect,
 }
 
 const sequelize = new Sequelize(sequelizeOptions)
 
-export const Topic = sequelize.define('Topic', topicModel, {})
-export const Comment = sequelize.define('Comment', commentModel, {})
+export const Topic = sequelize.define('Topic', TopicModel, {})
+export const Comment = sequelize.define('Comment', CommentModel, {})
+export const Role = sequelize.define('Role', RoleModel, {})
+export const User = sequelize.define('User', UserModel, {})
 
-Topic.hasMany(Comment)
+Topic.hasMany(Comment, {
+  foreignKey: 'topic_id',
+})
 
-Topic.create({
-  userId: 1,
-  title: `Новый топик`,
-  description: `Описание`,
-  messageCount: 0,
+Comment.belongsTo(Topic, {
+  foreignKey: 'topic_id',
+})
+
+User.belongsTo(Role, {
+  foreignKey: 'role_id',
+})
+
+Role.hasMany(User, {
+  foreignKey: 'role_id',
 })
 
 export const dbConnect = async (): Promise<Client | null> => {
@@ -45,7 +58,7 @@ export const dbConnect = async (): Promise<Client | null> => {
       .getQueryInterface()
       .showAllSchemas()
       .then(tableObj => {
-        console.log('// Tables in database', '==========================')
+        console.log('// Tables in database', '=========================')
         console.log(tableObj)
       })
       .catch(err => {

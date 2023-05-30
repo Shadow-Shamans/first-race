@@ -2,6 +2,7 @@ import { ICreateTopic, IUpdateTopic } from '../models/types'
 import { Topic } from '../init/db'
 
 export const getAllTopicsService = async () => {
+  console.log('11')
   return await Topic.findAll()
 }
 

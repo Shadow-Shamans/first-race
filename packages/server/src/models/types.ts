@@ -21,11 +21,27 @@ export interface IComment {
   id: number
   content: string
   userId: string
-  parentId: string
+  parentCommentId: string
+  topicId: number
+  emojiHappyFace: number
+  emojiSadFace: number
+  emojiAngryFace: number
+  emojiLike: number
+  emojiDislike: number
 }
 
 export interface ICreateComment {
   title: string
   description: string
   userId: string
+}
+
+export interface IUser {
+  roleId: number
+}
+
+export type TRoles = 'admin' | 'usual'
+
+export interface IRole {
+  name: TRoles
 }

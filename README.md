@@ -78,3 +78,10 @@
 ## Заупск SSR
 Запустить проект локально в режиме разработки yarn run dev:server
 Убедиться то в папке packages/client появились две папки dist && ssr-dist
+
+Для запуска приложения с базой данных нужно сначала запустить docker
+image c postgres.
+
+docker compose -f docker-compose.dev.yml up
+после этого запускаем сам сервер в режиме разработки.
+yarn dev:server

@@ -6,7 +6,7 @@ import {
   deleteTopicService,
   getOneTopicService,
   updateTopicService,
-} from '../services/forum'
+} from '../services/topics'
 
 export const getAllTopics = async (_req: Request, res: Response) => {
   try {
