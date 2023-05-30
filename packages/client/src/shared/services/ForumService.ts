@@ -12,13 +12,16 @@ interface IUpdateTopic {
   id: string
 }
 
+interface IDeleteTopic {
+  id: string
+}
+
 export interface IForumItem {
   createdAt: string
   description: string
   id: string
   messageCount: number
   title: string
-  updatedAt: string
   userId: number
 }
 
@@ -26,13 +29,13 @@ export const forumAPI = createApi({
   reducerPath: 'forumAPI',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3001/api/forum',
+    baseUrl: 'http://localhost:3001/api/v1/topics',
   }),
 
   endpoints: build => ({
-    createTopic: build.mutation<void, ICreateTopic>({
+    createTopic: build.mutation<{ data: IForumItem }, ICreateTopic>({
       query: data => ({
-        url: '/topics',
+        url: '/create',
         method: 'POST',
         body: { data },
       }),
@@ -40,23 +43,23 @@ export const forumAPI = createApi({
 
     getTopics: build.query<{ data: IForumItem[] }, void>({
       query: () => ({
-        url: `/topics`,
+        url: `/all`,
       }),
     }),
 
-    updateTopic: build.mutation<void, IUpdateTopic>({
+    updateTopic: build.mutation<{ data: IForumItem }, IUpdateTopic>({
       query: data => ({
-        url: '/topics',
+        url: `/${data.id}`,
         method: 'PUT',
         body: { data },
       }),
     }),
 
-    deleteTopic: build.mutation<void, { id: string }>({
-      query: id => ({
-        url: '/topics',
+    deleteTopic: build.mutation<{ data: IForumItem }, IDeleteTopic>({
+      query: data => ({
+        url: `/${data.id}`,
         method: 'DELETE',
-        body: id,
+        body: { id: data.id },
       }),
     }),
   }),
@@ -65,5 +68,6 @@ export const forumAPI = createApi({
 export const {
   useCreateTopicMutation,
   useDeleteTopicMutation,
+  useUpdateTopicMutation,
   useLazyGetTopicsQuery,
 } = forumAPI

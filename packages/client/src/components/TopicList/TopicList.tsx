@@ -1,10 +1,12 @@
 import { FC, useEffect, useState } from 'react'
-import { Button, List, Modal, message, Input } from 'antd'
+import { Button, List, message } from 'antd'
 import { useForum } from '@/shared/hooks/useForum'
 import { TopicItem } from './components/TopicItem'
 import { useCreateTopicMutation } from '@/shared/services/ForumService'
 import { useAppSelector } from '@/app'
 import { selectUserData } from '@/features/User'
+import { ForumModal } from '@/components/ForumModal'
+import { IModalData } from '../ForumModal/ForumModal'
 
 import styles from './TopicList.module.css'
 
@@ -16,8 +18,6 @@ export const TopicList: FC = () => {
   const { topics, isLoading: isTopicsLoading, refreshTopics } = useForum()
 
   const [isModalOpened, setIsModalOpened] = useState(false)
-  const [topicTitle, setTopicTitle] = useState('')
-  const [topicDescription, setTopicDescription] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const [createTopic, mutationResult] = useCreateTopicMutation()
@@ -26,7 +26,7 @@ export const TopicList: FC = () => {
 
   const handleCloseModal = () => setIsModalOpened(false)
 
-  const handleCreateTopic = () => {
+  const handleCreateTopic = (data: IModalData) => {
     setIsLoading(true)
 
     if (!userId) {
@@ -38,18 +38,24 @@ export const TopicList: FC = () => {
       return
     }
 
+    const { title, description } = data
+
     createTopic({
-      title: topicTitle,
-      description: topicDescription,
+      title,
+      description,
       userId: userId.toString(),
     })
+
+    setIsModalOpened(false)
   }
 
   useEffect(() => {
-    if (mutationResult.status === 'fulfilled') {
+    if (mutationResult.status === 'fulfilled' && mutationResult.data) {
+      const title = mutationResult.data.data.title
+
       messageApi.open({
         type: 'success',
-        content: `Новая тема "${topicTitle}" успешно создана`,
+        content: `Новая тема "${title}" успешно создана`,
       })
 
       refreshTopics()
@@ -76,29 +82,16 @@ export const TopicList: FC = () => {
         loading={isTopicsLoading}
         itemLayout="horizontal"
         dataSource={topics}
-        renderItem={item => <TopicItem topic={item} isLoading={isLoading} />}
+        renderItem={item => <TopicItem topic={item} />}
       />
 
-      <Modal
-        title="Создать новую тему"
-        open={isModalOpened}
-        confirmLoading={isLoading}
-        onOk={handleCreateTopic}
-        onCancel={handleCloseModal}>
-        <Input
-          placeholder="Название темы"
-          value={topicTitle}
-          className={styles.input}
-          onChange={event => setTopicTitle(event.target.value)}
-        />
-
-        <Input.TextArea
-          value={topicDescription}
-          onChange={event => setTopicDescription(event.target.value)}
-          placeholder="Описание"
-          autoSize={{ minRows: 3, maxRows: 5 }}
-        />
-      </Modal>
+      <ForumModal
+        isOpened={isModalOpened}
+        isLoading={isLoading}
+        title={'Новая тема'}
+        onSubmit={handleCreateTopic}
+        onCancel={handleCloseModal}
+      />
 
       {contextHolder}
     </div>

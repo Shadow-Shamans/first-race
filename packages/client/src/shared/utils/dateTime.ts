@@ -4,6 +4,8 @@
  */
 
 export const convertDateTime = (dateTime: string): string[] => {
+  if (!dateTime) return []
+
   const [date, time] = dateTime.split('T')
 
   const resultDate = date.split('-').reverse().join('.')
