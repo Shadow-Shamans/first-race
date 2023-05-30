@@ -15,42 +15,42 @@ export const CommentModel: ModelAttributes<Model, IComment> = {
   userId: {
     type: DataType.INTEGER,
     allowNull: false,
-    field: 'user_id',
+    // references: {
+    //   model: 'User',
+    //   key: 'id'
+    // }
   },
-  parentCommentId: {
+  parentId: {
     type: DataType.UUID,
     allowNull: true,
-    field: 'parent_comment_id',
   },
-  topicId: {
-    type: DataType.INTEGER,
-    field: 'topic_id',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  },
+  // parentCommentId: {
+  //   type: DataType.UUID,
+  // onDelete: 'CASCADE',
+  // onUpdate: 'CASCADE',
+  // references: {
+  //   model: 'Topic',
+  //   key: 'id',
+  // },
+  // },
   emojiHappyFace: {
     type: DataType.INTEGER,
-    allowNull: false,
-    field: 'emoji_happy_face',
+    allowNull: true,
   },
   emojiSadFace: {
     type: DataType.INTEGER,
-    allowNull: false,
-    field: 'emoji_sad_face',
+    allowNull: true,
   },
   emojiAngryFace: {
     type: DataType.INTEGER,
-    allowNull: false,
-    field: 'emoji_angry_face',
+    allowNull: true,
   },
   emojiLike: {
     type: DataType.INTEGER,
-    allowNull: false,
-    field: 'emoji_like',
+    allowNull: true,
   },
   emojiDislike: {
     type: DataType.INTEGER,
-    allowNull: false,
-    field: 'emoji_dislike',
+    allowNull: true,
   },
 }

@@ -6,9 +6,9 @@ import {
   getOneTopic,
   updateTopic,
 } from '../controllers/topics'
+import { addNewComment, getAllComments } from '../controllers/comments'
 // import { checkAuth } from '../middlewares/auth'
 
-// Как скрыть ручки за авторизацией
 export const topicsRouter = express.Router()
 
 topicsRouter.get(`/all`, getAllTopics)
@@ -20,3 +20,7 @@ topicsRouter.post(`/create`, createNewTopic)
 topicsRouter.put(`/:id`, updateTopic)
 
 topicsRouter.delete(`/:id`, deleteTopic)
+
+topicsRouter.get(`/:id/comments`, getAllComments)
+
+topicsRouter.post(`/:id/comments`, addNewComment)

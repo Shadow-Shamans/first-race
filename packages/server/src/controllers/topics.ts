@@ -38,6 +38,7 @@ export const createNewTopic = async (req: Request, res: Response) => {
     const newTopic = await createTopicService(newTopicData)
     res.status(201).json({ data: newTopic })
   } catch (error) {
+    console.log(error, 'error')
     res.status(400).json({ error: 'Error. Cannot create new topic' })
   }
 }
