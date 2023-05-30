@@ -6,6 +6,12 @@ interface ICreateTopic {
   userId: string
 }
 
+interface IUpdateTopic {
+  title: string
+  description: string
+  id: string
+}
+
 export interface IForumItem {
   createdAt: string
   description: string
@@ -37,7 +43,27 @@ export const forumAPI = createApi({
         url: `/topics`,
       }),
     }),
+
+    updateTopic: build.mutation<void, IUpdateTopic>({
+      query: data => ({
+        url: '/topics',
+        method: 'PUT',
+        body: { data },
+      }),
+    }),
+
+    deleteTopic: build.mutation<void, { id: string }>({
+      query: id => ({
+        url: '/topics',
+        method: 'DELETE',
+        body: id,
+      }),
+    }),
   }),
 })
 
-export const { useCreateTopicMutation, useLazyGetTopicsQuery } = forumAPI
+export const {
+  useCreateTopicMutation,
+  useDeleteTopicMutation,
+  useLazyGetTopicsQuery,
+} = forumAPI

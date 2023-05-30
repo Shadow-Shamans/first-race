@@ -3,7 +3,10 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-import { IForumItem } from '@/shared/services/ForumService'
+import {
+  IForumItem,
+  useDeleteTopicMutation,
+} from '@/shared/services/ForumService'
 import { convertDateTime } from '@/shared/utils/dateTime'
 import { useAppSelector } from '@/app'
 import { selectUserData } from '@/features/User'
@@ -20,6 +23,12 @@ export const TopicItem: FC<IProps> = ({ topic, isLoading = false }) => {
 
   const isCurrentUser = userId === topic.userId
   const [date, time] = convertDateTime(topic.createdAt)
+
+  const [deleteTopic, mutationResult] = useDeleteTopicMutation()
+
+  const handleDelete = () => {
+    deleteTopic({ id: topic.id })
+  }
 
   return (
     <List.Item>
@@ -51,7 +60,7 @@ export const TopicItem: FC<IProps> = ({ topic, isLoading = false }) => {
             <EditOutlined />
           </Button>
 
-          <Button type="primary" danger size="small">
+          <Button type="primary" danger size="small" onClick={handleDelete}>
             <DeleteOutlined />
           </Button>
         </div>

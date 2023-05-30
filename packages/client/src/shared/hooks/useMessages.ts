@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { messagesMock } from '@/mock/mockForum'
 import { IForumMessage } from '@/pages/ForumTopic/types'
 
 export const useMessages = () => {
@@ -10,7 +9,7 @@ export const useMessages = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false)
-      setMessages(messagesMock)
+      setMessages([])
       setTopic('Topic name 123')
     }, 1000)
   }, [])
