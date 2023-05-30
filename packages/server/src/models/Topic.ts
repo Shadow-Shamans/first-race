@@ -2,7 +2,7 @@ import { DataType, Model } from 'sequelize-typescript'
 import { ModelAttributes } from 'sequelize/types'
 import { ITopic } from './types'
 
-export const topicModel: ModelAttributes<Model, ITopic> = {
+export const TopicModel: ModelAttributes<Model, ITopic> = {
   id: {
     type: DataType.UUID,
     primaryKey: true,
@@ -11,12 +11,17 @@ export const topicModel: ModelAttributes<Model, ITopic> = {
   title: {
     type: DataType.STRING,
     allowNull: false,
+    validate: {
+      max: 100,
+      min: 10,
+    },
   },
   description: {
     type: DataType.STRING,
     allowNull: false,
   },
   messageCount: {
+    allowNull: true,
     type: DataType.INTEGER,
   },
   userId: {

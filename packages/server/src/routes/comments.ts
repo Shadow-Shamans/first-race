@@ -1,8 +1,7 @@
 import express from 'express'
 import { getAllComments } from '../controllers/comments'
+import { COMMENTS_URL } from '../utils/constants/api'
 
 export const commentsRouter = express.Router()
 
-const COMMENTS = 'comments'
-
-commentsRouter.get(`/${COMMENTS}`, getAllComments)
+commentsRouter.get(`/${COMMENTS_URL}`, getAllComments)

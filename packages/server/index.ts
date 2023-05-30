@@ -1,14 +1,21 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
-import { createProxyMiddleware } from 'http-proxy-middleware'
-import { dbConnect } from './init/db'
-import { forumRouter } from './routes/forum'
+import { dbConnect } from './src/init/db'
+import { topicsRouter } from './src/routes/topics'
 import express from 'express'
 import * as fs from 'fs'
 import * as path from 'path'
+import {
+  API_VERSION,
+  TOPICS_URL,
+  USER_URL,
+  YA_API_URL,
+} from './src/utils/constants/api'
+import proxy from './src/middlewares/proxy'
+import { getViteDevServer } from './src/utils/vite'
+import { userRouter } from './src/routes/user'
 
 dotenv.config({ path: '../../.env' })
 
@@ -21,10 +28,7 @@ const isDev = process.env.NODE_ENV === 'development'
 async function startServer() {
   const app = express()
   app.use(cors())
-  // app.use(bodyParser.json({ type: 'application/*+json' }))
   app.use(bodyParser.json())
-  app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
-  app.use(bodyParser.text({ type: 'text/html' }))
   const port = Number(process.env.SERVER_PORT) || 3000
 
   let vite: ViteDevServer | undefined
@@ -33,31 +37,13 @@ async function startServer() {
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs')
 
   if (isDev) {
-    vite = await createViteServer({
-      server: { middlewareMode: true },
-      root: srcPath,
-      appType: 'custom',
-    })
-
+    vite = await getViteDevServer(srcPath)
     app.use(vite.middlewares)
   }
 
-  app.use(
-    '/api/v2',
-    createProxyMiddleware({
-      changeOrigin: true,
-      cookieDomainRewrite: {
-        '*': '',
-      },
-      target: 'https://ya-praktikum.tech',
-    })
-  )
-
-  app.use('/api/forum', forumRouter)
-
-  app.get('/api', (_, res) => {
-    res.json('👋 Howdy from the server :)')
-  })
+  app.use(YA_API_URL, proxy)
+  app.use(`${API_VERSION}${TOPICS_URL}`, topicsRouter)
+  app.use(`${API_VERSION}${USER_URL}`, userRouter)
 
   if (!isDev) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
