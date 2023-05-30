@@ -3,6 +3,7 @@ import {
   createCommentService,
   getAllCommentsService,
 } from '../services/comments'
+import { ICreateComment } from '../models/types'
 
 export const getAllComments = async (req: Request, res: Response) => {
   try {
@@ -16,14 +17,12 @@ export const getAllComments = async (req: Request, res: Response) => {
 
 export const addNewComment = async (req: Request, res: Response) => {
   const { id } = req.params
-  const newCommentDataDTO = req.body.data as any
+  const newCommentDataDTO = req.body.data as ICreateComment
   const newCommentData = await createCommentService(id, newCommentDataDTO)
-  console.log(newCommentData, '=> newCommentData')
-  console.log(id, '=> id')
+
   try {
-    res.status(200).json({ data: 'success' })
+    res.status(200).json({ data: newCommentData })
   } catch (error) {
-    console.log(error)
     res.status(400).json({ error: 'Error. Cannot add new comment' })
   }
 }

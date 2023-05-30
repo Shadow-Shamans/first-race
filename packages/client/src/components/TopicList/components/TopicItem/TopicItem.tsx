@@ -13,9 +13,9 @@ import { useAppSelector } from '@/app'
 import { selectUserData } from '@/features/User'
 import { useForum } from '@/shared/hooks'
 import { ForumModal } from '@/components/ForumModal'
+import { IModalData } from '@/components/ForumModal/ForumModal'
 
 import styles from './TopicItem.module.css'
-import { IModalData } from '../../../ForumModal/ForumModal'
 
 interface IProps {
   topic: IForumItem

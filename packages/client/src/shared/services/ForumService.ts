@@ -16,6 +16,12 @@ interface IDeleteTopic {
   id: string
 }
 
+interface ICreateComment {
+  id: string // topicId or parentCommentId
+  content: string
+  userId: string
+}
+
 export interface IForumItem {
   createdAt: string
   description: string
@@ -23,6 +29,15 @@ export interface IForumItem {
   messageCount: number
   title: string
   userId: number
+}
+
+export interface IForumComment {
+  createdAt: string
+  content: string
+  id: string
+  messageCount: number
+  userId: number
+  parentId: number
 }
 
 export const forumAPI = createApi({
@@ -47,6 +62,12 @@ export const forumAPI = createApi({
       }),
     }),
 
+    getTopicById: build.query<{ data: IForumItem }, { id: string }>({
+      query: params => ({
+        url: `/${params.id}`,
+      }),
+    }),
+
     updateTopic: build.mutation<{ data: IForumItem }, IUpdateTopic>({
       query: data => ({
         url: `/${data.id}`,
@@ -62,12 +83,29 @@ export const forumAPI = createApi({
         body: { id: data.id },
       }),
     }),
+
+    createComment: build.mutation<IForumComment, ICreateComment>({
+      query: data => ({
+        url: `/${data.id}/comments`,
+        method: 'POST',
+        body: { data },
+      }),
+    }),
+
+    getComments: build.query<{ data: IForumComment[] }, { id: string }>({
+      query: params => ({
+        url: `/${params.id}/comments`,
+      }),
+    }),
   }),
 })
 
 export const {
   useCreateTopicMutation,
+  useCreateCommentMutation,
   useDeleteTopicMutation,
   useUpdateTopicMutation,
   useLazyGetTopicsQuery,
+  useLazyGetTopicByIdQuery,
+  useLazyGetCommentsQuery,
 } = forumAPI

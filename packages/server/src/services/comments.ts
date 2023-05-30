@@ -5,7 +5,7 @@ export const getAllCommentsService = async (id: string) => {
   try {
     return await Comment.findAll({
       where: {
-        topicId: id,
+        parentId: id,
       },
     })
   } catch (error) {
@@ -21,7 +21,7 @@ export const createCommentService = async (
     return await Comment.create({
       content: fields.content,
       userId: fields.userId,
-      topicId: id,
+      parentId: id,
     })
   } catch (error) {
     console.log(error)

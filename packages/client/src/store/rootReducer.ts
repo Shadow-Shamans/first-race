@@ -6,6 +6,7 @@ import { authAPI } from '@/shared/services/AuthService'
 import { leaderboardAPI } from '@/shared/services/LeaderboardService'
 import { leaderboardSlice } from '@/features/Leaderboard'
 import { forumAPI } from '@/shared/services/ForumService'
+import { forumSlice } from '@/features/Forum'
 
 // const rootPersistConfig = {
 //   key: storageKey,
@@ -23,6 +24,7 @@ export const rootReducer = combineReducers({
   [authSlice.name]: authSlice.reducer,
   [gameSlice.name]: gameSlice.reducer,
   [leaderboardSlice.name]: leaderboardSlice.reducer,
+  [forumSlice.name]: forumSlice.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
   [leaderboardAPI.reducerPath]: leaderboardAPI.reducer,
   [forumAPI.reducerPath]: forumAPI.reducer,

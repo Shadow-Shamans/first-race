@@ -7,3 +7,15 @@
   justify-content: space-between;
   gap: 20px;
 }
+
+.hidden {
+  display: none;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.date {
+  margin-left: 16px;
+}

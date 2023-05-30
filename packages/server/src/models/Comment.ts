@@ -33,24 +33,24 @@ export const CommentModel: ModelAttributes<Model, IComment> = {
   //   key: 'id',
   // },
   // },
-  emojiHappyFace: {
-    type: DataType.INTEGER,
-    allowNull: true,
-  },
-  emojiSadFace: {
-    type: DataType.INTEGER,
-    allowNull: true,
-  },
-  emojiAngryFace: {
-    type: DataType.INTEGER,
-    allowNull: true,
-  },
-  emojiLike: {
-    type: DataType.INTEGER,
-    allowNull: true,
-  },
-  emojiDislike: {
-    type: DataType.INTEGER,
-    allowNull: true,
-  },
+  // emojiHappyFace: {
+  //   type: DataType.INTEGER,
+  //   allowNull: true,
+  // },
+  // emojiSadFace: {
+  //   type: DataType.INTEGER,
+  //   allowNull: true,
+  // },
+  // emojiAngryFace: {
+  //   type: DataType.INTEGER,
+  //   allowNull: true,
+  // },
+  // emojiLike: {
+  //   type: DataType.INTEGER,
+  //   allowNull: true,
+  // },
+  // emojiDislike: {
+  //   type: DataType.INTEGER,
+  //   allowNull: true,
+  // },
 }

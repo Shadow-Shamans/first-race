@@ -12,6 +12,7 @@ export interface ICreateTopic {
   description: string
   userId: string
 }
+
 export interface IUpdateTopic {
   title: string
   description: string
@@ -34,7 +35,6 @@ export interface IComment {
 export interface ICreateComment {
   content: string
   userId: string
-  topicId: string
 }
 
 export interface IUser {
