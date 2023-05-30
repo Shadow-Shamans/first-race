@@ -4,4 +4,4 @@ import { COMMENTS_URL } from '../utils/constants/api'
 
 export const commentsRouter = express.Router()
 
-commentsRouter.get(`/${COMMENTS_URL}`, getAllComments)
+commentsRouter.get(`/:id/${COMMENTS_URL}`, getAllComments)

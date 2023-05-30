@@ -1,5 +1,5 @@
 export const modalCommonOptions = {
   timestamps: true,
-  createdAt: false,
+  createdAt: true,
   updatedAt: false,
 }

@@ -10,3 +10,19 @@ export const getAllComments = async (req: Request, res: Response) => {
     res.status(400).json({ error: 'Error. Cannot get comments' })
   }
 }
+
+export const addNewComment = async (_req: Request, res: Response) => {
+  try {
+    res.status(200).json({ data: 'success' })
+  } catch (error) {
+    res.status(400).json({ error: 'Error. Cannot add new comment' })
+  }
+}
+
+export const deleteComment = async (_req: Request, res: Response) => {
+  try {
+    res.status(200).json({ data: 'success' })
+  } catch (error) {
+    res.status(400).json({ error: 'Error. Cannot delete comment' })
+  }
+}
