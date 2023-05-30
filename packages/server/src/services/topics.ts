@@ -7,7 +7,6 @@ export const getAllTopicsService = async () => {
 
 export const createTopicService = async (topicData: ICreateTopic) => {
   const { userId, title, description } = topicData
-  // TODO message count
   const newTopic = await Topic.create({
     userId,
     title,

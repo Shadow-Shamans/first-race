@@ -36,7 +36,7 @@ export const createNewTopic = async (req: Request, res: Response) => {
   try {
     const newTopicData = req.body.data as ICreateTopic
     const newTopic = await createTopicService(newTopicData)
-    res.status(200).json({ data: newTopic })
+    res.status(201).json({ data: newTopic })
   } catch (error) {
     res.status(400).json({ error: 'Error. Cannot create new topic' })
   }
@@ -47,7 +47,6 @@ export const updateTopic = async (req: Request, res: Response) => {
     const updatedTopicData = req.body.data as IUpdateTopic
     await updateTopicService(updatedTopicData)
     const updatedTopic = await getOneTopicService(updatedTopicData.id)
-    console.log(updatedTopic, '=> updatedTopic')
     if (typeof updatedTopic === 'string') {
       res.status(204).json({ data: updatedTopic })
     } else {
