@@ -26,6 +26,7 @@
     "lerna": "^5.4.3"
   },
   "dependencies": {
+    "emoji-mart": "^5.5.2",
     "http-proxy-middleware": "^2.0.6"
   }
 }
