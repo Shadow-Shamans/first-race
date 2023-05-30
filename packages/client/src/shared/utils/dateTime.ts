@@ -13,3 +13,15 @@ export const convertDateTime = (dateTime: string): string[] => {
 
   return [resultDate, resultTime]
 }
+
+export interface ISortOption {
+  createdAt: string
+}
+
+export const sortByNew = (array: ISortOption[]): ISortOption[] => {
+  const arrayForSort = [...array]
+
+  return arrayForSort.sort(
+    (a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+  )
+}

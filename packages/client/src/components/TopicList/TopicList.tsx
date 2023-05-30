@@ -1,12 +1,18 @@
 import { FC, useEffect, useState } from 'react'
-import { Button, List, message } from 'antd'
+import { List, message } from 'antd'
 import { useForum } from '@/shared/hooks/useForum'
 import { TopicItem } from './components/TopicItem'
-import { useCreateTopicMutation } from '@/shared/services/ForumService'
+import {
+  IForumItem,
+  useCreateTopicMutation,
+} from '@/shared/services/ForumService'
 import { useAppSelector } from '@/app'
 import { selectUserData } from '@/features/User'
 import { ForumModal } from '@/components/ForumModal'
 import { IModalData } from '../ForumModal/ForumModal'
+import { ISortOption, sortByNew } from '@/shared/utils/dateTime'
+import { Controls } from '@/components/TopicList/components/Controls'
+import { TFilterOption, TSortOption } from './components/Controls/Controls'
 
 import styles from './TopicList.module.css'
 
@@ -15,7 +21,12 @@ export const TopicList: FC = () => {
 
   const [messageApi, contextHolder] = message.useMessage()
 
-  const { topics, isLoading: isTopicsLoading, refreshTopics } = useForum()
+  const {
+    topics,
+    isLoading: isTopicsLoading,
+    refreshTopics,
+    setTopics,
+  } = useForum()
 
   const [isModalOpened, setIsModalOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -49,6 +60,28 @@ export const TopicList: FC = () => {
     setIsModalOpened(false)
   }
 
+  const handleSort = (value: TSortOption) => {
+    const sortedByNew = sortByNew(topics as ISortOption[])
+
+    if (value === 'new') {
+      setTopics(sortedByNew as IForumItem[])
+    } else {
+      setTopics(sortedByNew.reverse() as IForumItem[])
+    }
+  }
+
+  const handleFilter = (value: TFilterOption[]) => {
+    if (value.length === 0) {
+      refreshTopics()
+    }
+
+    if (value.includes('own')) {
+      const filteredTopics = topics.filter(topic => topic.userId === userId)
+
+      setTopics(filteredTopics)
+    }
+  }
+
   useEffect(() => {
     if (mutationResult.status === 'fulfilled' && mutationResult.data) {
       const title = mutationResult.data.data.title
@@ -74,9 +107,11 @@ export const TopicList: FC = () => {
 
   return (
     <div className={styles.root}>
-      <Button className={styles.link} onClick={handleOpenModal}>
-        Добавить новую тему
-      </Button>
+      <Controls
+        onCreateTopic={handleOpenModal}
+        onSortTopics={handleSort}
+        onFilterTopics={handleFilter}
+      />
 
       <List
         loading={isTopicsLoading}

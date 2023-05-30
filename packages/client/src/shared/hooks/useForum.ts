@@ -3,6 +3,7 @@ import {
   IForumItem,
   useLazyGetTopicsQuery,
 } from '@/shared/services/ForumService'
+import { ISortOption, sortByNew } from '../utils/dateTime'
 
 export const useForum = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -26,7 +27,10 @@ export const useForum = () => {
   useEffect(() => {
     if (topicsList.data && topicsList.status === 'fulfilled') {
       setIsLoading(false)
-      setTopics(topicsList.data.data)
+
+      const sortedTopics = sortByNew(topicsList.data.data as ISortOption[])
+
+      setTopics(sortedTopics as IForumItem[])
     }
   }, [topicsList])
 
@@ -34,5 +38,6 @@ export const useForum = () => {
     isLoading,
     topics,
     refreshTopics,
+    setTopics,
   }
 }

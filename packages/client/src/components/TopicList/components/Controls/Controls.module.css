@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.link {
+  margin-bottom: 20px;
+  align-self: flex-end;
+}
+
+.filter {
+  width: 100%;
+}

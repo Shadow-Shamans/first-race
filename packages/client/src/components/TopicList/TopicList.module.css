@@ -3,8 +3,3 @@
   display: flex;
   flex-direction: column;
 }
-
-.link {
-  margin-bottom: 20px;
-  align-self: flex-end;
-}
