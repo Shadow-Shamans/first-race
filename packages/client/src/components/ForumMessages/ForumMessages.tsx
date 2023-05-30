@@ -19,11 +19,7 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
   const { id: topicId } = useAppSelector(selectTopic)
 
   const { isLoading } = useTopic()
-  const {
-    isLoading: isMessagesLoading,
-    messages,
-    refreshMessages,
-  } = useMessages(parentId)
+  const { messages, refreshMessages } = useMessages(parentId)
 
   const [comment, setComment] = useState('')
 

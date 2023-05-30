@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import {
-  useLazyGetTopicByIdQuery,
   useLazyGetCommentsQuery,
   IForumComment,
 } from '@/shared/services/ForumService'
