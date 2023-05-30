@@ -23,7 +23,7 @@ export const ForumMessage: FC<IProps> = ({ message }) => {
         <Divider />
 
         {message.replyCount > 0 && (
-          <Button style={{ marginBottom: '16px' }} type="primary">
+          <Button className={styles.button} type="primary">
             Показать ответы
           </Button>
         )}
