@@ -6,6 +6,7 @@ import { CommentModel } from '../models/Comment'
 import { RoleModel } from '../models/Role'
 import { UserModel } from '../models/User'
 import type { Dialect } from 'sequelize'
+import { modalCommonOptions } from './constants'
 
 dotenv.config({ path: '../../.env' })
 
@@ -29,10 +30,14 @@ const sequelizeOptions: SequelizeOptions = {
 
 const sequelize = new Sequelize(sequelizeOptions)
 
-export const Topic = sequelize.define('Topic', TopicModel, {})
-export const Comment = sequelize.define('Comment', CommentModel, {})
-export const Role = sequelize.define('Role', RoleModel, {})
-export const User = sequelize.define('User', UserModel, {})
+export const Topic = sequelize.define('Topic', TopicModel, modalCommonOptions)
+export const Comment = sequelize.define(
+  'Comment',
+  CommentModel,
+  modalCommonOptions
+)
+export const Role = sequelize.define('Role', RoleModel, modalCommonOptions)
+export const User = sequelize.define('User', UserModel, modalCommonOptions)
 
 Topic.hasMany(Comment, {
   foreignKey: 'topic_id',

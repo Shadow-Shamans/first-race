@@ -23,11 +23,9 @@ export const TopicModel: ModelAttributes<Model, ITopic> = {
   messageCount: {
     allowNull: true,
     type: DataType.INTEGER,
-    field: 'message_count',
   },
   userId: {
     type: DataType.INTEGER,
     allowNull: false,
-    field: 'user_id',
   },
 }

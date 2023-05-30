@@ -13,6 +13,7 @@ export const getAllTopics = async (_req: Request, res: Response) => {
     const allTopics = await getAllTopicsService()
     res.status(200).json({ data: allTopics })
   } catch (error) {
+    console.log(error, '=> error')
     res.status(400).json({ error: 'Error. Cannot get all topic' })
   }
 }
@@ -44,7 +45,9 @@ export const createNewTopic = async (req: Request, res: Response) => {
 export const updateTopic = async (req: Request, res: Response) => {
   try {
     const updatedTopicData = req.body.data as IUpdateTopic
-    const updatedTopic = await updateTopicService(updatedTopicData)
+    await updateTopicService(updatedTopicData)
+    const updatedTopic = await getOneTopicService(updatedTopicData.id)
+    console.log(updatedTopic, '=> updatedTopic')
     if (typeof updatedTopic === 'string') {
       res.status(204).json({ data: updatedTopic })
     } else {
@@ -58,7 +61,8 @@ export const updateTopic = async (req: Request, res: Response) => {
 export const deleteTopic = async (req: Request, res: Response) => {
   try {
     const id = req.params.id as string
-    const deletedTopic = await deleteTopicService(id)
+    const deletedTopic = await getOneTopicService(id)
+    await deleteTopicService(id)
     if (typeof deletedTopic === 'string') {
       res.status(204).json({ data: deletedTopic })
     } else {
