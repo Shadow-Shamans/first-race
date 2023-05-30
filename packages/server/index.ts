@@ -9,6 +9,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import {
   API_VERSION,
+  COMMENTS_URL,
   TOPICS_URL,
   USER_URL,
   YA_API_URL,
@@ -16,6 +17,7 @@ import {
 import proxy from './src/middlewares/proxy'
 import { getViteDevServer } from './src/utils/vite'
 import { userRouter } from './src/routes/user'
+import { commentsRouter } from './src/routes/comments'
 
 dotenv.config({ path: '../../.env' })
 
@@ -44,6 +46,7 @@ async function startServer() {
   app.use(YA_API_URL, proxy)
   app.use(`${API_VERSION}${TOPICS_URL}`, topicsRouter)
   app.use(`${API_VERSION}${USER_URL}`, userRouter)
+  app.use(`${API_VERSION}${COMMENTS_URL}`, commentsRouter)
 
   if (!isDev) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))

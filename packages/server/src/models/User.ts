@@ -6,6 +6,10 @@ export const UserModel: ModelAttributes<Model, IUser> = {
   roleId: {
     type: DataType.INTEGER,
     allowNull: false,
-    field: 'role_id',
+  },
+  id: {
+    type: DataType.UUID,
+    primaryKey: true,
+    defaultValue: DataType.UUIDV4,
   },
 }

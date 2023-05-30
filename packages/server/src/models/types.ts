@@ -4,6 +4,7 @@ export interface ITopic {
   description: string
   userId: string
   messageCount: number
+  commentIds?: number[]
 }
 
 export interface ICreateTopic {
@@ -20,9 +21,9 @@ export interface IUpdateTopic {
 export interface IComment {
   id: number
   content: string
-  userId: string
-  parentCommentId: string
-  topicId: number
+  userId?: string
+  parentId: string
+  // topicId: number
   emojiHappyFace?: number
   emojiSadFace?: number
   emojiAngryFace?: number
@@ -31,13 +32,14 @@ export interface IComment {
 }
 
 export interface ICreateComment {
-  title: string
-  description: string
+  content: string
   userId: string
+  topicId: string
 }
 
 export interface IUser {
-  roleId: number
+  roleId: string
+  id: string
 }
 
 export type TRoles = 'admin' | 'usual'

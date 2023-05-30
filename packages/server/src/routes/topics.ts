@@ -6,16 +6,21 @@ import {
   getOneTopic,
   updateTopic,
 } from '../controllers/topics'
-import { checkAuth } from '../middlewares/auth'
+import { addNewComment, getAllComments } from '../controllers/comments'
+// import { checkAuth } from '../middlewares/auth'
 
 export const topicsRouter = express.Router()
 
-topicsRouter.get(`/all`, checkAuth, getAllTopics)
+topicsRouter.get(`/all`, getAllTopics)
 
-topicsRouter.get(`/:id`, checkAuth, getOneTopic)
+topicsRouter.get(`/:id`, getOneTopic)
 
-topicsRouter.post(`/create`, checkAuth, createNewTopic)
+topicsRouter.post(`/create`, createNewTopic)
 
-topicsRouter.put(`/:id`, checkAuth, updateTopic)
+topicsRouter.put(`/:id`, updateTopic)
 
-topicsRouter.delete(`/:id`, checkAuth, deleteTopic)
+topicsRouter.delete(`/:id`, deleteTopic)
+
+topicsRouter.get(`/:id/comments`, getAllComments)
+
+topicsRouter.post(`/:id/comments`, addNewComment)

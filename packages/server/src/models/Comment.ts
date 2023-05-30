@@ -15,42 +15,42 @@ export const CommentModel: ModelAttributes<Model, IComment> = {
   userId: {
     type: DataType.INTEGER,
     allowNull: false,
-    // field: 'user_id',
+    // references: {
+    //   model: 'User',
+    //   key: 'id'
+    // }
   },
-  parentCommentId: {
+  parentId: {
     type: DataType.UUID,
     allowNull: true,
-    // field: 'parent_comment_id',
   },
-  topicId: {
+  // parentCommentId: {
+  //   type: DataType.UUID,
+  // onDelete: 'CASCADE',
+  // onUpdate: 'CASCADE',
+  // references: {
+  //   model: 'Topic',
+  //   key: 'id',
+  // },
+  // },
+  emojiHappyFace: {
     type: DataType.INTEGER,
-    // field: 'topic_id',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
+    allowNull: true,
   },
-  // emojiHappyFace: {
-  //   type: DataType.INTEGER,
-  //   allowNull: false,
-  //   field: 'emoji_happy_face',
-  // },
-  // emojiSadFace: {
-  //   type: DataType.INTEGER,
-  //   allowNull: false,
-  //   field: 'emoji_sad_face',
-  // },
-  // emojiAngryFace: {
-  //   type: DataType.INTEGER,
-  //   allowNull: false,
-  //   field: 'emoji_angry_face',
-  // },
-  // emojiLike: {
-  //   type: DataType.INTEGER,
-  //   allowNull: false,
-  //   field: 'emoji_like',
-  // },
-  // emojiDislike: {
-  //   type: DataType.INTEGER,
-  //   allowNull: false,
-  //   field: 'emoji_dislike',
-  // },
+  emojiSadFace: {
+    type: DataType.INTEGER,
+    allowNull: true,
+  },
+  emojiAngryFace: {
+    type: DataType.INTEGER,
+    allowNull: true,
+  },
+  emojiLike: {
+    type: DataType.INTEGER,
+    allowNull: true,
+  },
+  emojiDislike: {
+    type: DataType.INTEGER,
+    allowNull: true,
+  },
 }
