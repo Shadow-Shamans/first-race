@@ -1,8 +1,12 @@
-import { List, Skeleton, Typography } from 'antd'
-import { FC } from 'react'
+import { Button, List, Skeleton, Typography } from 'antd'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
+import classNames from 'classnames'
 import { IForumItem } from '@/shared/services/ForumService'
 import { convertDateTime } from '@/shared/utils/dateTime'
+import { useAppSelector } from '@/app'
+import { selectUserData } from '@/features/User'
 
 import styles from './TopicItem.module.css'
 
@@ -12,6 +16,9 @@ interface IProps {
 }
 
 export const TopicItem: FC<IProps> = ({ topic, isLoading = false }) => {
+  const { id: userId } = useAppSelector(selectUserData)
+
+  const isCurrentUser = userId === topic.userId
   const [date, time] = convertDateTime(topic.createdAt)
 
   return (
@@ -35,6 +42,19 @@ export const TopicItem: FC<IProps> = ({ topic, isLoading = false }) => {
         <Typography.Text type="secondary" className={styles.date}>
           {date}
         </Typography.Text>
+
+        <div
+          className={classNames(styles.controls, {
+            [styles.hidden]: !isCurrentUser,
+          })}>
+          <Button type="default" size="small">
+            <EditOutlined />
+          </Button>
+
+          <Button type="primary" danger size="small">
+            <DeleteOutlined />
+          </Button>
+        </div>
       </Skeleton>
     </List.Item>
   )

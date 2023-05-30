@@ -11,3 +11,15 @@
   align-items: center;
   justify-content: center;
 }
+
+.controls {
+  position: absolute;
+  right: -50px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hidden {
+  display: none;
+}
