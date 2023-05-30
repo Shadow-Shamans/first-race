@@ -6,7 +6,7 @@ import styles from './Controls.module.css'
 interface IProps {
   onCreateTopic: () => void
   onSortTopics: (value: TSortOption) => void
-  onFilterTopics: (value: TFilterOption) => void
+  onFilterTopics: (value: TFilterOption[]) => void
 }
 
 export type TSortOption = 'old' | 'new'
