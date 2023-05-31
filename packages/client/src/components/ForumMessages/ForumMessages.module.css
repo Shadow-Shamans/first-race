@@ -1,7 +1,29 @@
 .comment {
   margin-bottom: 16px;
+  position: relative;
 }
 
-.button {
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0 16px;
   margin-top: 16px;
+}
+
+.iconImages svg {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.emoji_wrapper {
+  position: relative;
+}
+
+.emoji_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }

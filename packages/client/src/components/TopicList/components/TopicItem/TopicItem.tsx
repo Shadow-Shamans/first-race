@@ -122,11 +122,11 @@ export const TopicItem: FC<IProps> = ({ topic }) => {
             type="default"
             size="small"
             onClick={() => setIsModalOpened(true)}>
-            <EditOutlined />
+            <EditOutlined rev={undefined} />
           </Button>
 
           <Button type="primary" danger size="small" onClick={handleDelete}>
-            <DeleteOutlined />
+            <DeleteOutlined rev={undefined} />
           </Button>
         </div>
       </Skeleton>

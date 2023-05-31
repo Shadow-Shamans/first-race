@@ -94,7 +94,7 @@ export const ForumTopic: FC = () => {
               type="default"
               size="small"
               onClick={() => setIsModalOpened(true)}>
-              <EditOutlined />
+              <EditOutlined rev={undefined} />
             </Button>
           </div>
         </div>
