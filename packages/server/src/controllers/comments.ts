@@ -6,11 +6,13 @@ import {
   getOneCommentService,
 } from '../services/comments'
 import { ICreateComment } from '../models/types'
+import { updateTopicMessageCount } from '../services/topics'
 
 export const getAllComments = async (req: Request, res: Response) => {
   try {
-    const id = req.params.id as string
+    const { id } = req.params
     const allComments = await getAllCommentsService(id)
+
     res.status(200).json({ data: allComments })
   } catch (error) {
     res.status(400).json({ error: 'Error. Cannot get comments' })
@@ -19,8 +21,11 @@ export const getAllComments = async (req: Request, res: Response) => {
 
 export const addNewComment = async (req: Request, res: Response) => {
   const { id } = req.params
+
   const newCommentDataDTO = req.body.data as ICreateComment
   const newCommentData = await createCommentService(id, newCommentDataDTO)
+
+  await updateTopicMessageCount(id)
 
   try {
     res.status(200).json({ data: newCommentData })

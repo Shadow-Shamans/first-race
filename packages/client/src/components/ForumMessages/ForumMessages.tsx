@@ -21,7 +21,7 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
 
   const { id: userId } = useAppSelector(selectUserData)
 
-  const { isLoading } = useTopic()
+  const { isLoading, refreshTopic } = useTopic()
   const { messages, refreshMessages } = useMessages(parentId)
 
   const [comment, setComment] = useState('')
@@ -30,7 +30,7 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
   const [deleteComment, mutationResultDelete] = useDeleteCommentMutation()
 
   const handleCreateComment = () => {
-    if (!userId) return
+    if (!userId || !comment) return
 
     createComment({ userId: userId.toString(), content: comment, id: parentId })
   }
@@ -47,6 +47,8 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
       })
 
       refreshMessages()
+      refreshTopic()
+
       setComment('')
     }
 
@@ -64,6 +66,7 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
       mutationResultDelete.data
     ) {
       refreshMessages()
+      refreshTopic()
     }
 
     if (mutationResultDelete.status === 'rejected') {

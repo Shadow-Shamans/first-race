@@ -15,6 +15,10 @@ export const useTopic = () => {
 
   const [getTopicById, topicInfo] = useLazyGetTopicByIdQuery()
 
+  const refreshTopic = () => {
+    getTopicById({ id: parentId })
+  }
+
   useEffect(() => {
     getTopicById({ id: parentId })
   }, [])
@@ -32,5 +36,6 @@ export const useTopic = () => {
 
   return {
     isLoading,
+    refreshTopic,
   }
 }

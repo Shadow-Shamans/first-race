@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 import { Input, Modal } from 'antd'
 
 import styles from './ForumModal.module.css'
+import { useTopic } from '../../shared/hooks/useTopic'
 
 export interface IModalData {
   title: string
@@ -31,13 +32,14 @@ export const ForumModal: FC<IProps> = ({
   )
 
   const handleSubmit = () => {
+    if (!topicTitle || !topicDescription) return
+
     onSubmit({ title: topicTitle, description: topicDescription })
     clearFields()
   }
 
   const handleCancel = () => {
     onCancel({ title: topicTitle, description: topicDescription })
-    clearFields()
   }
 
   const clearFields = () => {
