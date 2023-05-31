@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { Card, Typography } from 'antd'
 import classNames from 'classnames'
 import { Rating } from '@/components/Rating'
@@ -14,19 +14,6 @@ const { Text } = Typography
 
 export const Main: FC = () => {
   const { userList } = useRating()
-
-  useEffect(() => {
-    fetch('http://localhost:3001/api/v1/topics/all', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-      // body: JSON.stringify({
-      //   data: { userId: '111', title: '123', description: '31' },
-      // }),
-    })
-  }, [])
-
   return (
     <section className={styles.root}>
       <div className={styles.picturesWrapper}>

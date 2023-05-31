@@ -2,6 +2,8 @@
   margin: 0 auto;
   width: 100%;
   max-width: 980px;
+  padding: 16px;
+  border-radius: 10px;
 }
 
 .titleWrapper {
