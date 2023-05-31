@@ -1,7 +1,9 @@
 import { Request, Response } from 'express'
 import {
   createCommentService,
+  deleteCommentService,
   getAllCommentsService,
+  getOneCommentService,
 } from '../services/comments'
 import { ICreateComment } from '../models/types'
 
@@ -27,9 +29,14 @@ export const addNewComment = async (req: Request, res: Response) => {
   }
 }
 
-export const deleteComment = async (_req: Request, res: Response) => {
+export const deleteComment = async (req: Request, res: Response) => {
   try {
-    res.status(200).json({ data: 'success' })
+    const { id } = req.params
+    const commentToDelete = await getOneCommentService(id)
+
+    await deleteCommentService(id)
+
+    res.status(200).json({ data: commentToDelete })
   } catch (error) {
     res.status(400).json({ error: 'Error. Cannot delete comment' })
   }

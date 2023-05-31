@@ -1,56 +1,28 @@
-import React, { FC, useEffect, useState } from 'react'
-import { Button, Card, Divider, Input, List, message, Typography } from 'antd'
-import classNames from 'classnames'
-import {
-  IForumComment,
-  useCreateCommentMutation,
-} from '@/shared/services/ForumService'
+import React, { FC } from 'react'
+import { Button, Card, Divider, List, Typography } from 'antd'
+import { DeleteOutlined } from '@ant-design/icons'
+import { IForumComment } from '@/shared/services/ForumService'
 import { useAppSelector } from '@/app'
 import { selectUserData } from '@/features/User'
 import { convertDateTime } from '@/shared/utils/dateTime'
+import { ForumMessages } from '@/components/ForumMessages'
 
 import styles from './ForumMessage.module.css'
 
 interface IProps {
   comment: IForumComment
+  onDelete: (id: string) => void
 }
 
-export const ForumMessage: FC<IProps> = ({ comment }) => {
+export const ForumMessage: FC<IProps> = ({ comment, onDelete }) => {
   const [date, time] = convertDateTime(comment.createdAt)
 
-  const [messageApi, contextHolder] = message.useMessage()
-
   const { id: userId } = useAppSelector(selectUserData)
+  const isCurrentUser = userId === comment.userId
 
-  const [reply, setReply] = useState('')
-  const [isHidden, setIsHidden] = useState(true)
-
-  const [createComment, mutationResult] = useCreateCommentMutation()
-
-  const handleCreateComment = () => {
-    if (isHidden) {
-      setIsHidden(false)
-
-      return
-    }
-
-    if (!userId) return
-
-    createComment({ userId: userId.toString(), content: reply, id: comment.id })
+  const handleDelete = () => {
+    onDelete(comment.id)
   }
-
-  useEffect(() => {
-    if (mutationResult.status === 'fulfilled' && mutationResult.data) {
-      setReply('')
-    }
-
-    if (mutationResult.status === 'rejected') {
-      messageApi.open({
-        type: 'error',
-        content: `Ошибка при добавлении комментария`,
-      })
-    }
-  }, [mutationResult])
 
   return (
     <List.Item>
@@ -64,29 +36,17 @@ export const ForumMessage: FC<IProps> = ({ comment }) => {
             <Typography.Text type="secondary" className={styles.date}>
               {date}
             </Typography.Text>
+
+            {isCurrentUser && (
+              <Button type="primary" danger size="small" onClick={handleDelete}>
+                <DeleteOutlined />
+              </Button>
+            )}
           </div>
         </div>
 
-        <Divider />
-
-        {comment.messageCount > 0 && (
-          <Button style={{ marginBottom: '16px' }} type="primary">
-            Показать ответы
-          </Button>
-        )}
-
-        <Input.TextArea
-          placeholder="Ответить"
-          className={classNames(styles.field, { [styles.hidden]: isHidden })}
-          onChange={event => setReply(event.target.value)}
-        />
-
-        <Button type="primary" onClick={handleCreateComment}>
-          Ответить
-        </Button>
+        <ForumMessages parentId={comment.id} />
       </Card>
-
-      {contextHolder}
     </List.Item>
   )
 }

@@ -2,10 +2,15 @@
   width: 100%;
 }
 
+.ant-list-empty-text {
+  display: none;
+}
+
 .content {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  margin-bottom: 20px;
 }
 
 .hidden {
@@ -17,5 +22,10 @@
 }
 
 .date {
-  margin-left: 16px;
+  margin: 8px;
+}
+
+/* костыль чтобы убрать анотовскую No Data  */
+:global .ant-list-empty-text {
+  display: none;
 }

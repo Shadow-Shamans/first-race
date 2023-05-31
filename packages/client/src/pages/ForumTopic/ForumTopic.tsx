@@ -6,7 +6,7 @@ import { selectTopic } from '@/features/Forum'
 import { convertDateTime } from '@/shared/utils/dateTime'
 import { selectUserData } from '@/features/User'
 import classNames from 'classnames'
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import { EditOutlined } from '@ant-design/icons'
 
 import styles from './ForumTopic.module.css'
 
@@ -54,14 +54,14 @@ export const ForumTopic: FC = () => {
               <EditOutlined />
             </Button>
 
-            <Button
-              type="primary"
-              danger
-              size="small"
-              // onClick={handleDelete}
-            >
-              <DeleteOutlined />
-            </Button>
+            {/*<Button*/}
+            {/*  type="primary"*/}
+            {/*  danger*/}
+            {/*  size="small"*/}
+            {/*  // onClick={handleDelete}*/}
+            {/*>*/}
+            {/*  <DeleteOutlined />*/}
+            {/*</Button>*/}
           </div>
         </div>
 

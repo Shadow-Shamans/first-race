@@ -28,3 +28,15 @@ export const createCommentService = async (
     throw new Error(`GET: Failed to create comment with id ${id}`)
   }
 }
+
+export const getOneCommentService = async (id: string) => {
+  return await Comment.findOne({
+    where: { id },
+  })
+}
+
+export const deleteCommentService = async (id: string) => {
+  return await Comment.destroy({
+    where: { id },
+  })
+}

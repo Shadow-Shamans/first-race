@@ -97,6 +97,14 @@ export const forumAPI = createApi({
         url: `/${params.id}/comments`,
       }),
     }),
+
+    deleteComment: build.mutation<{ data: IForumComment }, { id: string }>({
+      query: data => ({
+        url: `/${data.id}/comments`,
+        method: 'DELETE',
+        body: { id: data.id },
+      }),
+    }),
   }),
 })
 
@@ -104,6 +112,7 @@ export const {
   useCreateTopicMutation,
   useCreateCommentMutation,
   useDeleteTopicMutation,
+  useDeleteCommentMutation,
   useUpdateTopicMutation,
   useLazyGetTopicsQuery,
   useLazyGetTopicByIdQuery,
