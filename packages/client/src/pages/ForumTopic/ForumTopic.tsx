@@ -7,10 +7,13 @@ import { convertDateTime } from '@/shared/utils/dateTime'
 import { selectUserData } from '@/features/User'
 import classNames from 'classnames'
 import { EditOutlined } from '@ant-design/icons'
+import { useTopic } from '@/shared/hooks/useTopic'
 
 import styles from './ForumTopic.module.css'
 
 export const ForumTopic: FC = () => {
+  const { isLoading } = useTopic()
+
   const { id: userId } = useAppSelector(selectUserData)
   const {
     title,
@@ -53,15 +56,6 @@ export const ForumTopic: FC = () => {
             >
               <EditOutlined />
             </Button>
-
-            {/*<Button*/}
-            {/*  type="primary"*/}
-            {/*  danger*/}
-            {/*  size="small"*/}
-            {/*  // onClick={handleDelete}*/}
-            {/*>*/}
-            {/*  <DeleteOutlined />*/}
-            {/*</Button>*/}
           </div>
         </div>
 
@@ -69,7 +63,7 @@ export const ForumTopic: FC = () => {
       </Layout.Header>
 
       <Layout.Content>
-        <ForumMessages parentId={topicId} />
+        {!isLoading && <ForumMessages parentId={topicId} />}
       </Layout.Content>
     </Layout>
   )
