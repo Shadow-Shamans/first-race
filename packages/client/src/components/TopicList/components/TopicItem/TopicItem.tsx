@@ -34,7 +34,7 @@ export const TopicItem: FC<IProps> = ({ topic }) => {
 
   const [isModalOpened, setIsModalOpened] = useState(false)
 
-  const { isLoading, refreshTopics } = useForum()
+  const { refreshTopics } = useForum()
 
   const handleDelete = () => {
     deleteTopic({ id: topic.id })
@@ -94,7 +94,7 @@ export const TopicItem: FC<IProps> = ({ topic }) => {
 
   return (
     <List.Item>
-      <Skeleton title={false} loading={isLoading} active>
+      <Skeleton title={false} loading={false} active>
         <List.Item.Meta
           title={
             <Link to={`/forum/topic/${topic.id}`}>
@@ -133,7 +133,6 @@ export const TopicItem: FC<IProps> = ({ topic }) => {
 
       {isModalOpened && (
         <ForumModal
-          isLoading={isLoading}
           title={`Тема "${topic.title}"`}
           initialData={{ title: topic.title, description: topic.description }}
           onSubmit={handleUpdate}

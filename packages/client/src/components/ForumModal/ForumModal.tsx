@@ -10,7 +10,7 @@ export interface IModalData {
 }
 
 interface IProps {
-  isLoading: boolean
+  isLoading?: boolean
   title: string
   initialData?: IModalData
   onSubmit: (data: IModalData) => void
@@ -18,7 +18,7 @@ interface IProps {
 }
 
 export const ForumModal: FC<IProps> = ({
-  isLoading,
+  isLoading = false,
   title,
   initialData,
   onSubmit,

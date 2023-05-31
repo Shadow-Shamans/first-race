@@ -26,11 +26,12 @@ export const TopicList: FC = () => {
     isLoading: isTopicsLoading,
     refreshTopics,
     setTopics,
+    filteredTopics,
+    filterTopics,
   } = useForum()
 
   const [isModalOpened, setIsModalOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [filteredTopics, setFilteredTopics] = useState<IForumItem[]>([])
 
   const [createTopic, mutationResult] = useCreateTopicMutation()
 
@@ -72,28 +73,8 @@ export const TopicList: FC = () => {
   }
 
   const handleFilter = (value: TFilterOption[]) => {
-    let filtered = topics
-
-    if (value.includes('own')) {
-      filtered = filtered.filter(topic => topic.userId === userId)
-    }
-
-    if (value.includes('withAnswers')) {
-      filtered = filtered.filter(topic => topic.messageCount > 0)
-    }
-
-    setFilteredTopics(filtered)
-
-    if (value.length === 0) {
-      setFilteredTopics(topics)
-    }
+    filterTopics(value)
   }
-
-  useEffect(() => {
-    if (topics.length > 0 && filteredTopics.length === 0) {
-      setFilteredTopics(topics)
-    }
-  }, [topics])
 
   useEffect(() => {
     if (mutationResult.status === 'fulfilled' && mutationResult.data) {
@@ -117,6 +98,10 @@ export const TopicList: FC = () => {
     setIsLoading(false)
     setIsModalOpened(false)
   }, [mutationResult])
+
+  useEffect(() => {
+    refreshTopics()
+  }, [])
 
   return (
     <div className={styles.root}>
