@@ -118,6 +118,7 @@ export class Game {
   }
 
   start = () => {
+    console.log('start game')
     this._running = true
   }
 
