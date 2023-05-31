@@ -30,6 +30,7 @@ export const TopicList: FC = () => {
 
   const [isModalOpened, setIsModalOpened] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [filteredTopics, setFilteredTopics] = useState<IForumItem[]>([])
 
   const [createTopic, mutationResult] = useCreateTopicMutation()
 
@@ -71,16 +72,28 @@ export const TopicList: FC = () => {
   }
 
   const handleFilter = (value: TFilterOption[]) => {
-    if (value.length === 0) {
-      refreshTopics()
-    }
+    let filtered = topics
 
     if (value.includes('own')) {
-      const filteredTopics = topics.filter(topic => topic.userId === userId)
+      filtered = filtered.filter(topic => topic.userId === userId)
+    }
 
-      setTopics(filteredTopics)
+    if (value.includes('withAnswers')) {
+      filtered = filtered.filter(topic => topic.messageCount > 0)
+    }
+
+    setFilteredTopics(filtered)
+
+    if (value.length === 0) {
+      setFilteredTopics(topics)
     }
   }
+
+  useEffect(() => {
+    if (topics.length > 0 && filteredTopics.length === 0) {
+      setFilteredTopics(topics)
+    }
+  }, [topics])
 
   useEffect(() => {
     if (mutationResult.status === 'fulfilled' && mutationResult.data) {
@@ -116,7 +129,7 @@ export const TopicList: FC = () => {
       <List
         loading={isTopicsLoading}
         itemLayout="horizontal"
-        dataSource={topics}
+        dataSource={filteredTopics}
         renderItem={item => <TopicItem topic={item} />}
       />
 

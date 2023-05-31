@@ -67,6 +67,11 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
     ) {
       refreshMessages()
       refreshTopic()
+
+      messageApi.open({
+        type: 'success',
+        content: `Комментарий удален`,
+      })
     }
 
     if (mutationResultDelete.status === 'rejected') {

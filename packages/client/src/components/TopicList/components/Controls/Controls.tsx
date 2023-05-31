@@ -11,7 +11,7 @@ interface IProps {
 
 export type TSortOption = 'old' | 'new'
 
-export type TFilterOption = 'own'
+export type TFilterOption = 'own' | 'withAnswers'
 
 interface IOption {
   value: TSortOption | TFilterOption
@@ -23,7 +23,10 @@ const selectOptions: IOption[] = [
   { value: 'old', label: 'Сначала старые' },
 ]
 
-const filterOptions: IOption[] = [{ value: 'own', label: 'Только мои' }]
+const filterOptions: IOption[] = [
+  { value: 'own', label: 'Только мои' },
+  { value: 'withAnswers', label: 'С комментариями' },
+]
 
 export const Controls: FC<IProps> = ({
   onCreateTopic,
