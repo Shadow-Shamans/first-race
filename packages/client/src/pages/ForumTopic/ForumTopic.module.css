@@ -1,13 +1,50 @@
 .layout {
-  width: 980px;
-  margin: 50px auto;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 980px;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   background: none;
   padding: 0;
+  margin-bottom: 20px;
+}
+
+.counter {
+  background-color: #ffd969;
+  border-radius: 100%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.controls {
+  position: absolute;
+  right: -50px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hidden {
+  display: none;
 }
 

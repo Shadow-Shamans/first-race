@@ -1,0 +1,26 @@
+.date {
+  margin-left: 16px;
+}
+
+.counter {
+  background-color: #ffd969;
+  border-radius: 100%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.controls {
+  position: absolute;
+  right: -50px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,20 +1,43 @@
 import { useEffect, useState } from 'react'
-import { IForumItem } from '@/pages/Forum/types'
-import { topicsMock } from '@/mock/mockForum'
+import {
+  IForumItem,
+  useLazyGetTopicsQuery,
+} from '@/shared/services/ForumService'
+import { ISortOption, sortByNew } from '../utils/dateTime'
 
 export const useForum = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [topics, setTopics] = useState<IForumItem[]>([])
 
-  useEffect(() => {
-    setTimeout(() => {
+  const [getTopics, topicsList] = useLazyGetTopicsQuery()
+
+  const refreshTopics = () => {
+    try {
+      getTopics()
+    } catch (error) {
       setIsLoading(false)
-      setTopics(topicsMock)
-    }, 1000)
+      setTopics([])
+    }
+  }
+
+  useEffect(() => {
+    refreshTopics()
   }, [])
+
+  useEffect(() => {
+    if (topicsList.data && topicsList.status === 'fulfilled') {
+      setIsLoading(false)
+
+      const sortedTopics = sortByNew(topicsList.data.data as ISortOption[])
+
+      setTopics(sortedTopics as IForumItem[])
+    }
+  }, [topicsList])
 
   return {
     isLoading,
     topics,
+    refreshTopics,
+    setTopics,
   }
 }

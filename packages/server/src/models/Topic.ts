@@ -13,7 +13,7 @@ export const TopicModel: ModelAttributes<Model, ITopic> = {
     allowNull: false,
     validate: {
       max: 100,
-      min: 10,
+      min: 1,
     },
   },
   description: {

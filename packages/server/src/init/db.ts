@@ -40,11 +40,11 @@ export const Role = sequelize.define('Role', RoleModel, modalCommonOptions)
 export const User = sequelize.define('User', UserModel, modalCommonOptions)
 
 Topic.hasMany(Comment, {
-  foreignKey: 'topicId',
+  foreignKey: 'parentId',
 })
 
 Comment.belongsTo(Topic, {
-  foreignKey: 'topicId',
+  foreignKey: 'parentId',
 })
 
 User.belongsTo(Role, {

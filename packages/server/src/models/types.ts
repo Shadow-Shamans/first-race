@@ -12,6 +12,7 @@ export interface ICreateTopic {
   description: string
   userId: string
 }
+
 export interface IUpdateTopic {
   title: string
   description: string
@@ -21,20 +22,13 @@ export interface IUpdateTopic {
 export interface IComment {
   id: number
   content: string
-  userId?: string
+  userId: string
   parentId: string
-  // topicId: number
-  emojiHappyFace?: number
-  emojiSadFace?: number
-  emojiAngryFace?: number
-  emojiLike?: number
-  emojiDislike?: number
 }
 
 export interface ICreateComment {
   content: string
   userId: string
-  topicId: string
 }
 
 export interface IUser {
