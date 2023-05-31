@@ -43,6 +43,7 @@ export const useFullscreen = (element: HTMLElement): [boolean, () => void] => {
   const toggleFullscreen = () => {
     const shouldEnable = !enabled
     setFullscreen(shouldEnable)
+    console.log({ shouldEnable })
     shouldEnable ? request(element) : exit()
   }
 

@@ -31,7 +31,6 @@ export class Game {
   ref: unknown
 
   constructor(opt: IGameOptions) {
-    console.log('GAME')
     this._canvas = opt.canvas
     this._ctx = opt.ctx
 
