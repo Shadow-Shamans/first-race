@@ -1,6 +1,5 @@
-import { FC, useEffect, useState } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { Button, Input, List, message } from 'antd'
-import { ForumMessage } from './components/ForumMessage'
 import {
   useCreateCommentMutation,
   useDeleteCommentMutation,
@@ -9,6 +8,10 @@ import { useAppSelector } from '@/app'
 import { selectUserData } from '@/features/User'
 import { useTopic } from '@/shared/hooks/useTopic'
 import { useMessages } from '@/shared/hooks'
+import { ForumMessage } from './components/ForumMessage'
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+import { SmileOutlined } from '@ant-design/icons'
 
 import styles from './ForumMessages.module.css'
 
@@ -25,6 +28,7 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
   const { messages, refreshMessages } = useMessages(parentId)
 
   const [comment, setComment] = useState('')
+  const [emojiVisibility, setEmojiVisibility] = useState(false)
 
   const [createComment, mutationResult] = useCreateCommentMutation()
   const [deleteComment, mutationResultDelete] = useDeleteCommentMutation()
@@ -82,6 +86,15 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
     }
   }, [mutationResultDelete])
 
+  const handleAddEmoji = (emoji: any) => {
+    setComment(`${comment + emoji.native}`)
+    setEmojiVisibility(false)
+  }
+
+  const handleEmojiVisability = () => {
+    setEmojiVisibility(true)
+  }
+
   return (
     <>
       <List
@@ -108,12 +121,24 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
           autoSize={{ minRows: 3, maxRows: 5 }}
         />
 
-        <Button
-          type="primary"
-          className={styles.button}
-          onClick={handleCreateComment}>
-          Отправить
-        </Button>
+        <div className={styles.navigation}>
+          <Button type="primary" onClick={handleCreateComment}>
+            Отправить
+          </Button>
+          <div className={styles.emoji_wrapper}>
+            <SmileOutlined
+              className={styles.iconImages}
+              rev={undefined}
+              onClick={handleEmojiVisability}
+            />
+
+            {emojiVisibility && (
+              <div className={styles.emoji_container}>
+                <Picker data={data} onEmojiSelect={handleAddEmoji} />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       {contextHolder}
