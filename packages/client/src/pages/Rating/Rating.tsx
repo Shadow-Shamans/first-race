@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Pagination } from 'antd'
+import { Card, Pagination } from 'antd'
 import { Rating as RatingItems } from '@/components/Rating'
 import { useGetLeaderboardMutation } from '@/shared/services/LeaderboardService'
 import { useAppSelector } from '@/app'
@@ -23,7 +23,7 @@ export const Rating: FC = () => {
   }
 
   return (
-    <section className={styles.wrapper}>
+    <Card className={styles.wrapper}>
       <RatingItems currentUserId={userId} list={userList} />
 
       {userList.length >= pageSize && (
@@ -34,6 +34,6 @@ export const Rating: FC = () => {
           onChange={handlePaginationChange}
         />
       )}
-    </section>
+    </Card>
   )
 }

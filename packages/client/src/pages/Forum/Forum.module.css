@@ -3,4 +3,6 @@
   max-width: 980px;
   min-height: calc(100vh - 185px);
   margin: 0 auto;
+  padding: 16px;
+  border-radius: 10px;
 }

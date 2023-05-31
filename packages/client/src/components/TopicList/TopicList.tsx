@@ -112,6 +112,7 @@ export const TopicList: FC = () => {
       />
 
       <List
+        bordered
         loading={isTopicsLoading}
         itemLayout="horizontal"
         dataSource={filteredTopics}
