@@ -77,7 +77,7 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
   return (
     <>
       <List
-        locale={{ emptyText: '' }}
+        locale={{ emptyText: <></> }}
         loading={isLoading}
         itemLayout="horizontal"
         dataSource={messages}
