@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-const request = (element: HTMLElement) => {
+const request = (element: HTMLElement | null) => {
   if (!element) return
 
   if (element.requestFullscreen) {
@@ -37,7 +37,7 @@ const exit = () => {
   }
 }
 
-const useFullscreen = (element: HTMLElement) => {
+export const useFullscreen = (element: HTMLElement): [boolean, () => void] => {
   const [enabled, setFullscreen] = useState(false)
 
   const toggleFullscreen = () => {
