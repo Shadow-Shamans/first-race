@@ -62,12 +62,12 @@ export const TopicList: FC = () => {
   }
 
   const handleSort = (value: TSortOption) => {
-    const sortedByNew = sortByNew(topics as ISortOption[])
+    const sortedByNew = sortByNew(filteredTopics as ISortOption[])
 
     if (value === 'new') {
-      setTopics(sortedByNew as IForumItem[])
+      setFilteredTopics(sortedByNew as IForumItem[])
     } else {
-      setTopics(sortedByNew.reverse() as IForumItem[])
+      setFilteredTopics(sortedByNew.reverse() as IForumItem[])
     }
   }
 
