@@ -2,15 +2,11 @@ import { FC, useEffect, useState } from 'react'
 import { List, message } from 'antd'
 import { useForum } from '@/shared/hooks/useForum'
 import { TopicItem } from './components/TopicItem'
-import {
-  IForumItem,
-  useCreateTopicMutation,
-} from '@/shared/services/ForumService'
+import { useCreateTopicMutation } from '@/shared/services/ForumService'
 import { useAppSelector } from '@/app'
 import { selectUserData } from '@/features/User'
 import { ForumModal } from '@/components/ForumModal'
 import { IModalData } from '../ForumModal/ForumModal'
-import { ISortOption, sortByNew } from '@/shared/utils/dateTime'
 import { Controls } from '@/components/TopicList/components/Controls'
 import { TFilterOption, TSortOption } from './components/Controls/Controls'
 
@@ -22,10 +18,9 @@ export const TopicList: FC = () => {
   const [messageApi, contextHolder] = message.useMessage()
 
   const {
-    topics,
     isLoading: isTopicsLoading,
     refreshTopics,
-    setTopics,
+    sortTopics,
     filteredTopics,
     filterTopics,
   } = useForum()
@@ -63,13 +58,7 @@ export const TopicList: FC = () => {
   }
 
   const handleSort = (value: TSortOption) => {
-    const sortedByNew = sortByNew(filteredTopics as ISortOption[])
-
-    if (value === 'new') {
-      setFilteredTopics(sortedByNew as IForumItem[])
-    } else {
-      setFilteredTopics(sortedByNew.reverse() as IForumItem[])
-    }
+    sortTopics(value)
   }
 
   const handleFilter = (value: TFilterOption[]) => {
