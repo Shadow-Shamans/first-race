@@ -39,7 +39,7 @@ export const ForumMessage: FC<IProps> = ({ comment, onDelete }) => {
 
             {isCurrentUser && (
               <Button type="primary" danger size="small" onClick={handleDelete}>
-                <DeleteOutlined />
+                <DeleteOutlined rev={undefined} />
               </Button>
             )}
           </div>
