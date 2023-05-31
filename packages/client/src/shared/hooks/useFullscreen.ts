@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-const request = (element: HTMLElement | null) => {
+const request = (element: HTMLElement) => {
   if (!element) return
 
   if (element.requestFullscreen) {

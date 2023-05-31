@@ -98,7 +98,6 @@ export class GameElement extends HTMLElement {
   }
 
   start() {
-    console.log('Start game')
     this._game.start()
   }
 

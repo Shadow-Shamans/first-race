@@ -2,7 +2,6 @@ import bg from '@/assets/grass.png'
 import { TILE_SIZE } from './constants'
 import { SegmentTile } from './modules'
 import { drawLayer, drawGrid } from './utils'
-import useFullscreen from '../shared/hooks/useFullscreen'
 
 interface IGameOptions {
   canvas: HTMLCanvasElement
@@ -120,8 +119,6 @@ export class Game {
   }
 
   start = () => {
-    console.log('start game')
-    useFullscreen(this._canvas)
     this._running = true
   }
 
