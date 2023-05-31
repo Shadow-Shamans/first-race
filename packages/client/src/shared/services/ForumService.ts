@@ -44,7 +44,7 @@ export const forumAPI = createApi({
   reducerPath: 'forumAPI',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3001/api/v1/topics',
+    baseUrl: 'http://localhost:3000/api/v1/topics',
   }),
 
   endpoints: build => ({

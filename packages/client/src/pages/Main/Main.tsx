@@ -15,17 +15,17 @@ const { Text } = Typography
 export const Main: FC = () => {
   const { userList } = useRating()
 
-  useEffect(() => {
-    fetch('http://localhost:3001/api/v1/topics/all', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-      // body: JSON.stringify({
-      //   data: { userId: '111', title: '123', description: '31' },
-      // }),
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:3001/api/v1/topics/all', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=UTF-8',
+  //     },
+  //     // body: JSON.stringify({
+  //     //   data: { userId: '111', title: '123', description: '31' },
+  //     // }),
+  //   })
+  // }, [])
 
   return (
     <section className={styles.root}>
