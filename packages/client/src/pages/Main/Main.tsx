@@ -14,7 +14,6 @@ const { Text } = Typography
 
 export const Main: FC = () => {
   const { userList } = useRating()
-
   return (
     <section className={styles.root}>
       <div className={styles.picturesWrapper}>
