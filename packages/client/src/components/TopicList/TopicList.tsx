@@ -120,13 +120,14 @@ export const TopicList: FC = () => {
         renderItem={item => <TopicItem topic={item} />}
       />
 
-      <ForumModal
-        isOpened={isModalOpened}
-        isLoading={isLoading}
-        title={'Новая тема'}
-        onSubmit={handleCreateTopic}
-        onCancel={handleCloseModal}
-      />
+      {isModalOpened && (
+        <ForumModal
+          isLoading={isLoading}
+          title={'Новая тема'}
+          onSubmit={handleCreateTopic}
+          onCancel={handleCloseModal}
+        />
+      )}
 
       {contextHolder}
     </div>

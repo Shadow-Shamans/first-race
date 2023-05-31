@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { Button, Layout, Typography } from 'antd'
+import React, { FC, useEffect, useState } from 'react'
+import { Button, Layout, message, Typography } from 'antd'
 import { ForumMessages } from '@/components/ForumMessages'
 import { useAppSelector } from '@/app'
 import { selectTopic } from '@/features/Forum'
@@ -8,11 +8,16 @@ import { selectUserData } from '@/features/User'
 import classNames from 'classnames'
 import { EditOutlined } from '@ant-design/icons'
 import { useTopic } from '@/shared/hooks/useTopic'
+import { ForumModal } from '@/components/ForumModal'
+import { IModalData } from '@/components/ForumModal/ForumModal'
+import { useUpdateTopicMutation } from '@/shared/services/ForumService'
 
 import styles from './ForumTopic.module.css'
 
 export const ForumTopic: FC = () => {
-  const { isLoading } = useTopic()
+  const [messageApi, contextHolder] = message.useMessage()
+
+  const { isLoading, refreshTopic } = useTopic()
 
   const { id: userId } = useAppSelector(selectUserData)
   const {
@@ -26,6 +31,42 @@ export const ForumTopic: FC = () => {
 
   const isCurrentUser = userId === topicUserId
   const [date, time] = convertDateTime(createdAt)
+
+  const [isModalOpened, setIsModalOpened] = useState(false)
+
+  const [updateTopic, mutationResultUpdate] = useUpdateTopicMutation()
+
+  const handleUpdate = (data: IModalData) => {
+    const { title, description } = data
+
+    updateTopic({
+      id: topicId,
+      title,
+      description,
+    })
+
+    setIsModalOpened(false)
+  }
+
+  useEffect(() => {
+    if (mutationResultUpdate.status === 'fulfilled') {
+      const title = mutationResultUpdate.data.data.title
+
+      messageApi.open({
+        type: 'success',
+        content: `Тема ${title} успешно обновлена`,
+      })
+
+      refreshTopic()
+    }
+
+    if (mutationResultUpdate.status === 'rejected') {
+      messageApi.open({
+        type: 'error',
+        content: `Ошибка при обновлении темы`,
+      })
+    }
+  }, [mutationResultUpdate])
 
   return (
     <Layout className={`${styles.layout}`}>
@@ -52,8 +93,7 @@ export const ForumTopic: FC = () => {
             <Button
               type="default"
               size="small"
-              // onClick={() => setIsModalOpened(true)}
-            >
+              onClick={() => setIsModalOpened(true)}>
               <EditOutlined />
             </Button>
           </div>
@@ -65,6 +105,18 @@ export const ForumTopic: FC = () => {
       <Layout.Content>
         {!isLoading && <ForumMessages parentId={topicId} />}
       </Layout.Content>
+
+      {isModalOpened && (
+        <ForumModal
+          isLoading={isLoading}
+          title={`Тема "${title}"`}
+          initialData={{ title, description }}
+          onSubmit={handleUpdate}
+          onCancel={() => setIsModalOpened(false)}
+        />
+      )}
+
+      {contextHolder}
     </Layout>
   )
 }

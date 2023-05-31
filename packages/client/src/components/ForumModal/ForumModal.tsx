@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Input, Modal } from 'antd'
 
 import styles from './ForumModal.module.css'
@@ -10,7 +10,6 @@ export interface IModalData {
 }
 
 interface IProps {
-  isOpened: boolean
   isLoading: boolean
   title: string
   initialData?: IModalData
@@ -19,7 +18,6 @@ interface IProps {
 }
 
 export const ForumModal: FC<IProps> = ({
-  isOpened,
   isLoading,
   title,
   initialData,
@@ -49,8 +47,8 @@ export const ForumModal: FC<IProps> = ({
 
   return (
     <Modal
+      open
       title={title}
-      open={isOpened}
       confirmLoading={isLoading}
       onOk={handleSubmit}
       onCancel={handleCancel}>

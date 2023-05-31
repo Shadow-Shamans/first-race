@@ -131,14 +131,15 @@ export const TopicItem: FC<IProps> = ({ topic }) => {
         </div>
       </Skeleton>
 
-      <ForumModal
-        isOpened={isModalOpened}
-        isLoading={isLoading}
-        title={`Тема "${topic.title}"`}
-        initialData={{ title: topic.title, description: topic.description }}
-        onSubmit={handleUpdate}
-        onCancel={() => setIsModalOpened(false)}
-      />
+      {isModalOpened && (
+        <ForumModal
+          isLoading={isLoading}
+          title={`Тема "${topic.title}"`}
+          initialData={{ title: topic.title, description: topic.description }}
+          onSubmit={handleUpdate}
+          onCancel={() => setIsModalOpened(false)}
+        />
+      )}
 
       {contextHolder}
     </List.Item>
