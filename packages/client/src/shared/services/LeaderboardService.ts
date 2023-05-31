@@ -53,7 +53,7 @@ export const leaderboardAPI = createApi({
     getLeaderboard: build.mutation<ILeaderboardResponse[], ILeaderboardRequest>(
       {
         query: data => ({
-          url: '/shamans',
+          url: '/leaderboard/shamans',
           method: 'POST',
           body: data,
         }),
