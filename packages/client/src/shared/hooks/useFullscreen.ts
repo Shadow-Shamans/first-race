@@ -37,7 +37,7 @@ const exit = () => {
   }
 }
 
-const useFullscreen = (element: HTMLElement) => {
+export const useFullscreen = (element: HTMLElement): [boolean, () => void] => {
   const [enabled, setFullscreen] = useState(false)
 
   const toggleFullscreen = () => {
