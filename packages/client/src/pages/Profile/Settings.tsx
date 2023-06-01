@@ -20,7 +20,7 @@ export const Settings = () => {
 
   return (
     <>
-      <Button icon={<SettingFilled />} onClick={showModal}>
+      <Button icon={<SettingFilled rev={undefined} />} onClick={showModal}>
         Настройки
       </Button>
       <Modal open={open} onOk={handleOk} onCancel={handleCancel} footer={[]}>
