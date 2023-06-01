@@ -91,8 +91,8 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
     setEmojiVisibility(false)
   }
 
-  const handleEmojiVisability = () => {
-    setEmojiVisibility(true)
+  const handleEmojiVisibility = () => {
+    setEmojiVisibility(!emojiVisibility)
   }
 
   return (
@@ -129,7 +129,7 @@ export const ForumMessages: FC<IProps> = ({ parentId }) => {
             <SmileOutlined
               className={styles.iconImages}
               rev={undefined}
-              onClick={handleEmojiVisability}
+              onClick={handleEmojiVisibility}
             />
 
             {emojiVisibility && (
