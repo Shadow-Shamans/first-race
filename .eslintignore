@@ -1,0 +1,3 @@
+./packages/server/dist
+./packages/client/dist
+dist
