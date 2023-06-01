@@ -32,7 +32,7 @@ export const GameFeature = () => {
     <Layout>
       <FloatButton
         onClick={() => toggleFullscreen()}
-        icon={<FullscreenOutlined />}
+        icon={<FullscreenOutlined rev={undefined} />}
       />
       <div ref={gameRef} className={styles.gameContainer}></div>
     </Layout>
