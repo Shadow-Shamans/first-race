@@ -4,7 +4,6 @@ import { TopicModel } from '../models/Topic'
 import { CommentModel } from '../models/Comment'
 import { RoleModel } from '../models/Role'
 import { UserModel } from '../models/User'
-import type { Dialect } from 'sequelize'
 import { modalCommonOptions } from './constants'
 
 const {
@@ -13,7 +12,6 @@ const {
   POSTGRES_DB,
   POSTGRES_PORT,
   DB_HOST,
-  DIALECT,
 } = process.env
 
 const sequelizeOptions: SequelizeOptions = {
@@ -22,7 +20,7 @@ const sequelizeOptions: SequelizeOptions = {
   database: POSTGRES_DB,
   password: String(POSTGRES_PASSWORD),
   port: Number(POSTGRES_PORT),
-  dialect: DIALECT as Dialect,
+  dialect: 'postgres',
 }
 
 const sequelize = new Sequelize(sequelizeOptions)
