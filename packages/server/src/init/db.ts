@@ -55,7 +55,7 @@ Role.hasMany(User, {
   foreignKey: 'roleId',
 })
 
-export const dbConnect = async (): Promise<Client | null> => {
+export const dbConnect = async (): Promise<any | null> => {
   try {
     await sequelize.sync()
     console.log('Connection has been established successfully.')
