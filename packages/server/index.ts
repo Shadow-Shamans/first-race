@@ -14,7 +14,7 @@ import {
 import proxy from './src/middlewares/proxy'
 import { userRouter } from './src/routes/user'
 import { commentsRouter } from './src/routes/comments'
-import { setupDevServer, setupProdServer } from './envSetup'
+import { setupDevSSR, setupProdSSR } from './env'
 
 dotenv.config({ path: '.env' })
 
@@ -35,11 +35,11 @@ async function startServer() {
   app.use(`${API_VERSION}${COMMENTS_URL}`, commentsRouter)
 
   if (isDev) {
-    setupDevServer(app)
+    setupDevSSR(app)
   }
 
   if (isProd) {
-    setupProdServer(app)
+    setupProdSSR(app)
   }
 
   app.listen(port, () => {
