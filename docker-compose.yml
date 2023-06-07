@@ -20,6 +20,7 @@ services:
     container_name: prakticum-server
     image: prackicum-server
     depends_on:
+      - client
       - postgres
     build:
       context: .
@@ -37,7 +38,7 @@ services:
     image: postgres:14
     restart: always
     ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+      - "${POSTGRES_PORT}:${POSTGRES_PORT_INTERNAL}"
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -53,13 +54,3 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
-
-  pgadmin:
-    container_name: prakticum-database-admin
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    ports:
-      - "${PGADMIN_PORT}:80"
