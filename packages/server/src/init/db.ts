@@ -1,5 +1,4 @@
 import type { SequelizeOptions } from 'sequelize-typescript'
-import dotenv from 'dotenv'
 import { Sequelize } from 'sequelize-typescript'
 import { TopicModel } from '../models/Topic'
 import { CommentModel } from '../models/Comment'
@@ -7,8 +6,6 @@ import { RoleModel } from '../models/Role'
 import { UserModel } from '../models/User'
 import type { Dialect } from 'sequelize'
 import { modalCommonOptions } from './constants'
-
-dotenv.config({ path: '../../.env' })
 
 const {
   POSTGRES_USER,
