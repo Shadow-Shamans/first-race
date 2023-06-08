@@ -11,4 +11,5 @@ export type TMenuItem = {
   label: string
   path: TPath
   isPrivate: boolean
+  isAuthHidden: boolean
 }

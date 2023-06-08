@@ -10,7 +10,11 @@ const mode = import.meta.env.MODE
 
 const initialState: RootState = JSON.parse(window.initialState as string)
 
-window.initialState = null
+// window.initialState = null
+
+const authCode: string = JSON.parse(window.authCode as string)
+
+initialState.auth.code = authCode
 
 const store = createStore(initialState)
 

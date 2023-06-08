@@ -1,5 +1,6 @@
 import { IUser } from '@/features/User/userSlice'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+import type { TPasswordChangeDTO, TPasswordChangeRes } from './types'
 
 interface ISignUp {
   first_name: string
@@ -21,6 +22,12 @@ interface IUpdateUserData {
   login: string
   email: string
   phone: string
+  avatar: string
+}
+
+interface IOAuth {
+  code: string
+  redirect_uri: string
 }
 
 export const authAPI = createApi({
@@ -28,7 +35,10 @@ export const authAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://ya-praktikum.tech/api/v2',
     prepareHeaders: headers => {
-      headers.set('Content-Type', 'application/json; charset=utf-8')
+      const contentType = headers.get('Content-Type')
+      if (!contentType) {
+        headers.set('Content-Type', 'application/json; charset=utf-8')
+      }
 
       return headers
     },
@@ -67,16 +77,26 @@ export const authAPI = createApi({
         body: data,
       }),
     }),
-    updateUserPassword: build.mutation({
-      query: () => ({
+    updateUserPassword: build.mutation<TPasswordChangeRes, TPasswordChangeDTO>({
+      query: body => ({
         url: `/user/password`,
         method: 'PUT',
+        body,
       }),
     }),
-    changeUserAvatar: build.mutation({
+    oAuthLogin: build.mutation<
+      { requestId: string; error: { originalStatus?: number } },
+      IOAuth
+    >({
+      query: data => ({
+        url: `/oauth/yandex`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    getOauthData: build.query<{ service_id: string }, void>({
       query: () => ({
-        url: `/user/profile/avatar`,
-        method: 'PUT',
+        url: `/oauth/yandex/service-id?redirect_uri=http%3A%2F%2Flocalhost%3A3000`,
       }),
     }),
   }),
@@ -88,4 +108,7 @@ export const {
   useLazyGetUserDataQuery,
   useUpdateUserProfileMutation,
   useLogoutMutation,
+  useOAuthLoginMutation,
+  useLazyGetOauthDataQuery,
+  useUpdateUserPasswordMutation,
 } = authAPI

@@ -5,19 +5,23 @@ import { Header } from '@/components/Header'
 import { AppRoutes } from '@/router'
 import { ThemeSwitcher } from '@/components/ThemeSwitcher'
 
+import styled from './app.module.css'
 import './index.css'
+import { NotificationProvider } from '@/shared/providers/NotificationProvider'
 
 export const App = () => {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <Layout style={{ minHeight: '100vh' }}>
-          <ThemeSwitcher />
-          <Header />
-          <Layout.Content style={{ position: 'relative' }}>
-            <AppRoutes />
-          </Layout.Content>
-        </Layout>
+        <NotificationProvider>
+          <Layout className={styled.layout}>
+            <ThemeSwitcher />
+            <Header />
+            <Layout.Content className={styled.content}>
+              <AppRoutes />
+            </Layout.Content>
+          </Layout>
+        </NotificationProvider>
       </ThemeProvider>
     </ErrorBoundary>
   )

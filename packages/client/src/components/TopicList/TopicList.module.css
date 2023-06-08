@@ -1,0 +1,5 @@
+.root {
+  margin: 0 60px 60px;
+  display: flex;
+  flex-direction: column;
+}

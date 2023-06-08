@@ -19,4 +19,5 @@ module.exports = {
     "semi": [2, "never"],
     "@typescript-eslint/no-non-null-assertion": "off"
   },
+  ignorePatterns: ["**/dist/*"],
 }

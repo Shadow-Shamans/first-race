@@ -1,0 +1,25 @@
+.block {
+  width: 100%;
+}
+
+.ant-list-empty-text {
+  display: none;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.date {
+  margin: 8px;
+}

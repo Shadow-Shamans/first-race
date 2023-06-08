@@ -25,9 +25,13 @@ export const Menu: FC = () => {
 
   return (
     <ul className={styles.list}>
-      {menuItems.map(({ label, path, isPrivate }) => {
+      {menuItems.map(({ label, path, isPrivate, isAuthHidden }) => {
         const isActive = current === path
-        if (!isPrivate || (isPrivate && isLoggedIn)) {
+        const isShow = () => {
+          return isLoggedIn ? isAuthHidden : !isPrivate
+        }
+
+        if (isShow()) {
           return (
             <li
               key={path}
