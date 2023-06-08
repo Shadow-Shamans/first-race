@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/arkanoid.png" />
+    <!--ssr-styles-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Арканоид</title>
   </head>
-  <script>window.initialState = '{{state}}'</script>
-  <script>window.authCode = '{{authCode}}'</script>
+  <script>
+    window.initialState = '{{state}}'
+  </script>
+  <script>
+    window.authCode = '{{authCode}}'
+  </script>
   <body>
     <div id="root"><!--ssr-outlet--></div>
     <script type="module" src="/src/main.tsx"></script>

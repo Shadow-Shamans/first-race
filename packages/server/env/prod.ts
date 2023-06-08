@@ -5,9 +5,9 @@ import * as path from 'path'
 export async function setupProdSSR(app: Express) {
   const distPath = path.dirname(require.resolve('/app/client/index.html'))
   const ssrClientPath = require.resolve('/app/client/client.cjs')
+  const styleLink = `<link rel="stylesheet" href="/style.css" />`
 
   app.use('*', async (req, res, next) => {
-    console.log({ req, res })
     try {
       const template = fs.readFileSync(
         path.resolve(distPath, 'index.html'),
@@ -24,6 +24,7 @@ export async function setupProdSSR(app: Express) {
 
       const html = template
         .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace(`<!--ssr-styles-->`, styleLink)
         .replace('{{state}}', initStateSerialized)
         .replace('{{authCode}}', JSON.stringify(queryCode))
 
