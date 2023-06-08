@@ -4,6 +4,8 @@ services:
   client:
     container_name: prakticum-client
     image: prakticum-client
+    depends_on:
+      - server
     build:
       context: .
       dockerfile: Dockerfile.client
@@ -20,7 +22,6 @@ services:
     container_name: prakticum-server
     image: prackicum-server
     depends_on:
-      - client
       - postgres
     build:
       context: .
