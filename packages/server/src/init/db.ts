@@ -1,14 +1,10 @@
 import type { SequelizeOptions } from 'sequelize-typescript'
-import dotenv from 'dotenv'
 import { Sequelize } from 'sequelize-typescript'
 import { TopicModel } from '../models/Topic'
 import { CommentModel } from '../models/Comment'
 import { RoleModel } from '../models/Role'
 import { UserModel } from '../models/User'
-import type { Dialect } from 'sequelize'
 import { modalCommonOptions } from './constants'
-
-dotenv.config({ path: '../../.env' })
 
 const {
   POSTGRES_USER,
@@ -16,7 +12,6 @@ const {
   POSTGRES_DB,
   POSTGRES_PORT,
   DB_HOST,
-  DIALECT,
 } = process.env
 
 const sequelizeOptions: SequelizeOptions = {
@@ -25,7 +20,7 @@ const sequelizeOptions: SequelizeOptions = {
   database: POSTGRES_DB,
   password: String(POSTGRES_PASSWORD),
   port: Number(POSTGRES_PORT),
-  dialect: DIALECT as Dialect,
+  dialect: 'postgres',
 }
 
 const sequelize = new Sequelize(sequelizeOptions)
@@ -55,7 +50,7 @@ Role.hasMany(User, {
   foreignKey: 'roleId',
 })
 
-export const dbConnect = async (): Promise<Client | null> => {
+export const dbConnect = async (): Promise<any | null> => {
   try {
     await sequelize.sync()
     console.log('Connection has been established successfully.')
