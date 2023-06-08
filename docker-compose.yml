@@ -26,12 +26,14 @@ services:
       context: .
       dockerfile: Dockerfile.server
       args:
+        NODE_ENV: ${NODE_ENV}
         SERVER_PORT: ${SERVER_PORT}
     restart: always
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     environment:
       SERVER_PORT: ${SERVER_PORT}
+      NODE_ENV: ${NODE_ENV}
 
   postgres:
     container_name: prakticum-database

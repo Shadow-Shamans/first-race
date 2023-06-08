@@ -43,7 +43,11 @@ async function startServer() {
   }
 
   app.listen(port, () => {
+    console.log('==================================================')
+    console.log('prod', isProd)
+    console.log('dev', isDev)
     console.log(`API listen on port ${port}`)
+    console.log('==================================================')
   })
 }
 
