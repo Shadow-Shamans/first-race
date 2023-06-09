@@ -51,7 +51,6 @@
     "jest-css-modules-transform": "^4.4.2",
     "jest-environment-jsdom": "^29.0.1",
     "lefthook": "^1.1.1",
-    "lerna": "^5.4.3",
     "prettier": "^2.7.1",
     "rimraf": "5.0.1",
     "ts-jest": "^28.0.8",
