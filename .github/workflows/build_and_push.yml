@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - 134/github_actions
+      - sprint_9
 
 jobs:
   build-and-push:
