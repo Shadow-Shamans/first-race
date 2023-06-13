@@ -96,7 +96,7 @@ export const authAPI = createApi({
     }),
     getOauthData: build.query<{ service_id: string }, void>({
       query: () => ({
-        url: `/oauth/yandex/service-id?redirect_uri=https://shamans-firstrace-24.ya-praktikum.tech/`,
+        url: `/oauth/yandex/service-id?redirect_uri=http%3A%2F%2Flocalhost%3A3000`,
       }),
     }),
   }),
