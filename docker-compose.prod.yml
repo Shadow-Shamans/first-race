@@ -11,8 +11,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./certbot/conf:/etc/nginx/ssl
-      - ./certbot/data:/app/letsencrypt
+      - ./var/certchecker:/app/certchecker
+      - ./certbot:/app/letsencrypt
 
   server:
     container_name: prakticum-server
@@ -46,11 +46,10 @@ services:
   certbot:
     container_name: certificate
     image: certbot/certbot:latest
-    command: certonly --webroot --webroot-path=/app/letsencrypt --email tanotify@gmail.com --agree-tos --no-eff-email -d shamans-firstrace-24.ya-praktikum.tech
+    command: certonly --webroot --webroot-path=/var/certchecker --email tanotify@gmail.com --agree-tos --no-eff-email -d shamans-firstrace-24.ya-praktikum.tech
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/logs:/var/log/letsencrypt
-      - ./certbot/data:/app/letsencrypt
+      - ./certbot:/etc/letsencrypt
+      - ./var/certchecker:/var/certchecker
 
 volumes:
   pgdata:
