@@ -9,8 +9,6 @@ services:
     restart: always
     ports:
       - 80:80
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
 
   server:
     container_name: prakticum-server
