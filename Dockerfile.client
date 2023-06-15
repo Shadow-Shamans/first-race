@@ -15,7 +15,7 @@ COPY . .
 RUN yarn lerna bootstrap
 RUN yarn build --scope=client
 
-FROM staticfloat/nginx-certbot as production
+FROM nginx:latest as production
 WORKDIR /app
 
 COPY --from=builder /app/packages/client/dist /app
