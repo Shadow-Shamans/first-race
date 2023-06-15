@@ -15,12 +15,23 @@ COPY . .
 RUN yarn lerna bootstrap
 RUN yarn build --scope=client
 
+FROM nginx:latest as certbot
+
+ARG CERTBOT_EMAIL
+ARG DOMAIN_LIST
+
+RUN  apt-get update \
+      && apt-get install -y certbot python-certbot-nginx bash wget \
+      && certbot certonly --standalone --agree-tos -m "${CERTBOT_EMAIL}" -n -d ${DOMAIN_LIST} \
+      && rm -rf /var/lib/apt/lists/*
+
 FROM nginx:latest as production
 WORKDIR /app
 
 COPY --from=builder /app/packages/client/dist /app
 COPY --from=builder /app/packages/client/ssr-dist /app
 COPY --from=builder /app/packages/client/nginx.conf /etc/nginx/nginx.conf
+COPY --from=certbot /etc/letsencrypt /app/certificates
 
 EXPOSE $CLIENT_PORT
 CMD [ "nginx", "-g", "daemon off;" ]

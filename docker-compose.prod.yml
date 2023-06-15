@@ -3,20 +3,23 @@ version: "3.9"
 services:
   client:
     container_name: prakticum-client
-    image: ghcr.io/shadow-shamans/first-race/client:f89a221466a6e26824669a31d197cfc857de92c7
+    image: ghcr.io/shadow-shamans/first-race/client:10bb0219f7f3eb65a49adff80f881e8d0e1807bf
     depends_on:
       - server
     restart: always
+    args:
+      - CERTBOT_EMAIL=tanotify@gmail.com
+      - DOMAIN_LIST=shamans-firstrace-24.ya-praktikum.tech
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./var/certchecker:/app/certchecker:rw
       - ./certbot:/app/letsencrypt:rw
+      - ./var/certchecker:/app/certchecker:rw
 
   server:
     container_name: prakticum-server
-    image: ghcr.io/shadow-shamans/first-race/server:f89a221466a6e26824669a31d197cfc857de92c7
+    image: ghcr.io/shadow-shamans/first-race/server:10bb0219f7f3eb65a49adff80f881e8d0e1807bf
     depends_on:
       - postgres
     restart: always
