@@ -43,7 +43,7 @@ export const Main: FC = () => {
       </div>
 
       <div className={styles.sloganWrapper}>
-        <Text className={styles.title}>Настройся2...</Text>
+        <Text className={styles.title}>Настройся...</Text>
         <img
           className={classNames(styles.joystick)}
           src={joystick}
