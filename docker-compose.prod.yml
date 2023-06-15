@@ -16,7 +16,8 @@ services:
     volumes:
       # - ./certbot:/app/letsencrypt:rw
       # - ./var/certchecker:/app/certchecker:rw
-      - ./etc/letsencrypt:/app/letsencrypt2
+      # - ./etc/letsencrypt:/app/letsencrypt2
+      - /etc/letsencrypt:/etc/letsencrypt
 
   server:
     container_name: prakticum-server
@@ -46,6 +47,14 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
+
+  # certbot:
+  #   container_name: certificate
+  #   image: certbot/certbot:latest
+  #   command: certonly --webroot --webroot-path=/var/certchecker --email tanotify@gmail.com --agree-tos --no-eff-email -d shamans-firstrace-24.ya-praktikum.tech
+  #   volumes:
+  #     - ./certbot:/etc/letsencrypt:rw
+  #     - ./var/certchecker:/var/certchecker:rw
 
 volumes:
   pgdata:
