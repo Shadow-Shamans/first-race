@@ -16,7 +16,13 @@ export const YandexOAuth: FC = () => {
 
   useEffect(() => {
     if (resultServiceId.data) {
-      document.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${resultServiceId.data.service_id}&redirect_uri=http://localhost:3000`
+      document.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${
+        resultServiceId.data.service_id
+      }&redirect_uri=${
+        process.env.NODE_ENV === 'producton'
+          ? 'https://shamans-firstrace-24.ya-praktikum.tech/'
+          : 'http://localhost:3000'
+      }`
     }
   }, [resultServiceId])
 

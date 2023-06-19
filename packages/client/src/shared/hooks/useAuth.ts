@@ -22,7 +22,14 @@ const useAuth = () => {
     }
 
     try {
-      oAuth({ code: `${authCode}`, redirect_uri: 'http://localhost:3000' })
+      oAuth({
+        code: `${authCode}`,
+        redirect_uri: `${
+          process.env.NODE_ENV === 'producton'
+            ? 'https://shamans-firstrace-24.ya-praktikum.tech/'
+            : 'http://localhost:3000'
+        }`,
+      })
     } catch (e) {
       console.error(e)
     }
