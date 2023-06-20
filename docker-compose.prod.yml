@@ -3,7 +3,7 @@ version: "3.9"
 services:
   client:
     container_name: prakticum-client
-    image: ghcr.io/shadow-shamans/first-race/client:19734019a3a8480e6f300abeaca12150e0552605
+    image: ghcr.io/shadow-shamans/first-race/client:2c9ef5fd4781af581be38e26e55911b67650d313
     depends_on:
       - server
     restart: always
@@ -13,7 +13,7 @@ services:
 
   server:
     container_name: prakticum-server
-    image: ghcr.io/shadow-shamans/first-race/server:19734019a3a8480e6f300abeaca12150e0552605
+    image: ghcr.io/shadow-shamans/first-race/server:2c9ef5fd4781af581be38e26e55911b67650d313
     depends_on:
       - postgres
     restart: always
@@ -42,3 +42,4 @@ services:
 
 volumes:
   pgdata:
+
